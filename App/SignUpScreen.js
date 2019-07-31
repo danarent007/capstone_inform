@@ -25,33 +25,130 @@ import {
   } from 'react-native/Libraries/NewAppScreen';
 
 
+  
+
 
 const {width: WIDTH} = Dimensions.get('window')
 
 export default class LoginScreen extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = 
+    {
+      loggedIn: 'false',
+      email: '',
+      password: '',
+      
+    };
+
+  }
+
+  checkEmail = () => 
+  {
+    if(this.state.email.includes("@"))
+    {
+      return 'true'
+    }
+    else
+    {
+      return 'false'
+    }
+  }
+   async getUser()
+   {
+ 
+  let response = await fetch(`http://dulwich.dlinkddns.com/sheldon.php`);
+  let data = await response.text()
+ 
+  alert(data);
+   }
+ 
+
+  signUpUser = () =>{
+
+ 
+    const { email }  = this.state ;
+    const { password }  = this.state ;
+    
+   
+   fetch('http://ec2-3-9-14-20.eu-west-2.compute.amazonaws.com/sheldon.php', {
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+   
+       email: email,
+   
+       password: password,
+   
+   
+     })
+   
+   }).then((response) => response.text())
+         .then((responseJson) => {
+   
+   // Showing response message coming from server after inserting records.
+           alert(responseJson);
+   
+         }).catch((error) => {
+           console.error(error);
+         });
+    
+    
+     }
+
+  saveInput = () =>
+  {
+    //check here if input meets requirements
+    //if input meets requirements, save and change back to login
+    if(this.checkEmail()=='true')
+    {
+    this.props.navigation.navigate('Login')
+    this.getUser()
+    alert('Data Saved Successfully! Please Login')
+    }
+    else
+    {
+      alert('Email does not contain correct characters, please try again')
+    }
+    
+   
+   
+  }
+
+  
+
   render() {
     return (
+      
       <View style={styles.container}>
             <Text style={styles.headingText}>SIGN UP</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
-                    placeholder={"Username"}
+                    placeholder={"Email"}
                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                     underLineColorAndroid='transparent'
+                    onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
                 </View>
             <View style={styles.inputContainer}>
+                
                 <TextInput 
                 style={styles.input}
                 placeholder={"Password"}
                 secureTextEntry={true}
                 placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                 underLineColorAndroid='transparent'
+                onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
+
                 </View>
-                <TouchableOpacity style={styles.btnLogin}>
+                <TouchableOpacity style={styles.btnLogin} onPress={this.saveInput}>
                     <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableOpacity>
         </View>
