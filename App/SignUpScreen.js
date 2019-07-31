@@ -47,7 +47,7 @@ export default class LoginScreen extends Component {
 
   checkEmail = () => 
   {
-    if(this.state.email.includes("@"))
+    if(this.state.email.includes("@") && this.state.email.includes("."))
     {
       return 'true'
     }
@@ -115,9 +115,6 @@ export default class LoginScreen extends Component {
     {
       alert('Email does not contain correct characters, please try again')
     }
-    
-   
-   
   }
 
   
