@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' ; 
+import PostFeed from './PostFeed'
 
 
 import {
@@ -9,6 +10,7 @@ import {
     View,
     Text,
     StatusBar,
+    Dimensions,
   } from 'react-native';
   
   import {
@@ -19,12 +21,16 @@ import {
     ReloadInstructions,
   } from 'react-native/Libraries/NewAppScreen';
 
+const {width: WIDTH} = Dimensions.get('window')
+
 export default class MainScreen extends Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.sectionTest}>This text is acting as a test</Text>
-        
+      <View style={{flex: 1, height: 100, width: 100}}>
+        <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text></View>
+        <View style={{width: WIDTH, alignItems:'center'}}>
+        <PostFeed />
+      </View>
       </View>
     );
   }
@@ -48,11 +54,18 @@ const styles = StyleSheet.create({
     },
     sectionTest: 
     {
-      fontSize: 50,
+      fontSize: 30,
       fontWeight: '600',
-      color: "purple",
+      color: "white",
       textAlign: "center",
     },
+    header: 
+    {
+      
+      width: WIDTH,
+      height: 60,
+      backgroundColor: "#8B008B"
+    }
    
    
    

@@ -40,8 +40,14 @@ export default class LoginScreen extends Component {
       loggedIn: 'false',
       email: '',
       password: '',
-      
     };
+    this.userData =
+    {
+      firstName : "Ben",
+      lastName : "Dover",
+      email : this.state.email,
+      password: this.state.password
+    }
 
   }
 
@@ -59,7 +65,7 @@ export default class LoginScreen extends Component {
    async getUser()
    {
  
-  let response = await fetch(`http://dulwich.dlinkddns.com/sheldon.php`);
+  let response = await fetch(`http://dulwich.dlinkddns.com/api/users`);
   let data = await response.text()
  
   alert(data);
@@ -72,18 +78,21 @@ export default class LoginScreen extends Component {
     const { email }  = this.state ;
     const { password }  = this.state ;
     
+    
    
-   fetch('http://ec2-3-9-14-20.eu-west-2.compute.amazonaws.com/sheldon.php', {
+   fetch('http://dulwich.dlinkddns.com/api/users', {
      method: 'POST',
      headers: {
        'Accept': 'application/json',
        'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-   
-       email: email,
-   
-       password: password,
+      
+      firstName: 'TestFirstName',
+      lastName: 'TestLastName',
+      email: 'test@email.com',
+      password: 'testPass',
+
    
    
      })
@@ -105,10 +114,14 @@ export default class LoginScreen extends Component {
   {
     //check here if input meets requirements
     //if input meets requirements, save and change back to login
+     
+    
     if(this.checkEmail()=='true')
     {
     this.props.navigation.navigate('Login')
     this.getUser()
+    this.signUpUser()
+    alert(JSON.stringify(this.userData))
     alert('Data Saved Successfully! Please Login')
     }
     else
