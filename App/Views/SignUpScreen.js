@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' ; 
 import {createStackNavigator, createAppContainer} from 'react-navigation'
-
+import UserController from '../Controllers/UserController'
 
 import {
     SafeAreaView,
@@ -34,109 +34,59 @@ export default class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
+    //uc = new UserController()
 
     this.state = 
     {
-      loggedIn: 'false',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     };
-    this.userData =
+  }
+
+  signUp = () =>
+  {
+    
+    userData =
     {
-      firstName : "Ben",
-      lastName : "Dover",
+      firstName : this.state.firstName,
+      lastName : this.state.lastName,
       email : this.state.email,
       password: this.state.password
     }
-
+    uc = new UserController(userData)
+    uc.signUpUser()
+    this.props.navigation.navigate('Main')
   }
-
-  checkEmail = () => 
-  {
-    if(this.state.email.includes("@") && this.state.email.includes("."))
-    {
-      return 'true'
-    }
-    else
-    {
-      return 'false'
-    }
-  }
-   async getUser()
-   {
  
-  let response = await fetch(`http://dulwich.dlinkddns.com/api/users`);
-  let data = await response.text()
- 
-  alert(data);
-   }
- 
-
-  signUpUser = () =>{
-
- 
-    const { email }  = this.state ;
-    const { password }  = this.state ;
-    
-    
-   
-   fetch('http://dulwich.dlinkddns.com/api/users', {
-     method: 'POST',
-     headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({
-      
-      firstName: 'TestFirstName',
-      lastName: 'TestLastName',
-      email: 'test@email.com',
-      password: 'testPass',
-
-   
-   
-     })
-   
-   }).then((response) => response.text())
-         .then((responseJson) => {
-   
-   // Showing response message coming from server after inserting records.
-           alert(responseJson);
-   
-         }).catch((error) => {
-           console.error(error);
-         });
-    
-    
-     }
-
-  saveInput = () =>
-  {
-    //check here if input meets requirements
-    //if input meets requirements, save and change back to login
-     
-    
-    if(this.checkEmail()=='true')
-    {
-    this.props.navigation.navigate('Login')
-    this.getUser()
-    this.signUpUser()
-    alert(JSON.stringify(this.userData))
-    alert('Data Saved Successfully! Please Login')
-    }
-    else
-    {
-      alert('Email does not contain correct characters, please try again')
-    }
-  }
-
-  
-
   render() {
     return (
       
       <View style={styles.container}>
             <Text style={styles.headingText}>SIGN UP</Text>
+            <View style={styles.inputContainer}>
+                
+                <TextInput 
+                style={styles.input}
+                placeholder={"First Name"}
+                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                underLineColorAndroid='transparent'
+                onChangeText={(text) => this.setState({firstName:text})}
+                ></TextInput>
+
+                </View>
+                <View style={styles.inputContainer}>
+                
+                <TextInput 
+                style={styles.input}
+                placeholder={"Last Name"}
+                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                underLineColorAndroid='transparent'
+                onChangeText={(text) => this.setState({lastName:text})}
+                ></TextInput>
+
+                </View>
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
@@ -158,7 +108,8 @@ export default class LoginScreen extends Component {
                 ></TextInput>
 
                 </View>
-                <TouchableOpacity style={styles.btnLogin} onPress={this.saveInput}>
+                
+                <TouchableOpacity style={styles.btnLogin} onPress={this.signUp}>
                     <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableOpacity>
         </View>

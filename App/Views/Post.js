@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
     render() {
       return (
       <TouchableOpacity>
-      <View style={{height:80, width: 400, marginTop: 10, backgroundColor: 'white', borderColor:'purple', borderWidth: 3, alignItems: 'center'}}>
+      <View style={{height:100, width: 400, marginTop: 10, backgroundColor: 'white', borderColor:'purple', borderWidth: 3, alignItems: 'center', borderRadius: 25,}}>
         <Text style={{fontSize: 15, color: 'black', }}>Post Heading</Text>
     </View></TouchableOpacity>
       );

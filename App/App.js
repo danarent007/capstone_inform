@@ -2,15 +2,15 @@
 import React from "react";
 import { Button, View, Text } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import LoginScreen from './LoginScreen'
-import SignUpScreen from './SignUpScreen'
-import MainScreen from './MainScreen'
-import Post from './Post'
-import PostFeed from './PostFeed'
+import LoginScreen from './Views/LoginScreen'
+import SignUpScreen from './Views/SignUpScreen'
+import MainScreen from './Views/MainScreen'
+import Post from './Views/Post'
+import PostFeed from './Views/PostFeed'
 
 const AppNavigator = createStackNavigator(
   {
-    Login: 
+    Login:
     {
       screen: LoginScreen,
       navigationOptions: 
@@ -38,7 +38,7 @@ const AppNavigator = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Login',
 });
 
 export default createAppContainer(AppNavigator);
