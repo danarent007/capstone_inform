@@ -26,7 +26,7 @@ class UserController
         //alert(JSON.stringify(userData, null, 4));
         
        
-       fetch('http://dulwich.dlinkddns.com/api/users', {
+       fetch('http://dulwich.dlinkddns.com/api/users/register', {
          method: 'POST',
          headers: {
            'Accept': 'application/json',
@@ -90,9 +90,39 @@ class UserController
       }
     }
 
-    
-  
+ 
 
+    loginUser = () =>
+    {
+      
+        
+        fetch('http://dulwich.dlinkddns.com/api/users/login', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             
+             email: userData.email,
+             password: userData.password,
+       
+            })
+          }).then((response) => response.text())
+                .then((responseJson) => {
+                alert(responseJson)
+                
+
+          // Showing response message coming from server after inserting records.
+                
+                  //alert(responseJson);
+          
+                }).catch((error) => {
+                  console.error(error);
+                }); 
+      
+        
+    }
 
 }
 export default UserController

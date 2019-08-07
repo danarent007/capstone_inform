@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image} from 'react-native' ; 
+import UserController from '../Controllers/UserController'
 import {
     SafeAreaView,
     StyleSheet,
@@ -10,13 +11,45 @@ import {
     Dimensions,
     TextInput,
     TouchableOpacity,
-    Parent 
+    Parent,
+    Colors 
   } from 'react-native';
   
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+
 const {width: WIDTH} = Dimensions.get('window')
 
 class LoginScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    //uc = new UserController()
+
+    this.state = 
+    {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    };
+  }
+
+  loginUser = () =>
+  {
+    userData =
+    {
+      firstName : this.state.firstName,
+      lastName : this.state.lastName,
+      email : this.state.email,
+      password: this.state.password
+    }
+    uc = new UserController(userData)
+    uc.loginUser()
+    
+    this.props.navigation.navigate('Main')
+    
+   
+  }
+
 
   render() {
     return (
@@ -29,6 +62,7 @@ class LoginScreen extends React.Component {
                     placeholder={"Username"}
                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                     underLineColorAndroid='transparent'
+                    onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
                 </View>
             <View style={styles.inputContainer}>
@@ -38,9 +72,10 @@ class LoginScreen extends React.Component {
                 secureTextEntry={true}
                 placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                 underLineColorAndroid='transparent'
+                onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
                 </View>
-                <TouchableOpacity style={styles.btnLogin}>
+                <TouchableOpacity style={styles.btnLogin} onPress={ this.loginUser}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>
@@ -58,9 +93,6 @@ class LoginScreen extends React.Component {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-    scrollView: {
-      backgroundColor: Colors.lighter,
-    },
     container: 
     {
         flex: 1,
@@ -72,9 +104,6 @@ const styles = StyleSheet.create({
     engine: {
       position: 'absolute',
       right: 0,
-    },
-    body: {
-      backgroundColor: Colors.white,
     },
     sectionContainer: {
       marginTop: 32,

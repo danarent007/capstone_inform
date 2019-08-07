@@ -12,18 +12,11 @@ import {
     StatusBar,
     Dimensions,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Colors
     
   } from 'react-native';
   
-  import {
-    Header,
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-  } from 'react-native/Libraries/NewAppScreen';
-
 
   
 
@@ -57,7 +50,7 @@ export default class LoginScreen extends Component {
     }
     uc = new UserController(userData)
     uc.signUpUser()
-    this.props.navigation.navigate('Main')
+    this.props.navigation.navigate('Login')
   }
  
   render() {
@@ -122,9 +115,6 @@ export default class LoginScreen extends Component {
   
 }
 const styles = StyleSheet.create({
-    scrollView: {
-      backgroundColor: Colors.lighter,
-    },
     container: 
     {
         flex: 1,
@@ -136,9 +126,6 @@ const styles = StyleSheet.create({
     engine: {
       position: 'absolute',
       right: 0,
-    },
-    body: {
-      backgroundColor: Colors.white,
     },
     sectionContainer: {
       marginTop: 32,
