@@ -38,6 +38,10 @@ export default class LoginScreen extends Component {
     };
   }
 
+  doSomething()
+  {
+    alert('test')
+  }
   signUp = () =>
   {
     
@@ -48,7 +52,7 @@ export default class LoginScreen extends Component {
       email : this.state.email,
       password: this.state.password
     }
-    uc = new UserController(userData)
+    uc = new UserController(userData, this)
     uc.signUpUser()
     this.props.navigation.navigate('Login')
   }

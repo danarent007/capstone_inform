@@ -1,16 +1,17 @@
-
-
+import SignUpScreen from '../Views/SignUpScreen'
 
 class UserController 
 {
-    constructor(userData)
+    constructor(userData, ss)
     {
+        this.signUpObj = ss
         userData =
         {
           firstName : userData.firstName,
           lastName : userData.lastName,
           email : userData.email,
-          password: userData.password
+          password: userData.password,
+          
         }
         //alert(JSON.stringify(userData, null, 4));
     }
@@ -22,9 +23,9 @@ class UserController
     }  
 
     signUpUser = () => {
-        
+        this.signUpObj.doSomething()
         //alert(JSON.stringify(userData, null, 4));
-        
+       
        
        fetch('http://dulwich.dlinkddns.com/api/users/register', {
          method: 'POST',
