@@ -15,12 +15,16 @@ class UserController
         }
         //alert(JSON.stringify(userData, null, 4));
     }
+
+    
+    
     async getUsers()
     {
     let response = await fetch(`http://dulwich.dlinkddns.com/api/users`);
     let data = await response
     return data;
     }  
+    
 
     signUpUser = () => {
         this.signUpObj.doSomething()

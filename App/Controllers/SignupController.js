@@ -45,18 +45,16 @@ class SignupController
          })
 
         })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((responseJson) => 
         {
             //Deal with response
-            alert(responseJson.text);
-            //alert('HHHHHH')
-            if(responseJson.text == 'sc1001')
+            if(responseJson.registered == false)
             {
                 //User Exists
-                alert('User already exists. Please sign up, or change email.')
+                alert('User already exists. Please sign in, or change email address.')
             }
-            else if (responseJson.text == 'sc1002')
+            else if (responseJson.registered == true)
             {
                 //User Added
                 alert('User sucessfully added! Please sign in.')
@@ -64,7 +62,7 @@ class SignupController
             }
             else
             {
-                alert('Sign-up currently unavailable. Please try again later.')
+                //alert('Sign-up currently unavailable. Please try again later.')
             }
         }).catch((error) => 
         {

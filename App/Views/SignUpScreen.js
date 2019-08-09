@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Image} from 'react-native' ; 
 import {createStackNavigator, createAppContainer} from 'react-navigation'
 import UserController from '../Controllers/UserController'
+import SignupController from '../Controllers/SignupController'
 
 import {
     SafeAreaView,
@@ -16,9 +17,6 @@ import {
     Colors
     
   } from 'react-native';
-  
-
-  
 
 
 const {width: WIDTH} = Dimensions.get('window')
@@ -38,13 +36,14 @@ export default class LoginScreen extends Component {
     };
   }
 
-  doSomething()
+  doSignup() //Method run from controller. Signs user up, initiates next screen
   {
-    alert('test')
+    //this.props.navigation.navigate('Login')
+    this.props.navigation.goBack()
+    console.debug("Login page")
   }
-  signUp = () =>
+  trySignup = () => //Launch controller and attempt to sign up.
   {
-    
     userData =
     {
       firstName : this.state.firstName,
@@ -52,9 +51,8 @@ export default class LoginScreen extends Component {
       email : this.state.email,
       password: this.state.password
     }
-    uc = new UserController(userData, this)
-    uc.signUpUser()
-    this.props.navigation.navigate('Login')
+    sc = new SignupController(userData, this)
+    sc.registerUser()
   }
  
   render() {
@@ -106,8 +104,11 @@ export default class LoginScreen extends Component {
 
                 </View>
                 
-                <TouchableOpacity style={styles.btnLogin} onPress={this.signUp}>
+                <TouchableOpacity style={styles.btnLogin} onPress={this.trySignup}>
                     <Text style={styles.loginText}>Sign Up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.goBack()}>
+                    <Text style={styles.loginText}>Back</Text>
                 </TouchableOpacity>
         </View>
       
