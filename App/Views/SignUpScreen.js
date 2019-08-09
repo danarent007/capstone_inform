@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' ; 
 import {createStackNavigator, createAppContainer} from 'react-navigation'
-import UserController from '../Controllers/UserController'
 import SignupController from '../Controllers/SignupController'
 
 import {
@@ -21,7 +20,7 @@ import {
 
 const {width: WIDTH} = Dimensions.get('window')
 
-export default class LoginScreen extends Component {
+class SignUpScreennnn extends Component {
 
   constructor(props) {
     super(props);
@@ -52,7 +51,7 @@ export default class LoginScreen extends Component {
       password: this.state.password
     }
     sc = new SignupController(userData, this)
-    sc.registerUser()
+    sc.attemptRegisterUser()
   }
  
   render() {

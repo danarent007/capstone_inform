@@ -4,22 +4,20 @@ const SIGNIN_URL = 'http://dulwich.dlinkddns.com/api/users/login'
 
 class LoginController
 {
-    constructor(userData,lScreen) //Constructor
+    constructor(userData, lScreen) //Constructor
     {
         this.logInObj = lScreen
         userData=
         {
-            firstName : userData.firstName,
-            lastName:userData.lastName,
-            email:userData.email,
-            password: userData.password
+            email : userData.email,
+            password : userData.password
         }
     }
 
 
     tryLogIn2 = () => 
     {
-        fetch(SIGNIN_URL, 
+        fetch(LOGIN_URL, 
          {
           method: 'POST',
           headers: 

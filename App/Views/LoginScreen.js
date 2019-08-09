@@ -19,7 +19,7 @@ import {
 
 const {width: WIDTH} = Dimensions.get('window')
 
-class LoginScreen extends React.Component {
+class LoginScreennnn extends React.Component {
 
   constructor(props) {
     super(props);
@@ -93,7 +93,7 @@ class LoginScreen extends React.Component {
 
   
 }
-export default LoginScreen;
+//export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: 
