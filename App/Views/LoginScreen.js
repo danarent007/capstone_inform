@@ -1,6 +1,7 @@
-import React from 'react';
-import {Image} from 'react-native' ; 
-import UserController from '../Controllers/UserController'
+import React from 'react'
+import {Image} from 'react-native' 
+import LoginController from '../Controllers/LoginController'
+
 import {
     SafeAreaView,
     StyleSheet,
@@ -26,14 +27,14 @@ class LoginScreen extends React.Component {
 
     this.state = 
     {
-      firstName: '',
-      lastName: '',
       email: '',
-      password: '',
+      password: ''
     };
   }
 
-  loginUser = () =>
+
+
+  tryLogin = () => //Attempt a login
   {
     userData =
     {
@@ -42,13 +43,15 @@ class LoginScreen extends React.Component {
       email : this.state.email,
       password: this.state.password
     }
-    uc = new UserController(userData)
-    uc.loginUser()
+
+    lc = new LoginController(userData,this)
+    lc.tryLogIn2()
     
-    this.props.navigation.navigate('Main')
+    //this.props.navigation.navigate('Main')
     
    
   }
+
 
 
   render() {
@@ -75,7 +78,7 @@ class LoginScreen extends React.Component {
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
                 </View>
-                <TouchableOpacity style={styles.btnLogin} onPress={ this.loginUser}>
+                <TouchableOpacity style={styles.btnLogin} onPress={ this.tryLogin}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>

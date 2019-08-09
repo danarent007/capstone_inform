@@ -22,11 +22,10 @@ class SignupController
     /*
     -Email Validation
     -Password Validation
-    -Check if email exist
     */
 
     //Attempt user registration
-    registerUser = () => {
+    attemptRegisterUser = () => {
        fetch(REGISTER_URL, 
         {
          method: 'POST',
@@ -68,8 +67,6 @@ class SignupController
         {
             console.error(error);
         });
-        
-        //return true
          }
 
 
