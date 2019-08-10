@@ -4,7 +4,14 @@ import {FlatList, Text} from 'react-native'
 
 class PostFeed extends React.PureComponent
 {
-    
+    constructor(posts)
+    {
+      super(posts)
+      this.state = 
+      {
+        posts: posts
+      }
+    }
 
     _renderPost()
     {
@@ -19,7 +26,8 @@ class PostFeed extends React.PureComponent
         return (
           <FlatList
           contentContainerStyle={{alignContent:'center'}}
-            data={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]}
+            data={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}
+            extraData={this.state}
             keyExtractor={this._returnKey}
             renderItem={this._renderPost}
           />

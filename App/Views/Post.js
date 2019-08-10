@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 const {width: WIDTH} = Dimensions.get('window')
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import PostController from '../Controllers/PostController'
   class Post extends Component { 
+
     render() {
       return (
       <TouchableOpacity>

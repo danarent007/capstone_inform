@@ -1,22 +1,27 @@
 import LoginScreen from '../Views/LoginScreen'
 
-const SIGNIN_URL = 'http://dulwich.dlinkddns.com/api/users/login'
+const LOGIN_URL = 'http://dulwich.dlinkddns.com/api/users/login'
 
 class LoginController
 {
-    constructor(userData, lScreen) //Constructor
+    
+    constructor(userData, ls)
     {
-        this.logInObj = lScreen
-        userData=
+        this.loginObj = ls
+        userData =
         {
-            email : userData.email,
-            password : userData.password
+          firstName : userData.firstName,
+          lastName : userData.lastName,
+          email : userData.email,
+          password: userData.password,  
         }
+        //alert(JSON.stringify(userData, null, 4));
     }
 
 
     tryLogIn2 = () => 
     {
+        
         fetch(LOGIN_URL, 
          {
           method: 'POST',
@@ -36,20 +41,20 @@ class LoginController
          .then((response) => response.json())
          .then((responseJson) => 
          {
+                
              console.debug(responseJson)
              
              //Deal with response
-
              
-             if(responseJson.registered == false)
+             if(responseJson.loggedIn == false)
              {
                  //User Exists
-                 alert('NOO LOGINNNNN')
+                 alert(responseJson.message)
              }
-             else if (responseJson.registered == true)
+             else if (responseJson.loggedIn == true)
              {
                  //User Added
-                 alert('LOGINNNNNN')
+                 alert(responseJson.message)
                  //this.signUpObj.doSignup()
              }
              else
@@ -63,10 +68,5 @@ class LoginController
          });
     }
     
-
-
-
-
-
-
 }
+export default LoginController;

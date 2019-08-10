@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' 
-import LoginController from '../Controllers/LoginController'
+import PostController from '../Controllers/PostController'
 
 import {
     SafeAreaView,
@@ -15,11 +15,12 @@ import {
     Parent,
     Colors 
   } from 'react-native';
+import Post from './Post';
   
 
 const {width: WIDTH} = Dimensions.get('window')
 
-export default class LoginScreen extends Component {
+export default class NewPost extends Component {
 
   constructor(props) {
     super(props);
@@ -27,29 +28,33 @@ export default class LoginScreen extends Component {
 
     this.state = 
     {
-      email: '',
-      password: ''
+      title: '',
+      body: ''
     };
   }
 
 
 
-  tryLogin = () => //Attempt a login
+  createPost = () => 
   {
-    userData =
+    postData =
     {
-      firstName : this.state.firstName,
-      lastName : this.state.lastName,
-      email : this.state.email,
-      password: this.state.password
+      title : this.state.title,
+      body : this.state.body,
     }
+    
 
-    lc = new LoginController(userData, this)
-    lc.tryLogIn2()
-    
-    //this.props.navigation.navigate('Main')
-    
-   
+    pc = new PostController(postData)
+    pc.publishPost()
+    //TODO:
+    /*
+    -Post field verification ie, no empty fields
+    -Display if post has been added successfully
+    -Refresh post feed
+    */
+
+
+    this.props.navigation.goBack()
   }
 
 
@@ -58,31 +63,29 @@ export default class LoginScreen extends Component {
     return (
         
       <View style={styles.container}>
-            <Text style={styles.headingText}>LOGIN</Text>
+            <Text style={styles.headingText}>NEW POST</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
-                    placeholder={"Username"}
-                    placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                    placeholder={"Title"}
+                    height={80}
+                    placeholderTextColor={'rgba(0, 0, 0, 0.5)'}
                     underLineColorAndroid='transparent'
-                    onChangeText={(text) => this.setState({email:text})}
+                    onChangeText={(text) => this.setState({title:text})}
                     ></TextInput>
                 </View>
             <View style={styles.inputContainer}>
                 <TextInput 
                 style={styles.input}
-                placeholder={"Password"}
-                secureTextEntry={true}
-                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                placeholder={"Body"}
+                height={120}
+                placeholderTextColor={'rgba(0, 0, 0, 0.5)'}
                 underLineColorAndroid='transparent'
-                onChangeText={(text) => this.setState({password:text})}
+                onChangeText={(text) => this.setState({body:text})}
                 ></TextInput>
                 </View>
-                <TouchableOpacity style={styles.btnLogin} onPress={ this.tryLogin}>
-                    <Text style={styles.loginText}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>
-                    <Text style={styles.loginText}>Sign Up</Text>
+                <TouchableOpacity style={styles.btnLogin} onPress={ this.createPost}>
+                    <Text style={styles.loginText}>Publish Post</Text>
                 </TouchableOpacity>
         </View>
       
@@ -131,12 +134,12 @@ const styles = StyleSheet.create({
     input: 
     {
         width: WIDTH - 55,
-        height: 45,
+        //height: 100,
         borderRadius: 25,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
+        backgroundColor: 'rgba(255, 255, 255, 0.35)',
+        color: 'rgba(0, 0, 0, 0.7)',
         marginHorizontal: 25
     },
     inputContainer: 

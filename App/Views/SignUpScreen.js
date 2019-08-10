@@ -20,7 +20,7 @@ import {
 
 const {width: WIDTH} = Dimensions.get('window')
 
-class SignUpScreennnn extends Component {
+class SignUpScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -118,6 +118,8 @@ class SignUpScreennnn extends Component {
 
   
 }
+export default SignUpScreen;
+
 const styles = StyleSheet.create({
     container: 
     {
