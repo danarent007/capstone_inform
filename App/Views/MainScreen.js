@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' ; 
 import PostFeed from './PostFeed'
+import PostController from '../Controllers/PostController'
 import { Icon } from 'react-native-elements'
 
 import {
@@ -27,14 +28,23 @@ import {
 
 const {width: WIDTH} = Dimensions.get('window')
 
+
 export default class MainScreen extends Component {
+
+  
+
+
+  //pc = new PostController
+  
+
 
   createPost = () =>
   {
-
     this.props.navigation.navigate('NewPost')
   }
+
   render() {
+    //Pf = new PostFeed
     return (
       <View style={{flex: 1, height: 100, width: 100,}}>
         <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text>
@@ -87,7 +97,6 @@ const styles = StyleSheet.create({
      backgroundColor: '#a302a3',
      height: 60,
      width: 50,
-     //position: 'absolute', <<-- this stops button from working
      alignSelf: 'flex-end',
     
     },

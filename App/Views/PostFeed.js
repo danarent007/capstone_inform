@@ -1,37 +1,54 @@
 import React, {Component, PureComponent} from 'react'
 import Post from './Post'
 import {FlatList, Text} from 'react-native'
+import PostController from '../Controllers/PostController';
 
 class PostFeed extends React.PureComponent
 {
-    constructor(posts)
-    {
-      super(posts)
+  //posts = new Array()
+
+  constructor ()
+  {
+      super()
       this.state = 
       {
-        posts: posts
+        posts: []
       }
     }
+
 
     _renderPost()
     {
         return <Post />
-        //return <Text>Test</Text>;
     }
+
     _returnKey(item)
     {
         return item.toString();
     }
     render() {
+      pc = new PostController;
+      //this.posts = pc.getPosts()
+      
+      this.setState({posts: pc.getPosts})
         return (
           <FlatList
           contentContainerStyle={{alignContent:'center'}}
-            data={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}
+            data={this.posts}
             extraData={this.state}
             keyExtractor={this._returnKey}
             renderItem={this._renderPost}
           />
         );
       }
+
+
+
+componentDidMount = () =>
+{
+
+}
+
+
 }
 export default PostFeed;
