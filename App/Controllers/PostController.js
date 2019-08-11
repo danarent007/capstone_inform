@@ -3,18 +3,16 @@ import PostFeed from '../Views/PostFeed'
 import React, { Component, PureComponent } from 'react'
 import { FlatList, Text } from 'react-native'
 
+
 const POST_URL = 'http://dulwich.dlinkddns.com/api/posts'
 const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add'
+let data = []
 
-class PostController extends React.PureComponent
+class PostController
 {
   constructor()
   {
-    super()
-    state =
-      {
-        posts: []
-      }
+    data = []
   }
 
  //TODO:
@@ -59,18 +57,25 @@ class PostController extends React.PureComponent
 getPosts = () =>
 {
 
-  alert('trying to get data...')
-  //pc = new PostController(this.postData)
-  fetch(POST_URL)
-  .then((response) => response.json())
-  .then((responseJson) => {
-    console.log(responseJson)
-    return responseJson
-  }).catch((error) => {
-    alert(error)
-  })
-  
-  
+    const url = 'http://dulwich.dlinkddns.com/api/posts'
+    return fetch(url)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      //alert(JSON.stringify(responseJson))
+      return responseJson;
+
+    }).catch((error) => {
+      alert(error)
+    })
 }
+ 
+//  getPosts = () => {
+//     return fetch(POST_URL).then(function(response) {
+//         return response.json();
+//     }).then(function(json) {
+//         return json;
+//     });
+// }
+
 }
 export default PostController;
