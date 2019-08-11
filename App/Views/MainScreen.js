@@ -22,7 +22,6 @@ import {
     Colors,
     DebugInstructions,
     ReloadInstructions,
-
   } from 'react-native/Libraries/NewAppScreen';
 //import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -41,10 +40,10 @@ export default class MainScreen extends Component {
   createPost = () =>
   {
     this.props.navigation.navigate('NewPost')
+    this.render()
   }
 
   render() {
-    //Pf = new PostFeed
     return (
       <View style={{flex: 1, height: 100, width: 100,}}>
         <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text>
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     header: 
     {
       width: WIDTH,
-      height: 60,
+      height: 45,
       backgroundColor: "#8B008B",
       flexDirection: 'column',
     },

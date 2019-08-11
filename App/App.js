@@ -6,6 +6,7 @@ import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
 import MainScreen from './Views/MainScreen'
 import NewPost from './Views/NewPost'
+import ViewPost from './Views/ViewPost'
 import Post from './Views/Post'
 import PostFeed from './Views/PostFeed'
 
@@ -50,9 +51,23 @@ const AppNavigator = createStackNavigator(
         fontSize: 18,
       },
       }
+    },
+    VPost:
+    {
+      screen: ViewPost,
+      navigationOptions: 
+      {
+        headerTintColor: '#ffffff',
+        headerStyle: {
+          backgroundColor: '#6b006b',
+          borderBottomColor: '#ffffff',
+          borderBottomWidth: 2,
+        },
+        headerTitleStyle: {
+          fontSize: 18,
+        },
+      }
     }
-
-
   },
   {
     initialRouteName: 'Main',

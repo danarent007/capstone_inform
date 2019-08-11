@@ -1,7 +1,9 @@
 import React, { Component, PureComponent } from 'react'
 import Post from './Post'
-import { FlatList, Text } from 'react-native'
+import { FlatList, Text, TouchableHighlight } from 'react-native'
+import { withNavigation } from 'react-navigation';
 import PostController from '../Controllers/PostController'
+import ViewPost from '../Views/ViewPost'
 import {
   AppRegistry,
   StyleSheet,
@@ -14,9 +16,11 @@ import {
 const {width: WIDTH} = Dimensions.get('window')
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-class PostFeed extends React.PureComponent {
-  constructor() {
-    super()
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts'
+
+class PostFeed extends React.Component {
+  constructor(props) {
+    super(props)
     this.state =
       {
         posts: []
@@ -27,22 +31,30 @@ class PostFeed extends React.PureComponent {
 
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
-    <TouchableOpacity> 
-        <View style={{ height: 120, width: WIDTH - 10, marginTop: 10, backgroundColor: 'white', borderColor: 'purple', borderWidth: 3, alignItems: 'center', borderRadius: 25, }}>
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {title: item.title, description: item.description})}> 
+        <View style={{ height: 120, width: WIDTH - 10, marginTop: 10, backgroundColor: 'white', borderColor: 'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0, }}>
           <Text style={{ fontSize: 15, color: 'black',}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: 'black', }}>{item.description}</Text>
         </View>
       </TouchableOpacity>  
   );
 
+  openPost = (item) =>
+  {
+    //alert(item.title)
+    
+    //this.props.navigation.navigate('VPost', {title: this.item.title, description: this.item.description})
+    
+    //this.props.navigation.goBack()
+  }
+
   _keyExtractor = (item, index) => item.post_id.toString();
 
 
   componentDidMount() {
-    alert('trying to get data...')
     //pc = new PostController(this.postData)
-    const url = 'http://dulwich.dlinkddns.com/api/posts'
-    fetch(url)
+    
+    fetch(POST_FETCH_URL)
     .then((response) => response.json())
     .then((responseJson) => {
       //alert(JSON.stringify(responseJson))
@@ -65,4 +77,4 @@ class PostFeed extends React.PureComponent {
     );
   }
 }
-export default PostFeed;
+export default withNavigation(PostFeed);

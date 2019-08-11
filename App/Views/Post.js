@@ -35,12 +35,18 @@ import PostController from '../Controllers/PostController'
 
 
 
+   openPost = () =>
+   {
+     alert(this.post_title)
+   }
+
+
 
     render() {
       console.log(postData.post_title)
       return (
       <TouchableOpacity>
-      <View style={{height:100, width: WIDTH-10, marginTop: 10, backgroundColor: 'grey', borderColor:'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0,}}>
+      <View style={{height:100, width: WIDTH-10, marginTop: 10, backgroundColor: 'grey', borderColor:'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0,}} onPress={this.openPost}>
         <Text style={{fontSize: 15, color: 'black', }}>{postData.post_title}</Text>
         <Text style={{fontSize: 12, color: 'black', }}>{postData.post_body}</Text>
     </View></TouchableOpacity>
