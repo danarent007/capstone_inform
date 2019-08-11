@@ -1,4 +1,13 @@
-import SignUpScreen from '../Views/SignUpScreen'
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+** UserController.js
+*/
+
 
 class UserController 
 {

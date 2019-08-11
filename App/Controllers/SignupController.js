@@ -1,13 +1,20 @@
-import SignUpScreen from '../Views/SignUpScreen'
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+** SignupController.js
+*/
 
-const REGISTER_URL = 'http://dulwich.dlinkddns.com/api/users/register'
+const REGISTER_URL = 'http://dulwich.dlinkddns.com/api/users/register' //API register request
 
 class SignupController
 {
-    
-    constructor(userData,sScreen) //Constructor
+    constructor(userData,sScreen)
     {
-        this.signUpObj = sScreen
+        this.signUpObj = sScreen //Create default sign-up screen object
         userData=
         {
             firstName : userData.firstName,
@@ -17,16 +24,8 @@ class SignupController
         }
     }
 
-    
-    //TODO:
-    /*
-    -Email Validation
-    -Password Validation
-    */
-
-    //Attempt user registration
-    attemptRegisterUser = () => {
-       fetch(REGISTER_URL, 
+    attemptRegisterUser = () => { //Attempt to register user
+       fetch(REGISTER_URL,  //JSon message
         {
          method: 'POST',
          headers: 
@@ -34,7 +33,6 @@ class SignupController
            'Accept': 'application/json',
            'Content-Type': 'application/json',
          },
-
          body: JSON.stringify(
              {
           firstName: userData.firstName,
@@ -42,30 +40,26 @@ class SignupController
           email: userData.email,
           password: userData.password,
          })
-
         })
         .then((response) => response.json())
         .then((responseJson) => 
         {
-            //Deal with response
-            if(responseJson.registered == false)
+
+            if(responseJson.registered == false) //Handle JSon response
             {
-                //User Exists
-                alert('User already exists. Please sign in, or change email address.')
+                alert('User already exists. Please sign in, or change email address.') //User exists
             }
             else if (responseJson.registered == true)
             {
-                //User Added
-                alert('User sucessfully added! Please sign in.')
-                this.signUpObj.doSignup()
+                alert('User sucessfully added! Please sign in.') //User added
+                this.signUpObj.doSignup() //Call signup method in view
             }
             else
             {
-                //alert('Sign-up currently unavailable. Please try again later.')
+                alert('Sign-up currently unavailable. Please try again later.') //Erorr handling (no DB connection)
             }
         }).catch((error) => 
         {
-            console.error(error);
         });
          }
 

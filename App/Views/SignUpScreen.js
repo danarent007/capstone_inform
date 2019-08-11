@@ -1,19 +1,22 @@
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+*/
+
 import React, { Component } from 'react';
-import {Image} from 'react-native' ; 
-import {createStackNavigator, createAppContainer} from 'react-navigation'
 import SignupController from '../Controllers/SignupController'
 
 import {
-    SafeAreaView,
     StyleSheet,
-    ScrollView,
     View,
     Text,
-    StatusBar,
     Dimensions,
     TextInput,
     TouchableOpacity,
-    Colors
     
   } from 'react-native';
 

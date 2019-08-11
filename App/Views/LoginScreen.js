@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
-import {Image} from 'react-native' 
-import LoginController from '../Controllers/LoginController'
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+** LoginScreen.js
+*/
 
+import React, { Component } from 'react';
+import LoginController from '../Controllers/LoginController'
 import {
-    SafeAreaView,
     StyleSheet,
-    ScrollView,
     View,
     Text,
-    StatusBar,
+    Image,
     Dimensions,
     TextInput,
     TouchableOpacity,
-    Parent,
-    Colors 
   } from 'react-native';
   
 
-const {width: WIDTH} = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 export default class LoginScreen extends Component {
-
   constructor(props) {
     super(props);
-    //uc = new UserController()
-
     this.state = 
     {
       email: '',
       password: ''
     };
   }
-
-
 
   tryLogin = () => //Attempt a login
   {
@@ -44,19 +43,16 @@ export default class LoginScreen extends Component {
       password: this.state.password
     }
 
-    lc = new LoginController(userData, this)
-    lc.tryLogIn2()
-    
+    lc = new LoginController(userData, this) //Create new login controller to handle login
+    lc.tryLogIn2() //Call method to attempt login
   }
 
   doLogin = () => //Log user in
   {
-    this.props.navigation.navigate('Main')
+    this.props.navigation.navigate('Main') //Navigate to main view
   }
 
-
-
-  render() {
+  render() { //Render view
     return (
         
       <View style={styles.container}>
@@ -67,7 +63,7 @@ export default class LoginScreen extends Component {
                     style={styles.input}
                     //placeholder={"Username"}
                     placeholder={"Email"}
-                    placeholderTextColor={'#35cd96'}
+                    placeholderTextColor={'#ffffff'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
@@ -78,7 +74,7 @@ export default class LoginScreen extends Component {
                 //placeholder={"Password"}
                 placeholder={"Password"}
                 secureTextEntry={true}
-                placeholderTextColor={'#35cd96'}
+                placeholderTextColor={'#ffffff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
@@ -90,24 +86,17 @@ export default class LoginScreen extends Component {
                     <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableOpacity>
         </View>
-      
-     
-    
     );
-  }
-
-  
+    }
 }
 
-
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ //Styles
     container: 
     {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#35cd96',
-
     },
     engine: {
       position: 'absolute',
@@ -131,7 +120,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 10,
         opacity: 0.5,
-        
     },
     input: 
     {
@@ -155,7 +143,6 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         fontSize: 16,
         marginTop: 25,
-        
         backgroundColor: '#ffffff',
         color: '#35cd96',
         justifyContent: 'center',
@@ -170,11 +157,5 @@ const styles = StyleSheet.create({
         color: '#35cd96',
         fontSize: 20,
         textAlign: 'center',
-        
-
     }
-
-   
-   
-    
   });

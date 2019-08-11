@@ -1,10 +1,17 @@
-import LoginScreen from '../Views/LoginScreen'
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+** LoginController.js
+*/
 
-const LOGIN_URL = 'http://dulwich.dlinkddns.com/api/users/login'
+const LOGIN_URL = 'http://dulwich.dlinkddns.com/api/users/login' //API Login Request
 
 class LoginController
 {
-    
     constructor(userData, ls)
     {
         this.loginObj = ls
@@ -15,14 +22,11 @@ class LoginController
           email : userData.email,
           password: userData.password,  
         }
-        //alert(JSON.stringify(userData, null, 4));
     }
 
-
-    tryLogIn2 = () => 
+    tryLogIn2 = () => //Attempt a login
     {
-        
-        fetch(LOGIN_URL, 
+        fetch(LOGIN_URL, //JSon Request
          {
           method: 'POST',
           headers: 
@@ -30,37 +34,28 @@ class LoginController
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
- 
           body: JSON.stringify(
         {
            email: userData.email,
            password: userData.password,
         })
- 
          })
          .then((response) => response.json())
          .then((responseJson) => 
-         {
-                
-             console.debug(responseJson)
-             
-             //Deal with response
-             if(responseJson.loggedIn == false)
+         {  
+             if(responseJson.loggedIn == false) //Handle response
              {
-                 //User does not exist
-                 alert('Incorrect Email / Password Combo.')
+                 alert('Incorrect Email / Password Combo.') //User / Password incorrect
              }
              else if (responseJson.loggedIn == true)
              {
-                 //User Added
-                 alert('User Sucessfully Logged In.')
-                 this.loginObj.doLogin()
+                 alert('User Sucessfully Logged In.') //User logged in
+                 this.loginObj.doLogin() //Call login method in View
              }
              else
              {
-                 alert('Sign-up currently unavailable. Please try again later.')
+                 alert('Sign-up currently unavailable. Please try again later.') //Error handling (no DB connection)
              }
-             
          }).catch((error) => 
          {
              console.error(error);
