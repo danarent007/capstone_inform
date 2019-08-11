@@ -47,9 +47,11 @@ export default class LoginScreen extends Component {
     lc = new LoginController(userData, this)
     lc.tryLogIn2()
     
-    //this.props.navigation.navigate('Main')
-    
-   
+  }
+
+  doLogin = () => //Log user in
+  {
+    this.props.navigation.navigate('Main')
   }
 
 
@@ -62,7 +64,8 @@ export default class LoginScreen extends Component {
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
-                    placeholder={"Username"}
+                    //placeholder={"Username"}
+                    placeholder={"Phundi"}
                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
@@ -71,7 +74,8 @@ export default class LoginScreen extends Component {
             <View style={styles.inputContainer}>
                 <TextInput 
                 style={styles.input}
-                placeholder={"Password"}
+                //placeholder={"Password"}
+                placeholder={"phundi"}
                 secureTextEntry={true}
                 placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                 underLineColorAndroid='transparent'

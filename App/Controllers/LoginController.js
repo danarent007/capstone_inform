@@ -45,21 +45,20 @@ class LoginController
              console.debug(responseJson)
              
              //Deal with response
-             
              if(responseJson.loggedIn == false)
              {
-                 //User Exists
-                 alert(responseJson.message)
+                 //User does not exist
+                 alert('Incorrect Email / Password Combo.')
              }
              else if (responseJson.loggedIn == true)
              {
                  //User Added
-                 alert(responseJson.message)
-                 //this.signUpObj.doSignup()
+                 alert('User Sucessfully Logged In.')
+                 this.loginObj.doLogin()
              }
              else
              {
-                 //alert('Sign-up currently unavailable. Please try again later.')
+                 alert('Sign-up currently unavailable. Please try again later.')
              }
              
          }).catch((error) => 

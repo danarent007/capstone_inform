@@ -39,7 +39,7 @@ class SignUpScreen extends Component {
   {
     //this.props.navigation.navigate('Login')
     this.props.navigation.goBack()
-    console.debug("Login page")
+
   }
   trySignup = () => //Launch controller and attempt to sign up.
   {

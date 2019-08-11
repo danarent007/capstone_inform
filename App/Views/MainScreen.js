@@ -38,22 +38,6 @@ export default class MainScreen extends Component {
     return (
       <View style={{flex: 1, height: 100, width: 100,}}>
         <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text>
-        
-        <TouchableOpacity>
-          <View style={styles.postButton}>
-              <Image
-                style={styles.image}
-                source={require('../Assets/plus.png')}
-              />
-            </View>
-        </TouchableOpacity>
-        
-     
-       
-          
-        
-        
-        
         </View>
         <View style={{width: WIDTH, alignItems:'center'}}>
         <PostFeed/>
