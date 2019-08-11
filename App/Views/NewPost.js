@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Image} from 'react-native' 
 import PostController from '../Controllers/PostController'
+import PostFeed from '../Views/PostFeed'
 
 import {
     SafeAreaView,
@@ -29,7 +30,8 @@ export default class NewPost extends Component {
     this.state = 
     {
       title: '',
-      body: ''
+      body: '',
+      controller: this.props.navigation.getParam('controller', 'Not Found')
     };
   }
 
@@ -52,7 +54,6 @@ export default class NewPost extends Component {
     -Display if post has been added successfully
     -Refresh post feed
     */
-
 
     this.props.navigation.goBack()
   }

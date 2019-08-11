@@ -40,7 +40,7 @@ export default class MainScreen extends Component {
   createPost = () =>
   {
     this.props.navigation.navigate('NewPost')
-    this.render()
+    console.log('render')
   }
 
   render() {
@@ -57,6 +57,8 @@ export default class MainScreen extends Component {
       </View>
     );
   }
+
+
 
   
 }
