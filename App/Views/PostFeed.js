@@ -30,8 +30,8 @@ class PostFeed extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {title: item.title, description: item.description, controller: this})}> 
-        <View style={{ height: 120, width: WIDTH - 10, marginTop: 10, backgroundColor: 'white', borderColor: 'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0, }}>
-          <Text style={{ fontSize: 15, color: 'black',}}>{item.title}</Text>
+        <View style={{ height: 120, width: WIDTH - 10, marginTop: 10, backgroundColor: '#ffffff', borderColor: 'grey', borderWidth: 0, alignItems: 'center', borderRadius: 0, shadowOffset: {width: 0, height: 2}, elevation: 5, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3.84}}>
+          <Text style={{ fontSize: 15, color: 'black', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: 'black', }}>{item.description}</Text>
         </View>
       </TouchableOpacity>  

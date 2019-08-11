@@ -64,7 +64,7 @@ class SignUpScreen extends Component {
                 <TextInput 
                 style={styles.input}
                 placeholder={"First Name"}
-                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                placeholderTextColor={'#000000'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({firstName:text})}
                 ></TextInput>
@@ -75,7 +75,7 @@ class SignUpScreen extends Component {
                 <TextInput 
                 style={styles.input}
                 placeholder={"Last Name"}
-                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                placeholderTextColor={'#000000'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({lastName:text})}
                 ></TextInput>
@@ -85,7 +85,7 @@ class SignUpScreen extends Component {
                     <TextInput 
                     style={styles.input}
                     placeholder={"Email"}
-                    placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                    placeholderTextColor={'#000000'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
@@ -96,7 +96,7 @@ class SignUpScreen extends Component {
                 style={styles.input}
                 placeholder={"Password"}
                 secureTextEntry={true}
-                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                placeholderTextColor={'#000000'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#8B008B',
+        backgroundColor: '#eeeeee',
 
     },
     engine: {
@@ -146,22 +146,22 @@ const styles = StyleSheet.create({
     },
     headingText: 
     {
-        color: 'white',
-        fontSize: 40,
-        fontWeight: 'bold',
-        marginTop: 10,
-        opacity: 0.5,
-        
-    },
+      color: 'black',
+      fontSize: 40,
+      fontWeight: 'bold',
+      marginTop: 10,
+      opacity: 0.5,
+      
+  },
     input: 
     {
         width: WIDTH - 55,
         height: 45,
-        borderRadius: 25,
+        borderRadius: 0,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
+        backgroundColor: '#dddddd',
+        color: '#000000',
         marginHorizontal: 25
     },
     inputContainer: 
@@ -170,19 +170,24 @@ const styles = StyleSheet.create({
     },
     btnLogin: 
     {
-        width: WIDTH - 150,
-        height: 45,
-        borderRadius: 25,
-        fontSize: 16,
-        marginTop: 25,
-        
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
-        justifyContent: 'center',
+      width: WIDTH - 150,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      marginTop: 25,
+      
+      backgroundColor: '#dddddd',
+      color: '#000000',
+      justifyContent: 'center',
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
     },
     loginText: 
     {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: '#000000',
         fontSize: 20,
         textAlign: 'center',
         

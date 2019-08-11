@@ -60,13 +60,14 @@ export default class LoginScreen extends Component {
     return (
         
       <View style={styles.container}>
+        <Image source={require('../Views/stone.png')} />
             <Text style={styles.headingText}>LOGIN</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
                     //placeholder={"Username"}
-                    placeholder={"Phundi"}
-                    placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                    placeholder={"Email"}
+                    placeholderTextColor={'#35cd96'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
@@ -75,9 +76,9 @@ export default class LoginScreen extends Component {
                 <TextInput 
                 style={styles.input}
                 //placeholder={"Password"}
-                placeholder={"phundi"}
+                placeholder={"Password"}
                 secureTextEntry={true}
-                placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                placeholderTextColor={'#35cd96'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#8B008B',
+        backgroundColor: '#35cd96',
 
     },
     engine: {
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     },
     headingText: 
     {
-        color: 'white',
+        color: '#ffffff',
         fontSize: 40,
         fontWeight: 'bold',
         marginTop: 10,
@@ -134,14 +135,14 @@ const styles = StyleSheet.create({
     },
     input: 
     {
-        width: WIDTH - 55,
-        height: 45,
-        borderRadius: 25,
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
-        marginHorizontal: 25
+      width: WIDTH - 55,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      paddingLeft: 45,
+      backgroundColor: '#ffffff',
+      color: '#35cd96',
+      marginHorizontal: 25
     },
     inputContainer: 
     {
@@ -151,17 +152,22 @@ const styles = StyleSheet.create({
     {
         width: WIDTH - 150,
         height: 45,
-        borderRadius: 25,
+        borderRadius: 0,
         fontSize: 16,
         marginTop: 25,
         
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
+        backgroundColor: '#ffffff',
+        color: '#35cd96',
         justifyContent: 'center',
+        shadowOffset: {width: 0, height: 2}, 
+        elevation: 5, 
+        shadowColor: '#000', 
+        shadowOpacity: 0.25, 
+        shadowRadius: 3.84
     },
     loginText: 
     {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: '#35cd96',
         fontSize: 20,
         textAlign: 'center',
         
