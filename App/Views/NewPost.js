@@ -5,37 +5,26 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
+** NewPost.js
 */
 
 import React, { Component } from 'react';
-import {Image} from 'react-native' 
 import PostController from '../Controllers/PostController'
-import PostFeed from '../Views/PostFeed'
-
 import {
-    SafeAreaView,
     StyleSheet,
-    ScrollView,
     View,
     Text,
-    StatusBar,
     Dimensions,
     TextInput,
     TouchableOpacity,
-    Parent,
-    Colors 
   } from 'react-native';
-import Post from './Post';
   
-
-const {width: WIDTH} = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 export default class NewPost extends Component {
 
   constructor(props) {
     super(props);
-    //uc = new UserController()
-
     this.state = 
     {
       title: '',
@@ -44,19 +33,16 @@ export default class NewPost extends Component {
     };
   }
 
-
-
-  createPost = () => 
+  createPost = () => //Create a new post
   {
     postData =
     {
       title : this.state.title,
       body : this.state.body,
     }
-    
+    pc = new PostController(postData) //Start a new post controller
+    pc.publishPost() //Publish post
 
-    pc = new PostController(postData)
-    pc.publishPost()
     //TODO:
     /*
     -Post field verification ie, no empty fields
@@ -64,14 +50,11 @@ export default class NewPost extends Component {
     -Refresh post feed
     */
 
-    this.props.navigation.goBack()
+    this.props.navigation.goBack() //Return to main screen
   }
 
-
-
-  render() {
+  render() { //Render view
     return (
-        
       <View style={styles.container}>
             <Text style={styles.headingText}>NEW POST</Text>
                 <View style={styles.inputContainer}>
@@ -79,7 +62,7 @@ export default class NewPost extends Component {
                     style={styles.input}
                     placeholder={"Title"}
                     height={80}
-                    placeholderTextColor={'rgba(0, 0, 0, 0.5)'}
+                    placeholderTextColor={'#ffffff'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({title:text})}
                     ></TextInput>
@@ -89,7 +72,7 @@ export default class NewPost extends Component {
                 style={styles.input}
                 placeholder={"Body"}
                 height={120}
-                placeholderTextColor={'rgba(0, 0, 0, 0.5)'}
+                placeholderTextColor={'#ffffff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({body:text})}
                 ></TextInput>
@@ -98,24 +81,17 @@ export default class NewPost extends Component {
                     <Text style={styles.loginText}>Publish Post</Text>
                 </TouchableOpacity>
         </View>
-      
-     
-    
     );
   }
-
-  
 }
 
-
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ //Styles
     container: 
     {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#8B008B',
-
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#4682b4',
     },
     engine: {
       position: 'absolute',
@@ -139,18 +115,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 10,
         opacity: 0.5,
-        
     },
     input: 
     {
-        width: WIDTH - 55,
-        //height: 100,
-        borderRadius: 25,
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: 'rgba(255, 255, 255, 0.35)',
-        color: 'rgba(0, 0, 0, 0.7)',
-        marginHorizontal: 25
+      width: WIDTH - 55,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      paddingLeft: 45,
+      backgroundColor: '#add8e6',
+      fontWeight: 'bold',
+      color: '#ffffff',
+      marginHorizontal: 25,
+      opacity: 0.6
     },
     inputContainer: 
     {
@@ -158,23 +135,27 @@ const styles = StyleSheet.create({
     },
     btnLogin: 
     {
-        width: WIDTH - 150,
-        height: 45,
-        borderRadius: 25,
-        fontSize: 16,
-        marginTop: 25,
-        
-        backgroundColor: 'rgba(0, 0, 0, 0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
-        justifyContent: 'center',
+      width: WIDTH - 150,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      marginTop: 25,
+      backgroundColor: '#add8e6',
+      color: '#ffffff',
+      justifyContent: 'center',
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
     },
     loginText: 
     {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: '#ffffff',
         fontSize: 20,
         textAlign: 'center',
-        
-
+        fontWeight: 'bold',
+        opacity: 0.6
     }
 
    

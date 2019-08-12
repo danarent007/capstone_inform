@@ -7,7 +7,6 @@
 ** Daniel Vorster (VRSDAN004)
 */
 
-
 import Post from '../Views/Post'
 var postData = [
     {

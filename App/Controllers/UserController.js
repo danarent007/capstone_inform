@@ -8,7 +8,6 @@
 ** UserController.js
 */
 
-
 class UserController 
 {
     constructor(userData, ss)

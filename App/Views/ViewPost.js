@@ -1,27 +1,26 @@
+/* 
+** Capstone 2019
+** "Inform - Community Notice System"
+** Group 5
+** Sheldon Reay (RXYSHE002)
+** Sabir Buxsoo (BXSMUH001)
+** Daniel Vorster (VRSDAN004)
+** ViewPost.js
+*/
+
 import React, { Component} from 'react';
-import {Image} from 'react-native' 
-import PostController from '../Controllers/PostController'
 
 import {
-    SafeAreaView,
     StyleSheet,
     ScrollView,
     View,
     Text,
-    StatusBar,
     Dimensions,
-    TextInput,
-    TouchableOpacity,
-    Parent,
-    Colors 
   } from 'react-native';
-import Post from './Post';
-  
 
-const {width: WIDTH} = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 export default class ViewPost extends Component {
-
   constructor(props) {
     super(props);
     //uc = new UserController()
@@ -32,42 +31,26 @@ export default class ViewPost extends Component {
     };
   }
 
-
-
-
-
-
-  render() {
+  render() { //Render view
     console.log(this.body)
     return (
-        
       <View style={styles.container}>
-        {console.log(this.title)}
             <Text style={styles.headingText}>{this.state.title}</Text>
-            
             <ScrollView style={styles.scroll}>
-            <View style={styles.lineStyle}/>
               <Text style={styles.bodyText}>{this.state.body}</Text>
             </ScrollView>
         </View>
-      
-     
-    
     );
   }
-
-  
 }
 
-
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ //Styles
     container: 
     {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#8B008B',
-
+      flex: 9,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#add8e6',
     },
     engine: {
       position: 'absolute',
@@ -90,17 +73,16 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 10,
-        opacity: 0.7,
+        opacity: 1,
         textAlign: "center",
         position : "relative",
-        flex: 1
+        flex: 0
         
     },
     bodyText: 
     {
         color: 'white',
-        fontSize: 15,
-        //fontWeight: 'bold',
+        fontSize: 20,
         minWidth: this.WIDTH,
         marginTop: 0,
         opacity: 1,
@@ -119,13 +101,20 @@ const styles = StyleSheet.create({
     scroll:
     {
       //paddingHorizontal: 20,
-      //flex: 6,
-      borderWidth: 5,
+      flex: 9,
+      borderWidth: 0,
       borderColor: 'white',
-      width: WIDTH -20,
-      //paddingBottom: 50,
-      //paddingTop: 10,
-      position: "relative",           
+      width: WIDTH -24,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 30,
+      backgroundColor: '#4682b4',
+      position: "relative", 
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84          
 
     },
 

@@ -43,9 +43,14 @@ const AppNavigator = createStackNavigator(
       {
         headerTintColor: '#ffffff',
       headerStyle: {
-        backgroundColor: '#6b006b',
-        borderBottomColor: '#ffffff',
+        backgroundColor: '#add8e6',
+        borderBottomColor: '#add8e6',
         borderBottomWidth: 2,
+        shadowOffset: {width: 0, height: 2}, 
+        elevation: 5, 
+        shadowColor: '#000', 
+        shadowOpacity: 0.25, 
+        shadowRadius: 3.84
       },
       headerTitleStyle: {
         fontSize: 18,
@@ -59,9 +64,9 @@ const AppNavigator = createStackNavigator(
       {
         headerTintColor: '#ffffff',
         headerStyle: {
-          backgroundColor: '#6b006b',
+          backgroundColor: '#4682b4',
           borderBottomColor: '#ffffff',
-          borderBottomWidth: 2,
+          borderBottomWidth: 0,
         },
         headerTitleStyle: {
           fontSize: 18,

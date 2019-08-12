@@ -5,6 +5,7 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
+** SignUpScreen.js
 */
 
 import React, { Component } from 'react';
@@ -17,18 +18,13 @@ import {
     Dimensions,
     TextInput,
     TouchableOpacity,
-    
   } from 'react-native';
 
-
-const {width: WIDTH} = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 class SignUpScreen extends Component {
-
   constructor(props) {
     super(props);
-    //uc = new UserController()
-
     this.state = 
     {
       firstName: '',
@@ -40,10 +36,9 @@ class SignUpScreen extends Component {
 
   doSignup() //Method run from controller. Signs user up, initiates next screen
   {
-    //this.props.navigation.navigate('Login')
     this.props.navigation.goBack()
-
   }
+
   trySignup = () => //Launch controller and attempt to sign up.
   {
     userData =
@@ -57,7 +52,7 @@ class SignUpScreen extends Component {
     sc.attemptRegisterUser()
   }
  
-  render() {
+  render() { //Render view
     return (
       
       <View style={styles.container}>
@@ -67,18 +62,17 @@ class SignUpScreen extends Component {
                 <TextInput 
                 style={styles.input}
                 placeholder={"First Name"}
-                placeholderTextColor={'#000000'}
+                placeholderTextColor={'#fff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({firstName:text})}
                 ></TextInput>
-
                 </View>
+
                 <View style={styles.inputContainer}>
-                
                 <TextInput 
                 style={styles.input}
                 placeholder={"Last Name"}
-                placeholderTextColor={'#000000'}
+                placeholderTextColor={'#fff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({lastName:text})}
                 ></TextInput>
@@ -88,7 +82,7 @@ class SignUpScreen extends Component {
                     <TextInput 
                     style={styles.input}
                     placeholder={"Email"}
-                    placeholderTextColor={'#000000'}
+                    placeholderTextColor={'#fff'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
@@ -99,11 +93,10 @@ class SignUpScreen extends Component {
                 style={styles.input}
                 placeholder={"Password"}
                 secureTextEntry={true}
-                placeholderTextColor={'#000000'}
+                placeholderTextColor={'#fff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
-
                 </View>
                 
                 <TouchableOpacity style={styles.btnLogin} onPress={this.trySignup}>
@@ -113,23 +106,18 @@ class SignUpScreen extends Component {
                     <Text style={styles.loginText}>Back</Text>
                 </TouchableOpacity>
         </View>
-      
-     
-    
     );
   }
-
-  
 }
 export default SignUpScreen;
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ //Styles
     container: 
     {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#eeeeee',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#4682b4',
 
     },
     engine: {
@@ -149,7 +137,7 @@ const styles = StyleSheet.create({
     },
     headingText: 
     {
-      color: 'black',
+      color: '#ffffff',
       fontSize: 40,
       fontWeight: 'bold',
       marginTop: 10,
@@ -158,14 +146,16 @@ const styles = StyleSheet.create({
   },
     input: 
     {
-        width: WIDTH - 55,
-        height: 45,
-        borderRadius: 0,
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: '#dddddd',
-        color: '#000000',
-        marginHorizontal: 25
+      width: WIDTH - 55,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      paddingLeft: 45,
+      backgroundColor: '#add8e6',
+      fontWeight: 'bold',
+      color: '#ffffff',
+      marginHorizontal: 25,
+      opacity: 0.6
     },
     inputContainer: 
     {
@@ -178,9 +168,8 @@ const styles = StyleSheet.create({
       borderRadius: 0,
       fontSize: 16,
       marginTop: 25,
-      
-      backgroundColor: '#dddddd',
-      color: '#000000',
+      backgroundColor: '#add8e6',
+      color: '#ffffff',
       justifyContent: 'center',
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -190,10 +179,11 @@ const styles = StyleSheet.create({
     },
     loginText: 
     {
-        color: '#000000',
-        fontSize: 20,
-        textAlign: 'center',
-        
+      color: '#ffffff',
+      fontSize: 20,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      opacity: 0.6
 
     }
 

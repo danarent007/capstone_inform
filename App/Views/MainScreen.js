@@ -5,73 +5,49 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
+** MainScreen.js
 */
 
 import React, { Component } from 'react';
-import {Image} from 'react-native' ; 
 import PostFeed from './PostFeed'
-import PostController from '../Controllers/PostController'
 import { Icon } from 'react-native-elements'
-
 import {
-    SafeAreaView,
     StyleSheet,
-    ScrollView,
     View,
     Text,
-    StatusBar,
     Dimensions,
-    TouchableHighlight,
     TouchableOpacity
   } from 'react-native';
-  
-  import {
-    Header,
-    LearnMoreLinks,
+import {
     Colors,
-    DebugInstructions,
-    ReloadInstructions,
   } from 'react-native/Libraries/NewAppScreen';
-//import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const {width: WIDTH} = Dimensions.get('window')
-
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 export default class MainScreen extends Component {
 
-  
-
-
-  //pc = new PostController
-  
-
-
-  createPost = () =>
+  createPost = () => //Navigate to new post screen
   {
     this.props.navigation.navigate('NewPost')
-    console.log('render')
   }
 
-  render() {
+  render() { //Render view
     return (
       <View style={{flex: 1, height: 100, width: 100,}}>
         <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text>
         </View>
-        <View style={{width: WIDTH, alignItems:'center'}}>
+        <View style={{width: WIDTH, alignItems:'center', backgroundColor: '#add8e6'}}>
         <PostFeed/>
       </View>
       <TouchableOpacity style={styles.creatPostFloatButton} onPress={ this.createPost}>
-   <Icon type='material-community' name='plus'  size={30} color="white" />
+   <Icon type='material-community' name='plus'  size={35} color="white" />
   </TouchableOpacity>
       </View>
     );
   }
 
-
-
-  
 }
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ //Styles
     scrollView: {
       backgroundColor: Colors.lighter,
     },
@@ -99,8 +75,9 @@ const styles = StyleSheet.create({
     {
       width: WIDTH,
       height: 45,
-      backgroundColor: "#8B008B",
+      backgroundColor: "#4682b4",
       flexDirection: 'column',
+      fontWeight: "bold"
     },
     postButton: 
     {
@@ -122,7 +99,7 @@ const styles = StyleSheet.create({
     },
     creatPostFloatButton:
     {
-      borderWidth:1,
+      borderWidth:0,
       borderColor:'rgba(0,0,0,0.2)',
       alignItems:'center',
       justifyContent:'center',
@@ -131,8 +108,13 @@ const styles = StyleSheet.create({
       bottom: 10,                                                    
       right: 10,
       height:70,
-      backgroundColor:'#8B008B',
+      backgroundColor:'#add8e6',
       borderRadius:100,
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
     }
  
   });

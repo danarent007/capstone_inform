@@ -5,11 +5,11 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
+** PostController.js
 */
 
-const POST_URL = 'http://dulwich.dlinkddns.com/api/posts'
-const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add'
-let data = []
+const POST_URL = 'http://dulwich.dlinkddns.com/api/posts' //API post get url
+const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add' //API post add url
 
 class PostController
 {
@@ -24,61 +24,38 @@ class PostController
     -Display if post has been added successfully
     -Refresh post feed
     */
-
-
-
     //---------------------------CREATE
 
 
-  publishPost = () => 
+  publishPost = () => //Publish post to DB
   {
-    fetch(ADD_URL, {
+    fetch(ADD_URL, { //JSon message
       method: 'POST',
       headers: {
         'Accept': 'application/json',
        'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-          
       title: postData.title,
       description: postData.body
-    
      })
    }).then((response) => response.text())
          .then((responseJson) => {
-    // Showing response message coming from server after inserting records.
-            alert(responseJson);
           }).catch((error) => {
             console.error(error);
          });
 }
 
-
-
-//-----------------------READ
-
-getPosts = () =>
+getPosts = () => //Fetch posts from DB
 {
-
-    const url = 'http://dulwich.dlinkddns.com/api/posts'
-    return fetch(url)
+    const url = POST_URL
+    return fetch(url) //JSon request
     .then((response) => response.json())
     .then((responseJson) => {
-      //alert(JSON.stringify(responseJson))
       return responseJson;
-
     }).catch((error) => {
       alert(error)
     })
 }
- 
-//  getPosts = () => {
-//     return fetch(POST_URL).then(function(response) {
-//         return response.json();
-//     }).then(function(json) {
-//         return json;
-//     });
-// }
-
 }
 export default PostController;

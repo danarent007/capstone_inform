@@ -96,7 +96,7 @@ const styles = StyleSheet.create({ //Styles
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#35cd96',
+        backgroundColor: '#4682b4',
     },
     engine: {
       position: 'absolute',
@@ -128,13 +128,15 @@ const styles = StyleSheet.create({ //Styles
       borderRadius: 0,
       fontSize: 16,
       paddingLeft: 45,
-      backgroundColor: '#ffffff',
-      color: '#35cd96',
-      marginHorizontal: 25
+      backgroundColor: '#add8e6',
+      fontWeight: 'bold',
+      color: '#ffffff',
+      marginHorizontal: 25,
+      opacity: 0.6
     },
     inputContainer: 
     {
-        marginTop: 10
+        marginTop: 10,
     },
     btnLogin: 
     {
@@ -143,8 +145,8 @@ const styles = StyleSheet.create({ //Styles
         borderRadius: 0,
         fontSize: 16,
         marginTop: 25,
-        backgroundColor: '#ffffff',
-        color: '#35cd96',
+        backgroundColor: '#add8e6',
+        color: '#ffffff',
         justifyContent: 'center',
         shadowOffset: {width: 0, height: 2}, 
         elevation: 5, 
@@ -154,8 +156,10 @@ const styles = StyleSheet.create({ //Styles
     },
     loginText: 
     {
-        color: '#35cd96',
+        color: '#ffffff',
         fontSize: 20,
         textAlign: 'center',
+        fontWeight: 'bold',
+        opacity: 0.6
     }
   });
