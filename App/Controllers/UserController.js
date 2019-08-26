@@ -7,6 +7,7 @@
 ** Daniel Vorster (VRSDAN004)
 ** UserController.js
 */
+import AsyncStorage from '@react-native-community/async-storage';
 
 class UserController 
 {
@@ -24,6 +25,10 @@ class UserController
         //alert(JSON.stringify(userData, null, 4));
     }
 
+    async storeToken(token)
+    {
+      AsyncStorage.setItem('token', token)
+    }
     
     
     async getUsers()
@@ -55,7 +60,7 @@ class UserController
          })
        }).then((response) => response.text())
              .then((responseJson) => {
-       
+              //this.storeToken(responseJson.token)
        // Showing response message coming from server after inserting records.
                alert(responseJson);
        
