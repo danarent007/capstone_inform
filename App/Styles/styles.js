@@ -41,6 +41,15 @@ export default StyleSheet.create({ //Styles
         marginTop: 10,
         opacity: 0.5,
     },
+    welcomeText:
+    {
+      color: TEXT_LIGHT,
+      fontSize: 50,
+      //fontWeight: 'bold',
+      fontStyle: 'italic',
+      marginTop: 10,
+      opacity: 0.5,
+  },
     input: 
     {
       width: WIDTH - 55,
