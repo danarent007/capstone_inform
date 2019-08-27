@@ -10,6 +10,7 @@
 
 import React, { Component, PureComponent } from 'react'
 import { FlatList, Text, TouchableHighlight } from 'react-native'
+import styles from '../Styles/styles'
 import { withNavigation } from 'react-navigation';
 import {
   View,
@@ -50,7 +51,7 @@ class PostFeed extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {title: item.title, description: item.description, controller: this})}> 
-        <View style={{ height: 120, width: WIDTH - 30, paddingLeft: 5, paddingRight: 5, marginTop: 10, marginLeft: 10, marginRight: 10, backgroundColor: '#4682b4', borderColor: 'grey', borderWidth: 0, alignItems: 'center', borderRadius: 0, shadowOffset: {width: 0, height: 2}, elevation: 8, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3.84}}>
+        <View style={styles.listpost}>
           <Text style={{ fontSize: 15, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
         </View>
