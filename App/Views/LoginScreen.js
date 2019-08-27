@@ -29,7 +29,8 @@ export default class LoginScreen extends Component {
     this.state = 
     {
       email: '',
-      password: ''
+      password: '',
+      loading: 'initial'
     };
   }
 

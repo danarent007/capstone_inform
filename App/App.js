@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button, View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
 import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
 import MainScreen from './Views/MainScreen'
@@ -83,6 +83,23 @@ const AppNavigator = createStackNavigator(
     initialRouteName: 'Login',
 });
 
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Main: MainScreen,
+    AreaSelect: AreaSelect,
+  },
+  {
+    hideStatusBar: true,
+    drawerBackgroundColor: 'rgba(255,255,255,.9)',
+    overlayColor: '#6b52ae',
+    contentOptions: {
+      activeTintColor: '#fff',
+      activeBackgroundColor: '#6b52ae',
+    },
+  }
+);
+
+//export default createAppContainer(DrawerNavigator);
 export default createAppContainer(AppNavigator);
 
 
