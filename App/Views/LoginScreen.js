@@ -20,7 +20,7 @@ import {
     TouchableOpacity,
   } from 'react-native';
   
-
+import AsyncStorage from '@react-native-community/async-storage';
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 export default class LoginScreen extends Component {
@@ -40,8 +40,9 @@ export default class LoginScreen extends Component {
       firstName : this.state.firstName,
       lastName : this.state.lastName,
       email : this.state.email,
-      password: this.state.password
+      password: this.state.password,
     }
+    //AsyncStorage.setItem('userData', userData)
 
     lc = new LoginController(userData, this) //Create new login controller to handle login
     lc.tryLogIn2() //Call method to attempt login

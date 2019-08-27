@@ -16,11 +16,12 @@ import {
     View,
     Text,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
   } from 'react-native';
 import {
     Colors,
   } from 'react-native/Libraries/NewAppScreen';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
@@ -29,6 +30,17 @@ export default class MainScreen extends Component {
   createPost = () => //Navigate to new post screen
   {
     this.props.navigation.navigate('NewPost')
+  }
+  display = async () =>
+  {
+    try {
+      let user = await AsyncStorage.getItem('userData')
+      let parsed = JSON.stringify(user)
+      alert(parsed)
+    } catch (error) {
+      alert(error)
+      
+    }
   }
 
   render() { //Render view
@@ -41,6 +53,9 @@ export default class MainScreen extends Component {
       </View>
       <TouchableOpacity style={styles.creatPostFloatButton} onPress={ this.createPost}>
    <Icon type='material-community' name='plus'  size={35} color="white" />
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.display}>
+   <Icon type='material-community' name='plus'  size={20} color="white" />
   </TouchableOpacity>
       </View>
     );

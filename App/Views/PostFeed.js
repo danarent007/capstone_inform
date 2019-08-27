@@ -17,6 +17,9 @@ import {
   
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
+
+
 
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
@@ -28,6 +31,20 @@ class PostFeed extends React.Component {
       {
         posts: []
       }
+  }
+
+  async getToken()
+  {
+    
+    try {
+      let token = await AsyncStorage.getItem('token')
+      //alert(token)
+      return token
+    } catch (error) {
+      alert(error)
+      
+    }
+    
   }
 
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
@@ -42,14 +59,32 @@ class PostFeed extends React.Component {
 
   _keyExtractor = (item, index) => item.post_id.toString();
 
-  componentDidMount() { //OnMount
-    fetch(POST_FETCH_URL)
+  async componentDidMount() { //OnMount
+    let token = await this.getToken()
+    alert(token)
+    fetch(POST_FETCH_URL, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json', 
+        'Authorization': 'JWT ' + token
+      }
+    })
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({ posts: responseJson })
     }).catch((error) => {
       alert(error)
     })
+
+
+
+    // fetch(POST_FETCH_URL)
+    // .then((response) => response.json())
+    // .then((responseJson) => {
+    //   this.setState({ posts: responseJson })
+    // }).catch((error) => {
+    //   alert(error)
+    // })
   }
 
   render() { //Render view
