@@ -71,15 +71,13 @@ class LoginController
          .then((response) => response.json())
          .then((responseJson) => 
          {  
-             //alert(responseJson.authToken)
              if(responseJson.loggedIn == false) //Handle response
              {
                  alert('Incorrect Email / Password Combo.') //User / Password incorrect
              }
              else if (responseJson.loggedIn == true)
              {
-                 
-                 this.storeToken(responseJson.authToken.toString())
+                 this.storeToken(responseJson.authToken.toString()) //Store user token locally
                  alert('User Sucessfully Logged In.') //User logged in
                  this.loginObj.doLogin() //Call login method in View
              }
@@ -92,6 +90,5 @@ class LoginController
              console.error(error);
          });
     }
-    
 }
 export default LoginController;

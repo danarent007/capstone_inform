@@ -43,8 +43,6 @@ import {
               </View>
               <ActivityIndicator size="large" color="#ffffff" />
           </View>
-          
       );
-      
       }
   } 
