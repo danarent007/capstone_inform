@@ -31,7 +31,7 @@ export default class MainScreen extends Component {
 
   createPost = () => //Navigate to new post screen
   {
-    this.props.navigation.navigate('NewPost')
+    
   }
   display = async () => {
     this.props.navigation.openDrawer();
@@ -68,11 +68,8 @@ export default class MainScreen extends Component {
         <View style={styles.pfeed}>
           <PostFeed />
         </View>
-        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.createPost}>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.props.navigation.navigate('NewPost')}>
           <Icon type='material-community' name='plus' size={35} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.display}>
-          <Icon type='material-community' name='plus' size={20} color="white" />
         </TouchableOpacity>
       </View>
       //</SafeAreaView>
