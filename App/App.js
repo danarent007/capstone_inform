@@ -93,7 +93,7 @@ const AppNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'Login',
 });
 
 const DrawerNavigator = createDrawerNavigator(
@@ -113,7 +113,7 @@ const DrawerNavigator = createDrawerNavigator(
 );
 
 //new LoginController();
-export default createAppContainer(AppNavigator);
+export default createAppContainer(DrawerNavigator);
 
 
 

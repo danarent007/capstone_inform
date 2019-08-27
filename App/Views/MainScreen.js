@@ -12,18 +12,20 @@ import React, { Component } from 'react';
 import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
+import { Header, Left, Right, Body, Title, Button } from 'native-base'
 
 import {
-    StyleSheet,
-    View,
-    Text,
-    Dimensions,
-    TouchableOpacity,
-  } from 'react-native';
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  SafeAreaView
+} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
+const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
 
 export default class MainScreen extends Component {
 
@@ -31,8 +33,7 @@ export default class MainScreen extends Component {
   {
     this.props.navigation.navigate('NewPost')
   }
-  display = async () =>
-  {
+  display = async () => {
     this.props.navigation.openDrawer();
     // try {
     //   let user = await AsyncStorage.getItem('userData')
@@ -40,25 +41,41 @@ export default class MainScreen extends Component {
     //   alert(parsed)
     // } catch (error) {
     //   alert(error)
-      
+
     // }
   }
 
   render() { //Render view
     return (
-      <View style={{flex: 1, height: 100, width: 100,}}>
-        <View style={styles.header}><Text style={styles.sectionTest}>Area Name</Text>
-        </View>
+
+      <View style={{ flex: 1, width: '100%'}}>
+        <Header styles={{backgroundColor: 'red'}}>
+          <Left>
+            <Button transparent onPress={()=>this.props.navigation.openDrawer()}>
+              <Icon type='material-community' name={"menu"} />
+            </Button>
+
+          </Left>
+          <Body>
+            <Title>Area Name</Title>
+          </Body>
+          <Right>
+            <Icon type='material-community' name='settings'></Icon>
+          </Right>
+
+        </Header>
+
         <View style={styles.pfeed}>
-        <PostFeed/>
+          <PostFeed />
+        </View>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.createPost}>
+          <Icon type='material-community' name='plus' size={35} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.display}>
+          <Icon type='material-community' name='plus' size={20} color="white" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.creatPostFloatButton} onPress={ this.createPost}>
-   <Icon type='material-community' name='plus'  size={35} color="white" />
-  </TouchableOpacity>
-  <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.display}>
-   <Icon type='material-community' name='plus'  size={20} color="white" />
-  </TouchableOpacity>
-      </View>
+      //</SafeAreaView>
     );
   }
 

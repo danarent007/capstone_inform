@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
     "asyncawait": "^1.0.8",
+    "native-base": "^2.13.5",
     "react": "16.8.6",
     "react-native": "0.60.4",
     "react-native-action-button": "^2.8.5",
