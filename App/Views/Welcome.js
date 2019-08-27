@@ -22,18 +22,13 @@ import {
   export default class Welcome extends Component {
     constructor(props) {
       super(props);
-      this.state = 
-      {
-        email: '',
-        password: '',
-        loading: 'initial'
-      };
     }
   
-    
     componentDidMount () {
         setTimeout (() => {
+
             this.props.navigation.replace('Login');
+            //new LoginController(props)
         }, 2000);
     }
 
@@ -52,4 +47,4 @@ import {
       );
       
       }
-  }
+  } 
