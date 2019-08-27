@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, Platform } from "react-native";
 import { createStackNavigator, statusBar, createAppContainer, createDrawerNavigator } from "react-navigation";
 import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
@@ -102,7 +102,7 @@ const DrawerNavigator = createDrawerNavigator(
     AreaSelect: AreaSelect,
   },
   {
-    hideStatusBar: true,
+    hideStatusBar: Platform.OS == 'ios' ? true : false,
     drawerBackgroundColor: 'rgba(255,255,255,.9)',
     overlayColor: '#6b52ae',
     contentOptions: {

@@ -49,7 +49,8 @@ export default class MainScreen extends Component {
     return (
 
       <View style={{ flex: 1, width: '100%'}}>
-        <Header styles={{backgroundColor: 'red'}}>
+        <Header style={{ backgroundColor: '#4682b4' }}
+          androidStatusBarColor={'#4682b4'}>
           <Left>
             <Button transparent onPress={()=>this.props.navigation.openDrawer()}>
               <Icon type='material-community' name={"menu"} />
