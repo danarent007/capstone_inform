@@ -29,10 +29,6 @@ const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
 
 export default class MainScreen extends Component {
 
-  createPost = () => //Navigate to new post screen
-  {
-    
-  }
   display = async () => {
     this.props.navigation.openDrawer();
     // try {
@@ -60,7 +56,9 @@ export default class MainScreen extends Component {
             <Title>Area Name</Title>
           </Body>
           <Right>
-            <Icon type='material-community' name='settings'></Icon>
+          <Button transparent onPress={()=>this.props.navigation.openDrawer()}>
+              <Icon type='material-community' name={"settings"} />
+            </Button>
           </Right>
 
         </Header>
@@ -68,7 +66,7 @@ export default class MainScreen extends Component {
         <View style={styles.pfeed}>
           <PostFeed />
         </View>
-        <TouchableOpacity style={styles.creatPostFloatButton} onPress={this.props.navigation.navigate('NewPost')}>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={()=>this.props.navigation.navigate('NewPost')}>
           <Icon type='material-community' name='plus' size={35} color="white" />
         </TouchableOpacity>
       </View>
