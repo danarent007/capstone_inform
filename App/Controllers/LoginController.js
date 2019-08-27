@@ -26,6 +26,28 @@ class LoginController
 
     tryLogIn2 = () => //Attempt a login
     {
+
+        /*
+        alert(this.email)
+
+        if(userData.password === undefined && userData.email === undefined)
+        {
+          alert('Please enter login details.')
+          return
+        }
+        else if(userData.password === undefined)
+        {
+          alert('Please enter password.')
+          return
+        }
+        else if(userData.email === undefined)
+        {
+          alert('Please enter email.')
+          return
+        }
+        */
+
+
         fetch(LOGIN_URL, //JSon Request
          {
           method: 'POST',
