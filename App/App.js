@@ -1,15 +1,19 @@
 
 import React from "react";
 import { Button, View, Text } from "react-native";
-import { createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
+import { createStackNavigator, statusBar, createAppContainer, createDrawerNavigator } from "react-navigation";
 import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
 import MainScreen from './Views/MainScreen'
 import NewPost from './Views/NewPost'
+import Welcome from './Views/Welcome'
 import ViewPost from './Views/ViewPost'
 import Post from './Views/Post'
 import PostFeed from './Views/PostFeed'
 import AreaSelect from './Views/AreaSelect'
+import { tsEnumDeclaration } from "@babel/types"
+import LoginController from "./Controllers/LoginController";
+//import console = require("console")
 
 const AppNavigator = createStackNavigator(
   {
@@ -35,6 +39,15 @@ const AppNavigator = createStackNavigator(
       navigationOptions: 
       {
         header: null,
+      }
+    },
+    Welcome: 
+    {
+      screen: Welcome,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
       }
     },
     NewPost:
@@ -80,7 +93,7 @@ const AppNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Welcome',
 });
 
 const DrawerNavigator = createDrawerNavigator(
@@ -99,8 +112,9 @@ const DrawerNavigator = createDrawerNavigator(
   }
 );
 
-//export default createAppContainer(DrawerNavigator);
+//new LoginController();
 export default createAppContainer(AppNavigator);
+
 
 
 
