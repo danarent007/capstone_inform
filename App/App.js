@@ -9,6 +9,7 @@ import NewPost from './Views/NewPost'
 import ViewPost from './Views/ViewPost'
 import Post from './Views/Post'
 import PostFeed from './Views/PostFeed'
+import AreaSelect from './Views/AreaSelect'
 
 const AppNavigator = createStackNavigator(
   {
@@ -72,6 +73,10 @@ const AppNavigator = createStackNavigator(
           fontSize: 18,
         },
       }
+    },
+    AreaSelect:
+    {
+      screen: AreaSelect
     }
   },
   {

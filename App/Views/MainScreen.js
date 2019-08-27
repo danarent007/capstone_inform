@@ -33,14 +33,15 @@ export default class MainScreen extends Component {
   }
   display = async () =>
   {
-    try {
-      let user = await AsyncStorage.getItem('userData')
-      let parsed = JSON.stringify(user)
-      alert(parsed)
-    } catch (error) {
-      alert(error)
+    this.props.navigation.navigate('AreaSelect')
+    // try {
+    //   let user = await AsyncStorage.getItem('userData')
+    //   let parsed = JSON.stringify(user)
+    //   alert(parsed)
+    // } catch (error) {
+    //   alert(error)
       
-    }
+    // }
   }
 
   render() { //Render view
