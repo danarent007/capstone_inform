@@ -7,14 +7,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const {width: WIDTH} = Dimensions.get('window')
-
+const BG_DARK = '#4682b4'
+const BG_LIGHT = '#add8e6'
+const TEXT_LIGHT = '#ffffff'
 export default StyleSheet.create({ //Styles
     container: 
     {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4682b4',
+        backgroundColor: BG_DARK,
     },
     engine: {
       position: 'absolute',
@@ -33,7 +35,7 @@ export default StyleSheet.create({ //Styles
     },
     headingText: 
     {
-        color: '#ffffff',
+        color: TEXT_LIGHT,
         fontSize: 40,
         fontWeight: 'bold',
         marginTop: 10,
@@ -46,9 +48,9 @@ export default StyleSheet.create({ //Styles
       borderRadius: 0,
       fontSize: 16,
       paddingLeft: 45,
-      backgroundColor: '#add8e6',
+      backgroundColor: BG_LIGHT,
       fontWeight: 'bold',
-      color: '#ffffff',
+      color: TEXT_LIGHT,
       marginHorizontal: 25,
       opacity: 0.6
     },
@@ -63,8 +65,8 @@ export default StyleSheet.create({ //Styles
       borderRadius: 0,
       fontSize: 16,
       marginTop: 25,
-      backgroundColor: '#add8e6',
-      color: '#ffffff',
+      backgroundColor: BG_LIGHT,
+      color: TEXT_LIGHT,
       justifyContent: 'center',
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -74,7 +76,7 @@ export default StyleSheet.create({ //Styles
     },
     loginText: 
     {
-        color: '#ffffff',
+        color: TEXT_LIGHT,
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -107,7 +109,7 @@ export default StyleSheet.create({ //Styles
     {
       width: WIDTH,
       height: 45,
-      backgroundColor: "#4682b4",
+      backgroundColor: BG_DARK,
       flexDirection: 'column',
       fontWeight: "bold"
     },
@@ -140,7 +142,7 @@ export default StyleSheet.create({ //Styles
       bottom: 10,                                                    
       right: 10,
       height:70,
-      backgroundColor:'#add8e6',
+      backgroundColor:BG_LIGHT,
       borderRadius:100,
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -152,6 +154,27 @@ export default StyleSheet.create({ //Styles
     {
       width: WIDTH,
       alignItems:'center', 
-      backgroundColor: '#add8e6'
+      backgroundColor: BG_LIGHT
+    },
+    listpost:
+    {
+      
+      height: 120, 
+      width: WIDTH - 30, 
+      paddingLeft: 5, 
+      paddingRight: 5, 
+      marginTop: 10, 
+      marginLeft: 10, 
+      marginRight: 10, 
+      backgroundColor: BG_DARK, 
+      borderColor: 'grey', 
+      borderWidth: 0, 
+      alignItems: 'center', 
+      borderRadius: 0, 
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 8, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
     }
   });
