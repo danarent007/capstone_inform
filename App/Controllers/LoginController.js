@@ -21,13 +21,21 @@ class LoginController
           firstName : userData.firstName,
           lastName : userData.lastName,
           email : userData.email,
-          password: userData.password,  
+          password: userData.password, 
+          id: ""
+          
         }
+      
     }
 
     async storeToken(token)
     {
       AsyncStorage.setItem('token', token)
+    }
+    async storeData(data)
+    {
+      
+      AsyncStorage.setItem('userID', data)
     }
 
     tryLogIn2 = () => //Attempt a login
@@ -71,16 +79,19 @@ class LoginController
          .then((response) => response.json())
          .then((responseJson) => 
          {  
-             //alert(responseJson.authToken)
+           
+            
              if(responseJson.loggedIn == false) //Handle response
              {
-                 alert('Incorrect Email / Password Combo.') //User / Password incorrect
+               alert(responseJson.message) //User / Password incorrect
              }
              else if (responseJson.loggedIn == true)
              {
                  
                  this.storeToken(responseJson.authToken.toString())
-                 alert('User Sucessfully Logged In.') //User logged in
+                 //userData.id = responseJson.userID
+                 this.storeData(responseJson.userID.toString())
+                 alert(responseJson.message) //User logged in
                  this.loginObj.doLogin() //Call login method in View
              }
              else
@@ -89,6 +100,7 @@ class LoginController
              }
          }).catch((error) => 
          {
+           
              console.error(error);
          });
     }
