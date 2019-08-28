@@ -34,7 +34,6 @@ export default class MainScreen extends Component {
     this.state = {
       selectedAreas: [],
       loading: 'initial',
-      id: ""
     };
   }
 
@@ -49,19 +48,19 @@ export default class MainScreen extends Component {
 
     // }
   }
-  async getData() {
+   async getData() {
     try {
-      let userData = await AsyncStorage.getItem('userID')
-      alert(userData)
+      let userData =  await AsyncStorage.getItem('userID')
+      //alert("ID1"+userData)
       return userData
     } catch (error) {
       alert(error)
     }
   }
 
-  getLocations = () => {
-    alert("Work")
-    fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+  async getLocations() {
+    //alert("Work"+this.state.id)
+    await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
       {
         method: 'POST',
         headers:
@@ -74,20 +73,27 @@ export default class MainScreen extends Component {
             id: this.state.id,
           })
       })
-      .then((response) => response.json())
+      .then(async response => await response.json())
       .then((responseJson) => {
-        alert(JSON.stringify(responseJson))
+        let loc = responseJson
+         alert("textL: "+JSON.stringify(loc))
       }).catch((error) => {
         alert("wrong")
         console.error(error);
       });
   }
-  async componentDidMount() {
-
-    this.setState({ id: await this.getData() })
-    await this.getLocations()
-
+    async componentDidMount() {
+   //this.getData()
+   let id = await this.getData()
+   this.state.id = id
+   //alert(this.state.id)
+    //this.setState({ id : this.getData() })
+    //alert("id sd"+ this.state.id)
+    this.getLocations()
+    
   }
+  
+
 
   render() { //Render view
     return (

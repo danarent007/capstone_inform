@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+import { Icon } from 'react-native-elements'
 import AsyncStorage from '@react-native-community/async-storage';
+import { Header, Left, Right, Body, Title, Button } from 'native-base'
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
+import styles from '../Styles/styles'
 export default class AreaSelect extends Component {
 
     constructor(props) {
@@ -59,7 +62,7 @@ export default class AreaSelect extends Component {
 
 
         this.setState({ loading: 'true' });
-        this.setState({ id : await this.getData() })
+        this.setState({ id: await this.getData() })
         await fetch(LOC_FETCH_URL)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -68,7 +71,7 @@ export default class AreaSelect extends Component {
             }).catch((error) => {
                 alert(error)
             })
-        
+
     }
 
     render() {
@@ -76,14 +79,33 @@ export default class AreaSelect extends Component {
 
         if (this.state.loading === 'initial') {
             return <Text>Intializing...</Text>;
+
         }
         if (this.state.loading === 'true') {
-            return <Text>Loading...</Text>;
+
+            return (
+                <View style={{flex:1}}>
+                <Header style={{ backgroundColor: '#4682b4' }}
+                    androidStatusBarColor={'#4682b4'}>
+                    <Body>
+                        <Title>AreaSelect</Title>
+                    </Body>  
+                </Header>
+                <Text>Loading...</Text>
+                </View>
+                );
         }
 
         return (
 
-            <View style={{ flex: 1 }}>
+
+            <View style={{ flex: 1, backgroundColor: '#add8e6' }}>
+                <Header style={{ backgroundColor: '#4682b4' }}
+                    androidStatusBarColor={'#4682b4'}>      
+                    <Body>
+                        <Title>AreaSelect</Title>
+                    </Body>           
+                </Header>
                 <MultiSelect
                     hideTags
                     items={this.locations}
@@ -95,12 +117,12 @@ export default class AreaSelect extends Component {
                     selectText="Pick Areas"
                     searchInputPlaceholderText="Search Areas..."
                     onChangeInput={(text) => console.log(text)}
-                    tagRemoveIconColor="#CCC"
-                    tagBorderColor="#CCC"
-                    tagTextColor="#CCC"
-                    selectedItemTextColor="#CCC"
-                    selectedItemIconColor="#CCC"
-                    itemTextColor="#000"
+                    tagRemoveIconColor="#D82121"
+                    tagBorderColor="#000000"
+                    tagTextColor="#000000"
+                    selectedItemTextColor="#000000"
+                    selectedItemIconColor="#000000"
+                    itemTextColor="#000000"
                     displayKey="location_name"
                     searchInputStyle={{ color: '#CCC' }}
                     submitButtonColor="#CCC"
@@ -109,12 +131,11 @@ export default class AreaSelect extends Component {
                 <View style={{ marginTop: 100 }}>
                     {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
                 </View>
-                <View>
-                    <TouchableOpacity onPress={() => this.saveAreas()}>
-                        <Text>Button</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.btnSave} onPress={ ()=>this.saveAreas()}>
+                    <Text style={styles.loginText}>Save Areas</Text>
+                </TouchableOpacity>
             </View>
+
         );
     }
 }

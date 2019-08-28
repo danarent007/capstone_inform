@@ -28,17 +28,18 @@ class LoginController
       
     }
 
-    async storeToken(token)
+    storeToken(token)
     {
       AsyncStorage.setItem('token', token)
     }
-    async storeData(data)
+    storeData(data)
     {
-      
+      // let uid = await 
       AsyncStorage.setItem('userID', data)
+      //alert(JSON.stringify(AsyncStorage.getItem('userID')));
     }
 
-    tryLogIn2 = () => //Attempt a login
+    tryLogIn2 = async () => //Attempt a login
     {
 
         /*
@@ -62,7 +63,7 @@ class LoginController
         */
 
 
-        fetch(LOGIN_URL, //JSon Request
+        await fetch(LOGIN_URL, //JSon Request
          {
           method: 'POST',
           headers: 
@@ -76,22 +77,27 @@ class LoginController
            password: userData.password,
         })
          })
-         .then((response) => response.json())
+         .then(async response => await response.json())
          .then((responseJson) => 
          {  
            
+            //alert(JSON.stringify(responseJson));
             
+            let loggedInData = responseJson;
              if(responseJson.loggedIn == false) //Handle response
              {
-               alert(responseJson.message) //User / Password incorrect
+               //alert(responseJson.message) //User / Password incorrect
              }
              else if (responseJson.loggedIn == true)
              {
-                 
-                 this.storeToken(responseJson.authToken.toString())
+                 //this.storeToken(loggedInData.authToken.toString())
                  //userData.id = responseJson.userID
-                 this.storeData(responseJson.userID.toString())
-                 alert(responseJson.message) //User logged in
+                // this.storeData(loggedInData.userID.toString())
+                // alert(loggedInData.userID)
+                AsyncStorage.setItem('userID', JSON.stringify(loggedInData.userID))
+               // alert(JSON.stringify(AsyncStorage.getItem('userID')));
+
+                 //alert(responseJson.message) //User logged in
                  this.loginObj.doLogin() //Call login method in View
              }
              else

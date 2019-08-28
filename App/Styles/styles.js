@@ -185,5 +185,21 @@ export default StyleSheet.create({ //Styles
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
-    }
+    },
+    btnSave: 
+    {
+      width: WIDTH - 150,
+      height: 45,
+      borderRadius: 0,
+      fontSize: 16,
+      marginTop: 25,
+      backgroundColor: BG_DARK,
+      color: TEXT_LIGHT,
+      justifyContent: 'center',
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
+    },
   });

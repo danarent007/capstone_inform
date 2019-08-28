@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button, View, Text, Platform } from "react-native";
-import { createStackNavigator, statusBar, createAppContainer, createDrawerNavigator } from "react-navigation";
+import { createStackNavigator, statusBar, createAppContainer, createDrawerNavigator, createSwitchNavigator } from "react-navigation";
 import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
 import MainScreen from './Views/MainScreen'
@@ -88,18 +88,37 @@ const AppNavigator = createStackNavigator(
       }
     },
     AreaSelect:
-    {
+    { 
       screen: AreaSelect
-    }
+    },
+    
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Login',
 });
 
 const DrawerNavigator = createDrawerNavigator(
   {
-    Main: MainScreen,
-    AreaSelect: AreaSelect,
+
+    MainScreen: 
+    {
+      screen: MainScreen,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
+      }
+    },
+    AreaSelect:
+    {
+      screen: AreaSelect,
+      navigationOptions: 
+      {
+        header: 'AreaSelect',
+        backgroundColor: '#add8e6'
+      }
+    }
+   
   },
   {
     hideStatusBar: Platform.OS == 'ios' ? true : false,
@@ -108,9 +127,11 @@ const DrawerNavigator = createDrawerNavigator(
     contentOptions: {
       activeTintColor: '#fff',
       activeBackgroundColor: '#6b52ae',
-    },
+    }
   }
 );
+
+
 
 //new LoginController();
 export default createAppContainer(AppNavigator);

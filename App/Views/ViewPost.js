@@ -26,11 +26,14 @@ export default class ViewPost extends Component {
     //uc = new UserController()
     this.state = 
     {
+      id: this.props.navigation.getParam('id', 'Not Found'),
       title: this.props.navigation.getParam('title', 'Not Found'),
       body: this.props.navigation.getParam('description', 'Not Found')
     };
+    alert(this.state.id)
   }
 
+  
   render() { //Render view
     console.log(this.body)
     return (

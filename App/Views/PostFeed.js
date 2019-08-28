@@ -50,7 +50,7 @@ class PostFeed extends React.Component {
 
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {title: item.title, description: item.description, controller: this})}> 
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {id: item.post_id, title: item.title, description: item.description, controller: this})}> 
         <View style={styles.listpost}>
           <Text style={{ fontSize: 15, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
@@ -62,7 +62,7 @@ class PostFeed extends React.Component {
 
   async componentDidMount() { //OnMount
     let token = await this.getToken()
-    alert(token)
+    //alert(token)
     fetch(POST_FETCH_URL, {
       method: 'GET',
       headers: {
@@ -96,6 +96,7 @@ class PostFeed extends React.Component {
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
+        refresh
       />
     );
   }
