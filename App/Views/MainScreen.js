@@ -13,6 +13,7 @@ import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
 
 import {
   StyleSheet,
@@ -29,11 +30,15 @@ const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
 
 export default class MainScreen extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       selectedAreas: [],
-      loading: 'initial',
+      loading: false,
+      refreshing: false,
+      data: []
+
+
     };
   }
 
@@ -41,10 +46,29 @@ export default class MainScreen extends Component {
     this.props.navigation.openDrawer();
   }
 
+  makeRequest =  async() =>
+  {
+    await fetch(POST_FETCH_URL, {
+      method: 'GET'
+    })
+    .then(async response => await response.json())
+    .then((responseJson) => {
+      this.setState 
+      ({
+        data: responseJson,
+        loading: false
+      })
+    }).catch((error) => {
+      alert(error)
+      this.setState({
+        loading: false
+      })
+    })
+  }
+
    async getData() {
     try {
       let userData =  await AsyncStorage.getItem('userID')
-      //alert("ID1"+userData)
       return userData
     } catch (error) {
       alert(error)
@@ -70,28 +94,43 @@ export default class MainScreen extends Component {
       .then((responseJson) => {
         let loc = responseJson
          //alert("textL: "+JSON.stringify(loc))
-         AsyncStorage.setItem('userLocations', JSON.stringify(loc))
-         //alert(a)
       }).catch((error) => {
         alert("wrong")
         console.error(error);
       });
   }
-    async componentDidMount() {
-   //this.getData()
-   let id = await this.getData()
-   this.state.id = id
-   //alert(this.state.id)
-    //this.setState({ id : this.getData() })
-    //alert("id sd"+ this.state.id)
-    this.getLocations()
-    
+
+   async componentDidMount() 
+  {
+    this.setState({loading: true})
+    this.makeRequest()
+  }
+
+  refreshPosts()
+  {
+    this.setState
+    ({ 
+    refreshing: !this.state.refreshing
+    })
+    console.log('Main Screen Refreshing: ' + this.state.refreshing)
+    this.makeRequest()
+    this.render()
+    alert(JSON.stringify(this.state.data))
   }
   
 
+  newPost = () =>
+  {
+    this.props.navigation.navigate('NewPost')
+  }
+
 
   render() { //Render view
+    if(!this.state.loading)
+    {
+      console.log('RENDER')
     return (
+
 
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
@@ -106,22 +145,28 @@ export default class MainScreen extends Component {
             <Title>Area Name</Title>
           </Body>
           <Right>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent onPress={() => this.refreshPosts()}>
               <Icon type='material-community' name={"settings"} />
             </Button>
           </Right>
-
         </Header>
-
         <View style={styles.pfeed}>
-          <PostFeed />
+          <PostFeed 
+          data={this.state}
+          refreshing={this.state.refreshing}
+          />
         </View>
-        <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.props.navigation.navigate('NewPost')}>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
           <Icon type='material-community' name='plus' size={35} color="white" />
         </TouchableOpacity>
       </View>
       //</SafeAreaView>
     );
+    }
+    else
+    {
+        return <Text>Intializing...</Text>;
+    }
   }
 
 }
