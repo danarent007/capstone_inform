@@ -7,59 +7,25 @@
 ** Daniel Vorster (VRSDAN004)
 */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  AsyncStorage,
-  Dimensions
-  
-} from 'react-native';
-const {width: WIDTH} = Dimensions.get('window')
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import PostController from '../Controllers/PostController'
-  class Post extends Component { 
-
-    constructor (postDta)
-    {
-      super()
-      postData = 
-      {
-        id : postDta.post_id,
-        post_title : postDta.title,
-        post_body : postDta.description
-      }
-    }
-
-    /*
-    returnData = () =>
-    {
-      console.log(postData.id)
-      onPress={this.returnData}
-    }
-   */
+import React from 'react';
+import styles from '../Styles/styles'
+import { View, Text, StyleSheet, Image } from 'react-native';
+const PHOTO_URL = 'https://avatars2.githubusercontent.com/u/26744195?s=400&u=b15b3c68813c1f17313a79c49691800b61a837b4&v=4'
 
 
+const CustomRow = ({ title, description, image_url }) => (
+    <View style={styles.post_container}>
+        <Image source={{ uri: PHOTO_URL }} style={styles.post_photo} />
+        <View style={styles.post_container_text}>
+            <Text style={styles.post_title}>
+                {title}
+            </Text>
+            <Text style={styles.post_description}>
+                {description}
+            </Text>
+        </View>
 
-   openPost = () =>
-   {
-     alert(this.post_title)
-   }
+    </View>
+);
 
-
-
-    render() {
-      console.log(postData.post_title)
-      return (
-      <TouchableOpacity>
-      <View style={{height:100, width: WIDTH-10, marginTop: 10, backgroundColor: 'grey', borderColor:'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0,}} onPress={this.openPost}>
-        <Text style={{fontSize: 15, color: 'black', }}>{postData.post_title}</Text>
-        <Text style={{fontSize: 12, color: 'black', }}>{postData.post_body}</Text>
-    </View></TouchableOpacity>
-      );
-    }
-}
-export default Post
+export default CustomRow;
