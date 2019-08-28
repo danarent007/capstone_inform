@@ -16,50 +16,47 @@ import {
   Image,
   AsyncStorage,
   Dimensions
-  
+
 } from 'react-native';
-const {width: WIDTH} = Dimensions.get('window')
+const { width: WIDTH } = Dimensions.get('window')
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PostController from '../Controllers/PostController'
-  class Post extends Component { 
+import { Header, Left, Right, Body, Title, Button } from 'native-base'
+class Post extends Component {
 
-    constructor (postDta)
-    {
-      super()
-      postData = 
+  constructor(postData, props) {
+    super()
+    this.state =
       {
-        id : postDta.post_id,
-        post_title : postDta.title,
-        post_body : postDta.description
+        postData: postData
       }
-    }
+      //alert(JSON.stringify(postData))
+  }
 
-    /*
-    returnData = () =>
-    {
-      console.log(postData.id)
-      onPress={this.returnData}
-    }
-   */
-
-
-
-   openPost = () =>
-   {
-     alert(this.post_title)
-   }
+  /*
+  returnData = () =>
+  {
+    console.log(postData.id)
+    onPress={this.returnData}
+  }
+ */
 
 
 
-    render() {
-      console.log(postData.post_title)
+  openPost = () => {
+    alert(this.post_title)
+  }
+
+  render() {
+    //alert(alert(this.postData))
       return (
-      <TouchableOpacity>
-      <View style={{height:100, width: WIDTH-10, marginTop: 10, backgroundColor: 'grey', borderColor:'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0,}} onPress={this.openPost}>
-        <Text style={{fontSize: 15, color: 'black', }}>{postData.post_title}</Text>
-        <Text style={{fontSize: 12, color: 'black', }}>{postData.post_body}</Text>
-    </View></TouchableOpacity>
+        <TouchableOpacity>
+          <View style={{ height: 100, width: WIDTH - 10, marginTop: 10, backgroundColor: 'grey', borderColor: 'purple', borderWidth: 3, alignItems: 'center', borderRadius: 0, }} onPress={this.openPost}>
+            <Text style={{ fontSize: 15, color: 'black', }}>{this.state.post_title}</Text>
+            <Text style={{ fontSize: 12, color: 'black', }}>{this.state.post_body}</Text>
+          </View></TouchableOpacity>
       );
-    }
+    } 
 }
+
 export default Post

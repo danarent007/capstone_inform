@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
+import Post from './Post'
 
 
 
@@ -30,7 +31,8 @@ class PostFeed extends React.Component {
     super(props)
     this.state =
       {
-        posts: []
+        posts: [],
+        loading: true
       }
   }
 
@@ -50,13 +52,20 @@ class PostFeed extends React.Component {
 
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
+    
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {id: item.post_id, title: item.title, description: item.description, controller: this})}> 
         <View style={styles.listpost}>
           <Text style={{ fontSize: 15, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
         </View>
       </TouchableOpacity>  
-  );
+    
+    
+      // <Post
+      // postData={item} 
+      // />
+     
+  )
 
   _keyExtractor = (item, index) => item.post_id.toString();
 
@@ -72,7 +81,8 @@ class PostFeed extends React.Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      this.setState({ posts: responseJson })
+      this.setState({ posts : responseJson })
+      this.setState({loading : false})
     }).catch((error) => {
       alert(error)
     })
@@ -89,6 +99,7 @@ class PostFeed extends React.Component {
   }
 
   render() { //Render view
+    if(!this.state.loading){
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
@@ -100,5 +111,17 @@ class PostFeed extends React.Component {
       />
     );
   }
+  else
+  {
+    return(
+    <View style={{flex:1}}>
+      <Text>
+        Loading....
+      </Text>
+    </View>
+    );
+  }
+
+}
 }
 export default withNavigation(PostFeed);

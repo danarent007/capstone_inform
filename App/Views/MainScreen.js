@@ -39,15 +39,8 @@ export default class MainScreen extends Component {
 
   display = async () => {
     this.props.navigation.openDrawer();
-    // try {
-    //   let user = await AsyncStorage.getItem('userData')
-    //   let parsed = JSON.stringify(user)
-    //   alert(parsed)
-    // } catch (error) {
-    //   alert(error)
-
-    // }
   }
+
    async getData() {
     try {
       let userData =  await AsyncStorage.getItem('userID')
@@ -76,7 +69,9 @@ export default class MainScreen extends Component {
       .then(async response => await response.json())
       .then((responseJson) => {
         let loc = responseJson
-         alert("textL: "+JSON.stringify(loc))
+         //alert("textL: "+JSON.stringify(loc))
+         AsyncStorage.setItem('userLocations', JSON.stringify(loc))
+         //alert(a)
       }).catch((error) => {
         alert("wrong")
         console.error(error);
