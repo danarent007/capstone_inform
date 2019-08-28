@@ -185,5 +185,35 @@ export default StyleSheet.create({ //Styles
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
-    }
+    },
+    post_container: {
+      flex: 1,
+      flexDirection: 'row',
+      padding: 10,
+      marginLeft:16,
+      marginRight:16,
+      marginTop: 8,
+      marginBottom: 8,
+      borderRadius: 5,
+      backgroundColor: '#FFF',
+      elevation: 2,
+  },
+  post_title: {
+      fontSize: 16,
+      color: '#000',
+  },
+  post_container_text: {
+      flex: 1,
+      flexDirection: 'column',
+      marginLeft: 12,
+      justifyContent: 'center',
+  },
+  post_description: {
+      fontSize: 11,
+      fontStyle: 'italic',
+  },
+  post_photo: {
+      height: 50,
+      width: 50,
+  },
   });
