@@ -24,16 +24,20 @@ import Post from './Post'
 
 
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+// const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+
 
 class PostFeed extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor(data) {
+    super()
     this.state =
       {
-        posts: [],
+        posts: data.data.data,
+        selected: data.data.refreshing
       }
   }
+
+  
 
   async getToken()
   {
@@ -63,38 +67,15 @@ class PostFeed extends React.Component {
      
   )
 
-  _keyExtractor = (item, index) => item.post_id.toString();
-
-  async componentDidMount() { //OnMount
-    let token = await this.getToken()
-    //alert(token)
-    fetch(POST_FETCH_URL, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json', 
-        'Authorization': 'JWT ' + token
-      }
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({ posts : responseJson })
-    }).catch((error) => {
-      alert(error)
-    })
+  // _keyExtractor = (item, index) => item.post_id.toString();
 
 
 
-    // fetch(POST_FETCH_URL)
-    // .then((response) => response.json())
-    // .then((responseJson) => {
-    //   this.setState({ posts: responseJson })
-    // }).catch((error) => {
-    //   alert(error)
-    // })
-  }
+
 
   render() { //Render view
-   
+    
+   console.log(this.props.refreshing)
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
@@ -102,7 +83,7 @@ class PostFeed extends React.Component {
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-        refresh
+        refreshing ={this.props.refreshing}
       />
     );
   }
