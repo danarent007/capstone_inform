@@ -34,16 +34,23 @@ export default class NewPost extends Component {
         title: '',
         body: '',
         controller: this.props.navigation.getParam('controller', 'Not Found'),
-        data: [],
         selectedAreas: [],
+        loading: 'initial',
       };
 
   }
+  async setMyState(myState)
+  {
+    this.state.loading = await 'true'
+    this.state.data = await myState
+    this.state.loading = await 'false'
+    //alert("New function "+this.state.data)
+  }
   async componentDidMount() {
-
     let a = await AsyncStorage.getItem('userLocations');
-    this.setState({ data: a })
-    alert(a)
+    
+    this.setMyState(a)
+  
   }
 
   createPost = () => //Create a new post
@@ -72,7 +79,18 @@ export default class NewPost extends Component {
 
   render() { //Render view
     const { selectedAreas } = this.state;
-    
+
+
+  if (this.state.loading === 'true') {
+
+      return (
+          <View style={{flex:1}}>
+          <Text>Loading...</Text>
+          </View>
+          );
+  }
+
+    alert("alert: "+this.state.data)
     return (
       <View style={styles.container}>
         <Text style={styles.headingText}>NEW POST</Text>
