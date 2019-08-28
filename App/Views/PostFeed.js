@@ -27,14 +27,13 @@ const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 
 class PostFeed extends React.Component {
-  constructor(piel,props) {
+  constructor(data) {
     super()
     this.state =
       {
-        posts: piel.data
+        posts: data.data.data,
+        selected: data.data.refreshing
       }
-      alert(JSON.stringify(piel.data))
-      console.log('222')
   }
 
   
@@ -65,27 +64,13 @@ class PostFeed extends React.Component {
 
   // _keyExtractor = (item, index) => item.post_id.toString();
 
-  async componentDidMount() { //OnMount
-    /*
-    let token = await this.getToken()
-    //alert(token)
-    fetch(POST_FETCH_URL, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json', 
-        'Authorization': 'JWT ' + token
-      }
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({ posts: responseJson })
-    }).catch((error) => {
-      alert(error)
-    })
-    */
-  }
+
+
+
 
   render() { //Render view
+    
+   console.log(this.props.refreshing)
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
@@ -93,7 +78,7 @@ class PostFeed extends React.Component {
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-        refresh
+        refreshing ={this.props.refreshing}
       />
     );
   }

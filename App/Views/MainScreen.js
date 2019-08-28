@@ -34,9 +34,10 @@ export default class MainScreen extends Component {
     super()
     this.state = {
       selectedAreas: [],
-      loading: true,
+      loading: false,
       refreshing: false,
       data: []
+
 
     };
   }
@@ -61,6 +62,9 @@ export default class MainScreen extends Component {
       })
     }).catch((error) => {
       alert(error)
+      this.setState({
+        loading: false
+      })
     })
   }
 
@@ -99,26 +103,36 @@ export default class MainScreen extends Component {
   }
 
    async componentDidMount() 
-    {
+  {
     this.setState({loading: true})
     this.makeRequest()
-    this.render()
-     
+  }
 
+  refreshPosts()
+  {
+    this.setState
+    ({ 
+    refreshing: !this.state.refreshing
+    })
+    console.log('Main Screen Refreshing: ' + this.state.refreshing)
+    this.makeRequest()
+    this.render()
+    alert(JSON.stringify(this.state.data))
   }
   
 
   newPost = () =>
   {
     this.props.navigation.navigate('NewPost')
-    this.makeRequest()
   }
 
 
   render() { //Render view
     if(!this.state.loading)
     {
+      console.log('RENDER')
     return (
+
 
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
@@ -133,14 +147,15 @@ export default class MainScreen extends Component {
             <Title>Area Name</Title>
           </Body>
           <Right>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent onPress={() => this.refreshPosts()}>
               <Icon type='material-community' name={"settings"} />
             </Button>
           </Right>
         </Header>
         <View style={styles.pfeed}>
           <PostFeed 
-          data={this.state.data}
+          data={this.state}
+          refreshing={this.state.refreshing}
           />
         </View>
         <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
