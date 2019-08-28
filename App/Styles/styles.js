@@ -207,10 +207,12 @@ export default StyleSheet.create({ //Styles
       flexDirection: 'column',
       marginLeft: 12,
       justifyContent: 'center',
+      backgroundColor:BG_LIGHT,
   },
   post_description: {
       fontSize: 11,
       fontStyle: 'italic',
+      backgroundColor:BG_LIGHT,
   },
   post_photo: {
       height: 50,

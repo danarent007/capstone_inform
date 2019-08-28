@@ -5,99 +5,38 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
-** PostFeed.js
+** CustomListview.js
 */
 
-import React, { Component, PureComponent } from 'react'
-import { FlatList, Text, TouchableHighlight } from 'react-native'
-import styles from '../Styles/styles'
-import { withNavigation } from 'react-navigation';
-import {
-  View,
-  Dimensions
-  
-} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-community/async-storage';
+import React from 'react';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
+import CustomPost from '../Views/CustomPost';
+const PHOTO_URL = 'https://avatars2.githubusercontent.com/u/26744195?s=400&u=b15b3c68813c1f17313a79c49691800b61a837b4&v=4'
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
 
+_keyExtractor = (item, index) => item.post_id.toString();
 
-const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+const CustomListview = ({ itemList }) => (
+    <View style={styles.container}>
+        <FlatList
+                data={itemList}
+                renderItem={({ item }) => <CustomPost
+                    title={item.title}
+                    description={item.description}
+                    image_url={PHOTO_URL}
+                    keyExtractor={item.post_id}
+                />
+                
+            }
+                
+            />
 
-class PostFeed extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state =
-      {
-        posts: []
-      }
-  }
+    </View>
+);
 
-  async getToken()
-  {
-    
-    try {
-      let token = await AsyncStorage.getItem('token')
-      //alert(token)
-      return token
-    } catch (error) {
-      alert(error)
-      
-    }
-    
-  }
-
-// TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
-  _renderItem = ({item}) => (
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {title: item.title, description: item.description, controller: this})}> 
-        <View style={styles.listpost}>
-          <Text style={{ fontSize: 15, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
-          <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
-        </View>
-      </TouchableOpacity>  
-  );
-
-  _keyExtractor = (item, index) => item.post_id.toString();
-
-  async componentDidMount() { //OnMount
-    let token = await this.getToken()
-    alert(token)
-    fetch(POST_FETCH_URL, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json', 
-        'Authorization': 'JWT ' + token
-      }
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({ posts: responseJson })
-    }).catch((error) => {
-      alert(error)
-    })
-
-
-
-    // fetch(POST_FETCH_URL)
-    // .then((response) => response.json())
-    // .then((responseJson) => {
-    //   this.setState({ posts: responseJson })
-    // }).catch((error) => {
-    //   alert(error)
-    // })
-  }
-
-  render() { //Render view
-    return (
-      <FlatList
-        contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
-        data={this.state.posts}
-        extraData={this.state}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />
-    );
-  }
-}
-export default withNavigation(PostFeed);
+export default CustomListview;

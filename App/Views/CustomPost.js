@@ -16,10 +16,10 @@ const PHOTO_URL = 'https://avatars2.githubusercontent.com/u/26744195?s=400&u=b15
 
 const CustomPost = ({ title, description, image_url }) => (
     <View style={styles.post_container}>
-        <Image source={{ uri: PHOTO_URL }} style={styles.post_photo} />
+        <Image source={{ uri: image_url }} style={styles.post_photo} />
         <View style={styles.post_container_text}>
             <Text style={styles.post_title}>
-                {title}
+                {'title'}
             </Text>
             <Text style={styles.post_description}>
                 {description}
@@ -28,5 +28,24 @@ const CustomPost = ({ title, description, image_url }) => (
 
     </View>
 );
+
+
+render()
+{
+    return(
+    <View
+        style = {{flex:1}}>
+
+            <Text>
+                Hello World
+            </Text>
+
+
+
+
+            
+        </View>
+    )
+}
 
 export default CustomPost;

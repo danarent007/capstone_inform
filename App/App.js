@@ -8,8 +8,7 @@ import MainScreen from './Views/MainScreen'
 import NewPost from './Views/NewPost'
 import Welcome from './Views/Welcome'
 import ViewPost from './Views/ViewPost'
-import Post from './Views/Post'
-import PostFeed from './Views/PostFeed'
+import CustomPost from './Views/CustomPost'
 import AreaSelect from './Views/AreaSelect'
 import { tsEnumDeclaration } from "@babel/types"
 import LoginController from "./Controllers/LoginController";
@@ -44,6 +43,15 @@ const AppNavigator = createStackNavigator(
     Welcome: 
     {
       screen: Welcome,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
+      }
+    },
+    CustomPost: 
+    {
+      screen: CustomPost,
       navigationOptions: 
       {
         header: null,
@@ -93,7 +101,7 @@ const AppNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'CustomPost',
 });
 
 const DrawerNavigator = createDrawerNavigator(
