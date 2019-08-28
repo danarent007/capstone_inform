@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import PostController from '../Controllers/PostController'
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
-import { Dropdown } from 'react-native-material-dropdown';
+import MultiSelect from 'react-native-multiple-select';
 import {
   StyleSheet,
   View,
@@ -34,14 +34,15 @@ export default class NewPost extends Component {
         title: '',
         body: '',
         controller: this.props.navigation.getParam('controller', 'Not Found'),
-        data: []
+        data: [],
+        selectedAreas: [],
       };
-      
+
   }
   async componentDidMount() {
 
     let a = await AsyncStorage.getItem('userLocations');
-    this.setState({data: a})
+    this.setState({ data: a })
     alert(a)
   }
 
@@ -65,12 +66,13 @@ export default class NewPost extends Component {
     this.props.navigation.goBack() //Return to main screen
   }
 
+  onSelectedItemsChange = selectedAreas => {
+    this.setState({ selectedAreas });
+  }
+
   render() { //Render view
+    const { selectedAreas } = this.state;
     
-
-
-
-
     return (
       <View style={styles.container}>
         <Text style={styles.headingText}>NEW POST</Text>
@@ -84,6 +86,7 @@ export default class NewPost extends Component {
             onChangeText={(text) => this.setState({ title: text })}
           ></TextInput>
         </View>
+
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -94,7 +97,33 @@ export default class NewPost extends Component {
             onChangeText={(text) => this.setState({ body: text })}
           ></TextInput>
         </View>
-
+        <View style={{flex:1, width: WIDTH}}>
+        <MultiSelect
+          hideTags
+          items={this.data}
+          uniqueKey={"location_id"}
+          ref={(component) => { this.multiSelect = component }}
+          onSelectedItemsChange={this.onSelectedItemsChange}
+          selectedItems={selectedAreas}
+          fixedHeight={true}
+          selectText="Pick Areas"
+          searchInputPlaceholderText="Search Areas..."
+          onChangeInput={(text) => console.log(text)}
+          tagRemoveIconColor="#D82121"
+          tagBorderColor="#000000"
+          tagTextColor="#000000"
+          selectedItemTextColor="#000000"
+          selectedItemIconColor="#000000"
+          itemTextColor="#000000"
+          displayKey="location_name"
+          searchInputStyle={{ color: '#CCC' }}
+          submitButtonColor="#CCC"
+          submitButtonText="Done"
+        />
+        </View>
+        <View style={{ marginTop: 100 }}>
+          {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
+        </View>
         <TouchableOpacity style={styles.btnLogin} onPress={this.createPost}>
           <Text style={styles.loginText}>Publish Post</Text>
         </TouchableOpacity>

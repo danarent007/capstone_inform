@@ -32,7 +32,6 @@ class PostFeed extends React.Component {
     this.state =
       {
         posts: [],
-        loading: true
       }
   }
 
@@ -61,9 +60,6 @@ class PostFeed extends React.Component {
       </TouchableOpacity>  
     
     
-      // <Post
-      // postData={item} 
-      // />
      
   )
 
@@ -82,7 +78,6 @@ class PostFeed extends React.Component {
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({ posts : responseJson })
-      this.setState({loading : false})
     }).catch((error) => {
       alert(error)
     })
@@ -99,7 +94,7 @@ class PostFeed extends React.Component {
   }
 
   render() { //Render view
-    if(!this.state.loading){
+   
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
@@ -111,17 +106,8 @@ class PostFeed extends React.Component {
       />
     );
   }
-  else
-  {
-    return(
-    <View style={{flex:1}}>
-      <Text>
-        Loading....
-      </Text>
-    </View>
-    );
-  }
+  
+   
 
-}
 }
 export default withNavigation(PostFeed);
