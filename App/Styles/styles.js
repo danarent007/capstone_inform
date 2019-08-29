@@ -96,7 +96,7 @@ export default StyleSheet.create({ //Styles
     {
       flex:1, 
       width: WIDTH-50,
-      height: HEIGHT,
+      height: 5,
       marginLeft: 25,
       
       //justifyContent: "center"
@@ -214,6 +214,7 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
     },
+<<<<<<< HEAD
     postText: 
     {
         color: TEXT_LIGHT,
@@ -249,4 +250,6 @@ export default StyleSheet.create({ //Styles
       
       //justifyContent: "center"
     },
+=======
+>>>>>>> f19d606fa96c831e49557abbd2b31a715133a1ca
   });

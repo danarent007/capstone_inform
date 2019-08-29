@@ -60,7 +60,9 @@ export default class LoginScreen extends Component {
     await this.getLocations()
     if(this.state.locations == 0)
     {
-      this.props.navigation.navigate('AreaSelect')
+
+      await this.props.navigation.navigate('AreaSelect')
+      console.log('GOOO BOYS')
     }
     else
     {
@@ -95,7 +97,6 @@ export default class LoginScreen extends Component {
         console.error(error);
         this.setState({loading: false})
       });
-
   }
 
 
