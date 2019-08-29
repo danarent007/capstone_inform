@@ -92,6 +92,14 @@ export default StyleSheet.create({ //Styles
         fontWeight: 'bold',
         opacity: 0.6
     },
+    selectorView:
+    {
+      flex:4, 
+      width: WIDTH-50,
+      marginLeft: 25,
+      
+      //justifyContent: "center"
+    },
     scrollView: {
       backgroundColor: Colors.lighter,
     },
