@@ -93,6 +93,7 @@ export default class MainScreen extends Component {
       .then(async response => await response.json())
       .then((responseJson) => {
         let loc = responseJson
+        AsyncStorage.setItem('userLocations', JSON.stringify(loc))
          //alert("textL: "+JSON.stringify(loc))
       }).catch((error) => {
         alert("wrong")
