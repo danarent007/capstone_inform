@@ -96,7 +96,7 @@ export default StyleSheet.create({ //Styles
     {
       flex:1, 
       width: WIDTH-50,
-      height: HEIGHT,
+      height: 5,
       marginLeft: 25,
       
       //justifyContent: "center"
@@ -213,30 +213,5 @@ export default StyleSheet.create({ //Styles
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
-    },
-    postText: 
-    {
-        color: TEXT_LIGHT,
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginTop: 1,
-        opacity: 0.5,
-        borderBottomStartRadius: 2,
-        borderBottomColor: 'black',
-        borderBottomWidth: 1
-    },
-    textAreaInput: 
-    {
-      width: WIDTH - 55,
-      height: 45,
-      borderRadius: 0,
-      fontSize: 16,
-      paddingTop: 30,
-      paddingLeft: 45,
-      backgroundColor: BG_LIGHT,
-      fontWeight: 'bold',
-      color: TEXT_LIGHT,
-      marginHorizontal: 25,
-      opacity: 0.6
     },
   });

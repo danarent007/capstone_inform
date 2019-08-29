@@ -17,8 +17,8 @@ export default class AreaSelect extends Component {
         };
     }
 
-    saveAreas = () => {
-        fetch(LOC_SET_URL, //JSon Request
+    saveAreas = async () => {
+        await fetch(LOC_SET_URL, //JSon Request
             {
                 method: 'POST',
                 headers:
@@ -40,6 +40,7 @@ export default class AreaSelect extends Component {
 
                 console.error(error);
             });
+            this.props.navigation.navigate('Main')
     }
     async getData() {
         try {
@@ -95,7 +96,15 @@ export default class AreaSelect extends Component {
                 );
         }
         return (
+
+            
             <View style={{ flex: 1, backgroundColor: '#4682b4',alignContent: "center" }}>
+                <Header style={{ backgroundColor: '#4682b4' }}
+                    androidStatusBarColor={'#4682b4'}>
+                    <Body>
+                        <Title>AreaSelect</Title>
+                    </Body>  
+            </Header>
                 <View style = {{minHeight: 25}}>
                 </View>
                 <View style={styles.selectorView}>
@@ -106,7 +115,7 @@ export default class AreaSelect extends Component {
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     selectedItems={selectedAreas}
                     fixedHeight={true}
-                    selectText="Pick Areas"
+                    selectText="Select Areas"
                     searchInputPlaceholderText="Search Areas..."
                     onChangeInput={(text) => console.log(text)}
                     tagRemoveIconColor="#D82121"
@@ -122,11 +131,11 @@ export default class AreaSelect extends Component {
                     
                 />
                 </View>
-                <View style={{ marginTop: 100, flex: 0.3, position: 'relative',bottom: 0,justifyContent: 'center', alignItems: 'center',}}>
+                { <View style={{ marginTop: 100, flex: 0.3,bottom: 0,justifyContent: 'center', alignItems: 'center',}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={ ()=>this.saveAreas()}>
                     <Text style={styles.loginText}>Save Areas</Text>
                 </TouchableOpacity>
-                </View>
+                </View> }
             </View>
 
         );

@@ -89,7 +89,12 @@ const AppNavigator = createStackNavigator(
     },
     AreaSelect:
     { 
-      screen: AreaSelect
+      screen: AreaSelect,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
+      }
     },
     
   },
@@ -109,15 +114,6 @@ const DrawerNavigator = createDrawerNavigator(
         backgroundColor: '#add8e6'
       }
     },
-    AreaSelect:
-    {
-      screen: AreaSelect,
-      navigationOptions: 
-      {
-        header: 'AreaSelect',
-        backgroundColor: '#add8e6'
-      }
-    }
    
   },
   {
