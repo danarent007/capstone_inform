@@ -6,7 +6,8 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-const {width: WIDTH} = Dimensions.get('window')
+const WIDTH = Dimensions.get('window').width
+const HEIGHT = Dimensions.get('window').height
 const BG_DARK = '#4682b4'
 const BG_LIGHT = '#add8e6'
 const TEXT_LIGHT = '#ffffff'
@@ -151,7 +152,7 @@ export default StyleSheet.create({ //Styles
       bottom: 10,                                                    
       right: 10,
       height:70,
-      backgroundColor:BG_LIGHT,
+      backgroundColor:BG_DARK,
       borderRadius:100,
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -163,7 +164,9 @@ export default StyleSheet.create({ //Styles
     {
       width: WIDTH,
       alignItems:'center', 
-      backgroundColor: BG_LIGHT
+      backgroundColor: BG_LIGHT,
+      minHeight: HEIGHT - 80,
+      maxHeight: HEIGHT - 80
     },
     listpost:
     {
