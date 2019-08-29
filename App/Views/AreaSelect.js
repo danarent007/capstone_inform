@@ -95,7 +95,7 @@ export default class AreaSelect extends Component {
                 );
         }
         return (
-            <View style={{ flex: 1, backgroundColor: '#add8e6' }}>
+            <View style={{ flex: 1, backgroundColor: '#4682b4',alignContent: "center" }}>
                 <View style = {{minHeight: 25}}>
                 </View>
                 <View style={styles.selectorView}>
@@ -122,13 +122,11 @@ export default class AreaSelect extends Component {
                     
                 />
                 </View>
-                <View style={{ marginTop: 100, flex: 0.5, position: 'relative',bottom: 0}}>
-                    
+                <View style={{ marginTop: 100, flex: 0.3, position: 'relative',bottom: 0,justifyContent: 'center', alignItems: 'center',}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={ ()=>this.saveAreas()}>
                     <Text style={styles.loginText}>Save Areas</Text>
                 </TouchableOpacity>
                 </View>
-                
             </View>
 
         );

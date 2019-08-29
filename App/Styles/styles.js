@@ -94,8 +94,9 @@ export default StyleSheet.create({ //Styles
     },
     selectorView:
     {
-      flex:4, 
+      flex:1, 
       width: WIDTH-50,
+      height: HEIGHT,
       marginLeft: 25,
       
       //justifyContent: "center"
