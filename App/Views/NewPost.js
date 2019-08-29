@@ -13,6 +13,7 @@ import PostController from '../Controllers/PostController'
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
+
 import {
   StyleSheet,
   View,
@@ -20,7 +21,8 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-  Picker
+  Picker,
+  TextArea
 } from 'react-native';
 
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
@@ -34,22 +36,25 @@ export default class NewPost extends Component {
         title: '',
         body: '',
         controller: this.props.navigation.getParam('controller', 'Not Found'),
+        locations: this.props.navigation.getParam('locs', 'Not Found'),
         selectedAreas: [],
         loading: 'initial',
+
       };
+      
 
   }
   async setMyState(myState)
   {
     this.state.loading = await 'true'
-    this.state.data = await myState
+    this.state.locations = await myState
     this.state.loading = await 'false'
     //alert("New function "+this.state.data)
   }
   async componentDidMount() {
-    let a = await AsyncStorage.getItem('userLocations');
-    
-    this.setMyState(a)
+   // let a = await AsyncStorage.getItem('userLocations');
+    //alert(JSON.stringify(a))
+    this.setMyState(this.state.locations)
   
   }
 
@@ -59,7 +64,9 @@ export default class NewPost extends Component {
       {
         title: this.state.title,
         body: this.state.body,
+        location: this.state.selectedAreas
       }
+  
     pc = new PostController(postData) //Start a new post controller
     pc.publishPost() //Publish post
 
@@ -90,13 +97,14 @@ export default class NewPost extends Component {
           );
   }
 
-    alert("alert: "+this.state.data)
+    
     return (
       <View style={styles.container}>
         <Text style={styles.headingText}>NEW POST</Text>
         <View style={styles.inputContainer}>
           <TextInput
-            style={styles.input}
+            style={styles.textAreaInput}
+            multiline={true}
             placeholder={"Title"}
             height={80}
             placeholderTextColor={'#ffffff'}
@@ -107,26 +115,28 @@ export default class NewPost extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-            style={styles.input}
+            style={styles.textAreaInput}
             placeholder={"Body"}
+            multiline={true}
             height={120}
             placeholderTextColor={'#ffffff'}
             underLineColorAndroid='transparent'
             onChangeText={(text) => this.setState({ body: text })}
           ></TextInput>
         </View>
-        <View style={{flex:1, width: WIDTH}}>
+        <View style={{flex:0.5, width: WIDTH, paddingTop: 5}}>
         <MultiSelect
           hideTags
-          items={this.data}
+          items={this.state.locations}
           uniqueKey={"location_id"}
           ref={(component) => { this.multiSelect = component }}
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedAreas}
-          fixedHeight={true}
+          fixedHeight={false}
           selectText="Pick Areas"
           searchInputPlaceholderText="Search Areas..."
           onChangeInput={(text) => console.log(text)}
+          single={true}
           tagRemoveIconColor="#D82121"
           tagBorderColor="#000000"
           tagTextColor="#000000"
@@ -139,7 +149,12 @@ export default class NewPost extends Component {
           submitButtonText="Done"
         />
         </View>
-        <View style={{ marginTop: 100 }}>
+        <View style={{flex:0.1, justifyContent: 'center',  borderBottomStartRadius: 2,
+        borderBottomColor: 'black',
+        borderBottomWidth: 1}}>
+        <Text style={styles.postText}>You are posting to:</Text>
+        </View>
+        <View style={{flex:0.2, justifyContent: 'center'}}>
           {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
         </View>
         <TouchableOpacity style={styles.btnLogin} onPress={this.createPost}>

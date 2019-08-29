@@ -153,7 +153,7 @@ export default class MainScreen extends Component
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPost')
+    this.props.navigation.navigate('NewPost', {locs: this.state.locations})
   }
 
 
