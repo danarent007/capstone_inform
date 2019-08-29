@@ -90,6 +90,7 @@ class LoginController
              else if (responseJson.loggedIn == true) //Logged In
              {
                 AsyncStorage.setItem('userID', JSON.stringify(loggedInData.userID))
+                this.loginObj.setState({userId: JSON.stringify(loggedInData.userID)})
                 this.loginObj.doLogin() //Call login method in View
              }
              else

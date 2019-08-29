@@ -45,7 +45,7 @@ export default class AreaSelect extends Component {
     async getData() {
         try {
             let userData = await AsyncStorage.getItem('userID')
-            alert(userData)
+            //alert(userData)
             return userData
         } catch (error) {
             alert(error)
