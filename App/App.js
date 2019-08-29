@@ -99,7 +99,7 @@ const AppNavigator = createStackNavigator(
     
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Welcome',
 });
 
 const DrawerNavigator = createDrawerNavigator(
