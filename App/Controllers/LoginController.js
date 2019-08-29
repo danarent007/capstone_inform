@@ -8,7 +8,7 @@
 ** LoginController.js
 */
 import AsyncStorage from '@react-native-community/async-storage';
-
+import React, { Component } from 'react';
 const LOGIN_URL = 'http://dulwich.dlinkddns.com/api/users/login' //API Login Request
 let token = ""
 class LoginController
@@ -16,16 +16,14 @@ class LoginController
     constructor(userData, ls)
     {
         this.loginObj = ls
-        userData =
+        this.state =
         {
           firstName : userData.firstName,
           lastName : userData.lastName,
           email : userData.email,
           password: userData.password, 
           id: ""
-          
-        }
-      
+        };
     }
 
     storeToken(token)
@@ -34,13 +32,15 @@ class LoginController
     }
     storeData(data)
     {
-      // let uid = await 
       AsyncStorage.setItem('userID', data)
-      //alert(JSON.stringify(AsyncStorage.getItem('userID')));
+      
     }
+
+
 
     tryLogIn2 = async () => //Attempt a login
     {
+      this.loginObj.setState({loading: true})
 
         /*
         alert(this.email)
@@ -80,25 +80,17 @@ class LoginController
          .then(async response => await response.json())
          .then((responseJson) => 
          {  
-           
-            //alert(JSON.stringify(responseJson));
-            
+          this.loginObj.setState({loading: false})
+          console.log('STATE: ' + this.loginObj.state.loading)
             let loggedInData = responseJson;
              if(responseJson.loggedIn == false) //Handle response
              {
-               //alert(responseJson.message) //User / Password incorrect
+              alert('Incorrect Username / Pass') //User / Password incorrect
              }
-             else if (responseJson.loggedIn == true)
+             else if (responseJson.loggedIn == true) //Logged In
              {
-                 //this.storeToken(loggedInData.authToken.toString())
-                 //userData.id = responseJson.userID
-                // this.storeData(loggedInData.userID.toString())
-                // alert(loggedInData.userID)
                 AsyncStorage.setItem('userID', JSON.stringify(loggedInData.userID))
-               // alert(JSON.stringify(AsyncStorage.getItem('userID')));
-
-                 //alert(responseJson.message) //User logged in
-                 this.loginObj.doLogin() //Call login method in View
+                this.loginObj.doLogin() //Call login method in View
              }
              else
              {
@@ -107,6 +99,7 @@ class LoginController
          }).catch((error) => 
          {
            
+          this.loginObj.setState({loading: false})
              console.error(error);
          });
     }

@@ -30,7 +30,7 @@ export default class LoginScreen extends Component {
     {
       email: '',
       password: '',
-      loading: 'initial'
+      loading: false
     };
   }
 
@@ -55,11 +55,49 @@ export default class LoginScreen extends Component {
   }
 
   render() { //Render view
+    if(this.state.loading)
+    {
+      return(
+      <View style={styles.container}>
+      <Image source={require('../Views/stone.png')} />
+          <Text style={styles.headingText}>loading...</Text>
+              <View style={styles.inputContainer}>
+                  <TextInput 
+                  style={styles.input}
+                  //placeholder={"Username"}
+                  placeholder={"Email"}
+                  placeholderTextColor={'#ffffff'}
+                  underLineColorAndroid='transparent'
+                  onChangeText={(text) => this.setState({email:text})}
+                  ></TextInput>
+              </View>
+          <View style={styles.inputContainer}>
+              <TextInput 
+              style={styles.input}
+              //placeholder={"Password"}
+              placeholder={"Password"}
+              secureTextEntry={true}
+              placeholderTextColor={'#ffffff'}
+              underLineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({password:text})}
+              ></TextInput>
+              </View>
+              <TouchableOpacity style={styles.btnLogin} onPress={ this.tryLogin}>
+                  <Text style={styles.loginText}>Login</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>
+                  <Text style={styles.loginText}>Sign Up</Text>
+              </TouchableOpacity>
+      </View>
+      )
+    }
+    else
+    {
     return (
         
       <View style={styles.container}>
         <Image source={require('../Views/stone.png')} />
-            <Text style={styles.headingText}>LOGIN</Text>
+            <Text style={styles.headingText}>login</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 
                     style={styles.input}
@@ -89,6 +127,7 @@ export default class LoginScreen extends Component {
                 </TouchableOpacity>
         </View>
     );
+    }
     }
 }
 
