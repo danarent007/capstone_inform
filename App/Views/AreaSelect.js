@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
-import { Icon } from 'react-native-elements'
+import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
-import styles from '../Styles/styles'
 export default class AreaSelect extends Component {
 
     constructor(props) {
@@ -45,7 +44,7 @@ export default class AreaSelect extends Component {
     async getData() {
         try {
             let userData = await AsyncStorage.getItem('userID')
-            alert(userData)
+            //alert(userData)
             return userData
         } catch (error) {
             alert(error)
@@ -77,12 +76,12 @@ export default class AreaSelect extends Component {
     render() {
         const { selectedAreas } = this.state;
 
-        if (this.state.loading === 'initial') {
+        if (this.state.loading === 'initial') 
+        {
             return <Text>Intializing...</Text>;
-
         }
-        if (this.state.loading === 'true') {
-
+        if (this.state.loading === 'true') 
+        {
             return (
                 <View style={{flex:1}}>
                 <Header style={{ backgroundColor: '#4682b4' }}
@@ -95,19 +94,12 @@ export default class AreaSelect extends Component {
                 </View>
                 );
         }
-
         return (
-
-
             <View style={{ flex: 1, backgroundColor: '#add8e6' }}>
-                <Header style={{ backgroundColor: '#4682b4' }}
-                    androidStatusBarColor={'#4682b4'}>      
-                    <Body>
-                        <Title>AreaSelect</Title>
-                    </Body>           
-                </Header>
+                <View style = {{minHeight: 25}}>
+                </View>
+                <View style={styles.selectorView}>
                 <MultiSelect
-                    hideTags
                     items={this.locations}
                     uniqueKey={"location_id"}
                     ref={(component) => { this.multiSelect = component }}
@@ -127,13 +119,16 @@ export default class AreaSelect extends Component {
                     searchInputStyle={{ color: '#CCC' }}
                     submitButtonColor="#CCC"
                     submitButtonText="Done"
+                    
                 />
-                <View style={{ marginTop: 100 }}>
-                    {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
                 </View>
-                <TouchableOpacity style={styles.btnSave} onPress={ ()=>this.saveAreas()}>
+                <View style={{ marginTop: 100, flex: 0.5, position: 'relative',bottom: 0}}>
+                    
+                    <TouchableOpacity style={styles.btnLogin} onPress={ ()=>this.saveAreas()}>
                     <Text style={styles.loginText}>Save Areas</Text>
                 </TouchableOpacity>
+                </View>
+                
             </View>
 
         );

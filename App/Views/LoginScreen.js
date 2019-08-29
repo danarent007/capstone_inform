@@ -30,7 +30,9 @@ export default class LoginScreen extends Component {
     {
       email: '',
       password: '',
-      loading: false
+      loading: false,
+      userId: '',
+      locations: []
     };
   }
 
@@ -49,10 +51,54 @@ export default class LoginScreen extends Component {
     lc.tryLogIn2() //Call method to attempt login
   }
 
-  doLogin = () => //Log user in
+  doLogin = async () => //User exists
   {
-    this.props.navigation.navigate('Main') //Navigate to main view
+    //Fetch posts
+    //Check if n > 1
+    //If, then login
+    //Else, open location pick screen
+    await this.getLocations()
+    if(this.state.locations == 0)
+    {
+      this.props.navigation.navigate('AreaSelect')
+    }
+    else
+    {
+      this.props.navigation.navigate('Main')
+    }
+    //console.log('Locations : ' +  JSON.stringify(this.state.locations))
   }
+
+
+  async getLocations() 
+  {
+    this.setState({loading_locations:true})
+    await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+      {
+        method: 'POST',
+        headers:
+        {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            id: this.state.userId,
+          })
+      })
+      .then(async response => await response.json())
+      .then((responseJson) => {
+        this.setState({locations: responseJson})
+        return '5'
+      }).catch((error) => {
+        alert("wrong")
+        console.error(error);
+        this.setState({loading: false})
+      });
+
+  }
+
+
 
   render() { //Render view
     if(this.state.loading)
