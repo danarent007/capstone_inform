@@ -85,15 +85,9 @@ export default class MainScreen extends Component
       })
       .then(async response => await response.json())
       .then((responseJson) => {
-<<<<<<< HEAD
-        let loc = responseJson
-        AsyncStorage.setItem('userLocations', JSON.stringify(loc))
-         //alert("textL: "+JSON.stringify(loc))
-=======
         //alert("HOSH" - JSON.stringify(responseJson))
         this.setState({locations: responseJson})
         return '5'
->>>>>>> 74e69e9de920b8cfe39a08fe6cac96811b4cacc6
       }).catch((error) => {
         alert("wrong")
         console.error(error);
