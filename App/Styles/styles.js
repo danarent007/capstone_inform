@@ -239,4 +239,14 @@ export default StyleSheet.create({ //Styles
       marginHorizontal: 25,
       opacity: 0.6
     },
+    selectorViews:
+    {
+      flex:1, 
+      width: WIDTH-50,
+      height: HEIGHT-20,
+      marginLeft: 25,
+      marginTop: 10
+      
+      //justifyContent: "center"
+    },
   });

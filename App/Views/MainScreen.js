@@ -53,7 +53,7 @@ export default class MainScreen extends Component
 
   display = async () => 
   {
-    this.props.navigation.openDrawer();
+    //this.props.navigation.openDrawer();
   }
 
    async getData() 

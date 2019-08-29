@@ -37,10 +37,12 @@ class PostController
      },
      body: JSON.stringify({
       title: postData.title,
-      description: postData.body
+      description: postData.body,
+      locationid: postData.location
      })
    }).then((response) => response.text())
          .then((responseJson) => {
+           alert(responseJson)
           }).catch((error) => {
             console.error(error);
          });

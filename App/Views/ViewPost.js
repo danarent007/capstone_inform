@@ -30,7 +30,7 @@ export default class ViewPost extends Component {
       title: this.props.navigation.getParam('title', 'Not Found'),
       body: this.props.navigation.getParam('description', 'Not Found')
     };
-    alert(this.state.id)
+    //alert(this.state.id)
   }
 
   
@@ -79,7 +79,8 @@ const styles = StyleSheet.create({ //Styles
         opacity: 1,
         textAlign: "center",
         position : "relative",
-        flex: 0
+        flex: 0,
+        marginBottom: 10
         
     },
     bodyText: 

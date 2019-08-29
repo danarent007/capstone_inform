@@ -124,7 +124,7 @@ export default class NewPost extends Component {
             onChangeText={(text) => this.setState({ body: text })}
           ></TextInput>
         </View>
-        <View style={{flex:0.5, width: WIDTH, paddingTop: 5}}>
+        <View style={styles.selectorViews}>
         <MultiSelect
           hideTags
           items={this.state.locations}
