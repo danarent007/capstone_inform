@@ -177,7 +177,7 @@ export default class MainScreen extends Component
 
 
   render() { //Render view
-    var data = [["C", "Java", "JavaScript", "PHP"], ["Python", "Ruby"], ["Swift", "Objective-C"]];
+    console.log("Render")
     if(!this.state.loading)
     {
       
@@ -199,10 +199,6 @@ export default class MainScreen extends Component
             </Button>
           </Right>
         </Header>
-
-
-      
-
         <View style={styles.pfeed}>
         <PostFeed 
           posts={this.state.data}
