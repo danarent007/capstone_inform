@@ -19,21 +19,16 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
-import Post from './Post'
 
 
-
-const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
-// const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
 
 
 class PostFeed extends React.Component {
-  constructor(data) {
+  constructor() {
     super()
     this.state =
       {
-        posts: data.data.data,
-        selected: data.data.refreshing
+        posts: []
       }
   }
 
@@ -62,9 +57,6 @@ class PostFeed extends React.Component {
           <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
         </View>
       </TouchableOpacity>  
-    
-    
-     
   )
 
   // _keyExtractor = (item, index) => item.post_id.toString();
@@ -79,7 +71,7 @@ class PostFeed extends React.Component {
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
-        data={this.state.posts}
+        data={this.props.posts}
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}

@@ -13,19 +13,22 @@ import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+import DropdownMenu from 'react-native-dropdown-menu';
 
+
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+ 
 
 import {
   Image,
   View,
   Text,
-  Dimensions,
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { thisTypeAnnotation } from '@babel/types';
 
 export default class MainScreen extends Component 
 {
@@ -37,7 +40,8 @@ export default class MainScreen extends Component
       loading: true,
       data:[],
       locations:[],
-      loading_locations: false
+      loading_locations: false,
+      text: ''
     };
   }
 
@@ -85,7 +89,6 @@ export default class MainScreen extends Component
       })
       .then(async response => await response.json())
       .then((responseJson) => {
-        //alert("HOSH" - JSON.stringify(responseJson))
         this.setState({locations: responseJson})
         return '5'
       }).catch((error) => {
@@ -96,17 +99,27 @@ export default class MainScreen extends Component
 
   }
 
+  componentWillUnmount()
+  {
+    this.focusListener.remove();
+  }
+
+
   async componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener('didFocus', () => {
+      this.makeRequest();
+    });
     let id = await this.getData()
     this.state.id = id
      let c = await this.getLocations()
      this.makeRequest()
- 
    }
   
   makeRequest =  async() =>
   {
     console.log("LOCS: " + JSON.stringify(this.state.locations))
+    console.log("Refreshing Posts (GET)")
 
   
     // while(this.state.loading_locations)
@@ -156,34 +169,40 @@ export default class MainScreen extends Component
     this.props.navigation.navigate('NewPost', {locs: this.state.locations})
   }
 
+  editAreas = () =>
+  {
+    console.log("Pre-parsed: " + JSON.stringify(this.state.locations))
+    this.props.navigation.navigate('AreaEdit', {preSelectedAreas: this.state.locations})
+  }
+
 
   render() { //Render view
-
+    console.log("Render")
     if(!this.state.loading)
     {
+      
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
           androidStatusBarColor={'#4682b4'}>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent onPress={() => this.editAreas()}>
               <Icon type='material-community' name={"menu"} />
             </Button>
-
           </Left>
           <Body>
-            <Title>Area Name</Title>
+
           </Body>
           <Right>
-            <Button transparent onPress={() => this.refreshPosts()}>
+            <Button transparent onPress={() => this.makeRequest()}>
               <Icon type='material-community' name={"settings"} />
             </Button>
           </Right>
         </Header>
         <View style={styles.pfeed}>
         <PostFeed 
-          data={this.state.data}
-          data={this.state}
+          posts={this.state.data}
+
           refreshing={this.state.refreshing}
           />
         </View>

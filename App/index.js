@@ -9,7 +9,3 @@ import { YellowBox } from 'react-native';
 
 
 AppRegistry.registerComponent(appName, () => App )
-constructor() 
-{
-    YellowBox.ignoreWarnings(['Setting a timer for a long']);
-}

@@ -8,9 +8,9 @@ import MainScreen from './Views/MainScreen'
 import NewPost from './Views/NewPost'
 import Welcome from './Views/Welcome'
 import ViewPost from './Views/ViewPost'
-import Post from './Views/Post'
-import PostFeed from './Views/PostFeed'
 import AreaSelect from './Views/AreaSelect'
+import AreaEdit from './Views/AreaEdit'
+
 import { tsEnumDeclaration } from "@babel/types"
 import LoginController from "./Controllers/LoginController";
 //import console = require("console")
@@ -67,6 +67,15 @@ const AppNavigator = createStackNavigator(
     Welcome: 
     {
       screen: Welcome,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
+      }
+    },
+    AreaEdit: 
+    {
+      screen: AreaEdit,
       navigationOptions: 
       {
         header: null,

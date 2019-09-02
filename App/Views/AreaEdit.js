@@ -6,18 +6,22 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
-export default class AreaSelect extends Component {
+export default class AreaEdit extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            selectedAreas: [],
+            rawAreas: this.props.navigation.getParam('preSelectedAreas'),
+            selectedAreas: this.props.navigation.getParam('preSelectedAreas').map(raw => raw.location_id),
             loading: 'initial',
-            id: ""
+            id: "",
+            locations: []
         };
     }
 
     saveAreas = async () => {
+        if(this.state.selectedAreas.length > 0)
+        {
         await fetch(LOC_SET_URL, //JSon Request
             {
                 method: 'POST',
@@ -41,7 +45,13 @@ export default class AreaSelect extends Component {
                 console.error(error);
             });
             this.props.navigation.navigate('Main')
+        }
+        else
+        {
+            alert('Please select at least on area.')
+        }
     }
+
     async getData() {
         try {
             let userData = await AsyncStorage.getItem('userID')
@@ -54,30 +64,27 @@ export default class AreaSelect extends Component {
 
     }
 
+    
     onSelectedItemsChange = selectedAreas => {
         this.setState({ selectedAreas });
     };
+    
 
     async componentDidMount() {
-
-
         this.setState({ loading: 'true' });
         this.setState({ id: await this.getData() })
         await fetch(LOC_FETCH_URL)
             .then((response) => response.json())
             .then((responseJson) => {
-                this.locations = responseJson
+                this.setState({locations: responseJson})
                 this.setState({ loading: 'false' });
             }).catch((error) => {
                 alert(error)
             })
-
     }
 
     render() {
-        const { selectedAreas } = this.state;
-        console.log("Selected: " + JSON.stringify(selectedAreas))
-
+        console.log('Selected: ' + this.state.selectedAreas)
         if (this.state.loading === 'initial') 
         {
             return <Text>Intializing...</Text>;
@@ -97,24 +104,22 @@ export default class AreaSelect extends Component {
                 );
         }
         return (
-
-            
             <View style={{ flex: 1, backgroundColor: '#4682b4',alignContent: "center" }}>
                 <Header style={{ backgroundColor: '#4682b4' }}
                     androidStatusBarColor={'#4682b4'}>
                     <Body>
-                        <Title>AreaSelect</Title>
+                        <Title>AreaEdit</Title>
                     </Body>  
             </Header>
                 <View style = {{minHeight: 25}}>
                 </View>
                 <View style={styles.selectorView}>
                 <MultiSelect
-                    items={this.locations}
+                    items={this.state.locations}
                     uniqueKey={"location_id"}
                     ref={(component) => { this.multiSelect = component }}
                     onSelectedItemsChange={this.onSelectedItemsChange}
-                    selectedItems={selectedAreas}
+                    selectedItems={this.state.selectedAreas}
                     fixedHeight={true}
                     selectText="Select Areas"
                     searchInputPlaceholderText="Search Areas..."
