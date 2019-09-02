@@ -38,7 +38,8 @@ class PostController
      body: JSON.stringify({
       title: postData.title,
       description: postData.body,
-      locationid: postData.location
+      locationid: postData.location,
+      photo_uri: postData.photo
      })
    }).then((response) => response.text())
          .then((responseJson) => {

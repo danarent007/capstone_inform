@@ -186,7 +186,7 @@ export default class MainScreen extends Component
         <Header style={{ backgroundColor: '#4682b4' }}
           androidStatusBarColor={'#4682b4'}>
           <Left>
-            <Button transparent onPress={() => this.editAreas()}>
+            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
               <Icon type='material-community' name={"menu"} />
             </Button>
           </Left>
@@ -194,7 +194,7 @@ export default class MainScreen extends Component
 
           </Body>
           <Right>
-            <Button transparent onPress={() => this.makeRequest()}>
+            <Button transparent onPress={() => this.editAreas()}>
               <Icon type='material-community' name={"settings"} />
             </Button>
           </Right>

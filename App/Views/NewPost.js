@@ -13,6 +13,7 @@ import PostController from '../Controllers/PostController'
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
+import ImagePicker from 'react-native-image-picker'
 
 import {
   StyleSheet,
@@ -22,7 +23,9 @@ import {
   TextInput,
   TouchableOpacity,
   Picker,
-  TextArea
+  TextArea,
+  Button,
+  Image
 } from 'react-native';
 
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
@@ -39,6 +42,7 @@ export default class NewPost extends Component {
         locations: this.props.navigation.getParam('locs', 'Not Found'),
         selectedAreas: [],
         loading: 'initial',
+        photo: null
 
       };
       
@@ -58,13 +62,25 @@ export default class NewPost extends Component {
   
   }
 
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true,
+    }
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        this.setState({ photo: response })
+      }
+    })
+  }
+
   createPost = () => //Create a new post
   {
     postData =
       {
         title: this.state.title,
         body: this.state.body,
-        location: this.state.selectedAreas
+        location: this.state.selectedAreas,
+        photo: this.state.photo
       }
   
     pc = new PostController(postData) //Start a new post controller
@@ -86,7 +102,7 @@ export default class NewPost extends Component {
 
   render() { //Render view
     const { selectedAreas } = this.state;
-
+    const { photo } = this.state
 
   if (this.state.loading === 'true') {
 
@@ -149,7 +165,19 @@ export default class NewPost extends Component {
           submitButtonText="Done"
         />
         </View>
-        <View style={{flex:0.1, justifyContent: 'center',  borderBottomStartRadius: 2,
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        
+        <TouchableOpacity onPress={this.handleChoosePhoto}>
+          <Text style={{fontSize:20, backgroundColor: '#add8e6'}}>Choose Photo</Text>
+        </TouchableOpacity>
+        {photo && (
+          <Image
+            source={{ uri: photo.uri }}
+            style={{ width: 150, height: 150 }}
+          />
+        )}
+      </View>
+        <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 2,
         borderBottomColor: 'black',
         borderBottomWidth: 1}}>
         <Text style={styles.postText}>You are posting to:</Text>
