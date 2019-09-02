@@ -13,8 +13,11 @@ import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+import DropdownMenu from 'react-native-dropdown-menu';
 
+
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+ 
 
 import {
   Image,
@@ -37,7 +40,8 @@ export default class MainScreen extends Component
       loading: true,
       data:[],
       locations:[],
-      loading_locations: false
+      loading_locations: false,
+      text: ''
     };
   }
 
@@ -173,9 +177,9 @@ export default class MainScreen extends Component
 
 
   render() { //Render view
-
+    var data = [["C", "Java", "JavaScript", "PHP"], ["Python", "Ruby"], ["Swift", "Objective-C"]];
+    console.log('RENDER')
     if(!this.state.loading)
-    {
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
@@ -184,10 +188,9 @@ export default class MainScreen extends Component
             <Button transparent onPress={() => this.editAreas()}>
               <Icon type='material-community' name={"menu"} />
             </Button>
-
           </Left>
           <Body>
-            <Title>Area Name</Title>
+
           </Body>
           <Right>
             <Button transparent onPress={() => this.makeRequest()}>
@@ -195,6 +198,37 @@ export default class MainScreen extends Component
             </Button>
           </Right>
         </Header>
+
+
+
+        <View style={{flex: 1}}>
+        <View style={{height: 64}} />
+        <DropdownMenu
+          style={{flex: 1}}
+          bgColor={'white'}
+          tintColor={'#666666'}
+          activityTintColor={'green'}
+          // arrowImg={}      
+          // checkImage={}   
+          // optionTextStyle={{color: '#333333'}}
+          // titleStyle={{color: '#333333'}} 
+          // maxHeight={300} 
+          handler={(selection, row) => this.setState({text: data[selection][row]})}
+          data={data}
+        >
+ 
+          <View style={{flex: 1}}>
+            <Text>
+              {this.state.text} is the best language in the world
+            </Text>
+          </View>
+ 
+        </DropdownMenu>
+      </View>
+        
+
+
+
         <View style={styles.pfeed}>
         <PostFeed 
           posts={this.state.data}
