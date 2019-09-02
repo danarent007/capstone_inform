@@ -14,7 +14,30 @@ import AreaSelect from './Views/AreaSelect'
 import { tsEnumDeclaration } from "@babel/types"
 import LoginController from "./Controllers/LoginController";
 //import console = require("console")
+const DrawerNavigator = createDrawerNavigator(
+  {
 
+    Main: 
+    {
+      screen: MainScreen,
+      navigationOptions: 
+      {
+        header: null,
+        backgroundColor: '#add8e6'
+      }
+    },
+   
+  },
+  {
+    hideStatusBar: Platform.OS == 'ios' ? true : false,
+    drawerBackgroundColor: 'rgba(255,255,255,.9)',
+    overlayColor: '#6b52ae',
+    contentOptions: {
+      activeTintColor: '#fff',
+      activeBackgroundColor: '#6b52ae',
+    }
+  }
+);
 const AppNavigator = createStackNavigator(
   {
     Login:
@@ -35,7 +58,7 @@ const AppNavigator = createStackNavigator(
     },
     Main: 
     {
-      screen: MainScreen,
+      screen: DrawerNavigator,
       navigationOptions: 
       {
         header: null,
@@ -99,33 +122,10 @@ const AppNavigator = createStackNavigator(
     
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Welcome',
 });
 
-const DrawerNavigator = createDrawerNavigator(
-  {
 
-    MainScreen: 
-    {
-      screen: MainScreen,
-      navigationOptions: 
-      {
-        header: null,
-        backgroundColor: '#add8e6'
-      }
-    },
-   
-  },
-  {
-    hideStatusBar: Platform.OS == 'ios' ? true : false,
-    drawerBackgroundColor: 'rgba(255,255,255,.9)',
-    overlayColor: '#6b52ae',
-    contentOptions: {
-      activeTintColor: '#fff',
-      activeBackgroundColor: '#6b52ae',
-    }
-  }
-);
 
 
 

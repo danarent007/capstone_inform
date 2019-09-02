@@ -42,7 +42,7 @@ class PostController
      })
    }).then((response) => response.text())
          .then((responseJson) => {
-           alert(responseJson)
+           alert(responseJson )
           }).catch((error) => {
             console.error(error);
          });

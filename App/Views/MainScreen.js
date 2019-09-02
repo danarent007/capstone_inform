@@ -193,7 +193,7 @@ export default class MainScreen extends Component
       </View>
       //</SafeAreaView>
     );
-    }
+   }
     else
     {
       return(
