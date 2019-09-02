@@ -19,6 +19,26 @@ export default StyleSheet.create({ //Styles
         alignItems: 'center',
         backgroundColor: BG_DARK,
     },
+    view_container: 
+    {
+      flex: 9,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#add8e6',
+    },
+    view_headingText: 
+    {
+        color: 'white',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 10,
+        opacity: 1,
+        textAlign: "center",
+        position : "relative",
+        flex: 0,
+        marginBottom: 10
+        
+    },
     engine: {
       position: 'absolute',
       right: 0,
@@ -33,6 +53,17 @@ export default StyleSheet.create({ //Styles
       fontWeight: '600',
       color: "purple",
       textAlign: "center",
+    },
+    postDesc: 
+    {
+        color: 'white',
+        fontSize: 20,
+        minWidth: this.WIDTH,
+        marginTop: 0,
+        opacity: 1,
+        textAlign: "left",
+        position : "relative",
+        flex: 0, 
     },
     headingText: 
     {
@@ -214,6 +245,30 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
     },
+    bodyText: 
+    {
+        color: 'white',
+        fontSize: 20,
+        minWidth: this.WIDTH,
+        marginTop: 0,
+        opacity: 1,
+        textAlign: "left",
+        position : "relative",
+        flex: 0, 
+    },
+    descText: 
+    {
+        color: 'white',
+        fontSize: 20,
+        minWidth: this.WIDTH,
+        marginTop: 0,
+        marginBottom: 10,
+        opacity: 1,
+        textAlign: "left",
+        position : "relative",
+        flex: 0,
+        textDecorationLine: "underline",
+    },
     postText: 
     {
         color: TEXT_LIGHT,
@@ -248,5 +303,24 @@ export default StyleSheet.create({ //Styles
       marginTop: 10
       
       //justifyContent: "center"
+    },
+    scroll:
+    {
+      //paddingHorizontal: 20,
+      flex: 9,
+      borderWidth: 0,
+      borderColor: 'white',
+      width: WIDTH -24,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 10,
+      backgroundColor: '#4682b4',
+      position: "relative", 
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84          
+
     },
   });

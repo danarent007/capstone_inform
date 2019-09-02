@@ -18,6 +18,7 @@ export default class AreaSelect extends Component {
     }
 
     saveAreas = async () => {
+        if (this.state.selectedAreas.length > 0) {
         await fetch(LOC_SET_URL, //JSon Request
             {
                 method: 'POST',
@@ -42,6 +43,11 @@ export default class AreaSelect extends Component {
             });
             this.fetchLocations()
             this.props.navigation.navigate('Main')
+        }
+        else
+        {
+            alert('Please select at least one area.')
+        }
     }
 
 

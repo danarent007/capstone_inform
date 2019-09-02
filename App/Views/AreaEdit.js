@@ -47,7 +47,7 @@ export default class AreaEdit extends Component {
             this.props.navigation.navigate('Main')
         }
         else {
-            alert('Please select at least on area.')
+            alert('Please select at least one area.')
         }
     }
 
