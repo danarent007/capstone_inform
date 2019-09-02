@@ -45,15 +45,6 @@ export default class MainScreen extends Component
     };
   }
 
-  async getData() {
-    try {
-      
-      let userData =  await AsyncStorage.getItem('userID')
-      return userData
-    } catch (error) {
-      alert(error)
-    }
-  }
 
   display = async () => 
   {
@@ -86,10 +77,12 @@ export default class MainScreen extends Component
           {
             id: this.state.id,
           })
+
       })
       .then(async response => await response.json())
       .then((responseJson) => {
         this.setState({locations: responseJson})
+        this.makeRequest()
         return '5'
       }).catch((error) => {
         alert("wrong")
@@ -108,7 +101,8 @@ export default class MainScreen extends Component
   async componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
-      this.makeRequest();
+      this.getLocations()
+      
     });
     let id = await this.getData()
     this.state.id = id
@@ -150,6 +144,8 @@ export default class MainScreen extends Component
       // })
       //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
       console.log( "------------" + JSON.stringify(responseJson))
+
+      
 
       this.setState({
         data: responseJson,

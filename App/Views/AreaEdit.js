@@ -44,6 +44,7 @@ export default class AreaEdit extends Component {
 
                 console.error(error);
             });
+            this.getLocations()
             this.props.navigation.navigate('Main')
         }
         else
@@ -52,16 +53,44 @@ export default class AreaEdit extends Component {
         }
     }
 
-    async getData() {
+    async getId() {
         try {
             let userData = await AsyncStorage.getItem('userID')
-            //alert(userData)
             return userData
         } catch (error) {
             alert(error)
 
         }
 
+    }
+
+    async getLocations() 
+    {
+        console.log('FETCHING')
+      this.setState({loading_locations:true})
+      await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+        {
+          method: 'POST',
+          headers:
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              id: this.state.id,
+            })
+        })
+        .then(async response => await response.json())
+        .then((responseJson) => {
+          this.setState({rawAreas: responseJson})
+          return '5'
+        }).catch((error) => {
+          alert("wrong")
+          console.error(error);
+          this.setState({loading: false})
+        });
+        console.log("FETCHED")
     }
 
     
@@ -72,7 +101,9 @@ export default class AreaEdit extends Component {
 
     async componentDidMount() {
         this.setState({ loading: 'true' });
-        this.setState({ id: await this.getData() })
+        this.setState({ id: await this.getId() })
+
+        //Fetch all locations
         await fetch(LOC_FETCH_URL)
             .then((response) => response.json())
             .then((responseJson) => {
