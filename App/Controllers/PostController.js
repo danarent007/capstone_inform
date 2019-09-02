@@ -29,6 +29,7 @@ class PostController
 
   publishPost = () => //Publish post to DB
   {
+    console.log("USER ID: " + JSON.stringify(postData.user_id))
     fetch(ADD_URL, { //JSon message
       method: 'POST',
       headers: {

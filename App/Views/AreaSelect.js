@@ -40,12 +40,14 @@ export default class AreaSelect extends Component {
 
                 console.error(error);
             });
+            this.fetchLocations()
             this.props.navigation.navigate('Main')
     }
+
+
     async getData() {
         try {
             let userData = await AsyncStorage.getItem('userID')
-            //alert(userData)
             return userData
         } catch (error) {
             alert(error)
@@ -59,8 +61,11 @@ export default class AreaSelect extends Component {
     };
 
     async componentDidMount() {
+        this.fetchLocations()
+    }
 
-
+    fetchLocations = async () =>
+    {
         this.setState({ loading: 'true' });
         this.setState({ id: await this.getData() })
         await fetch(LOC_FETCH_URL)
@@ -71,7 +76,6 @@ export default class AreaSelect extends Component {
             }).catch((error) => {
                 alert(error)
             })
-
     }
 
     render() {

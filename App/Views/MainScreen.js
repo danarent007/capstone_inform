@@ -45,15 +45,6 @@ export default class MainScreen extends Component
     };
   }
 
-  async getData() {
-    try {
-      
-      let userData =  await AsyncStorage.getItem('userID')
-      return userData
-    } catch (error) {
-      alert(error)
-    }
-  }
 
   display = async () => 
   {
@@ -84,12 +75,14 @@ export default class MainScreen extends Component
         },
         body: JSON.stringify(
           {
-            id: this.state.id,
+            id: this.state.user_id,
           })
+
       })
       .then(async response => await response.json())
       .then((responseJson) => {
         this.setState({locations: responseJson})
+        this.makeRequest()
         return '5'
       }).catch((error) => {
         alert("wrong")
@@ -108,10 +101,12 @@ export default class MainScreen extends Component
   async componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
-      this.makeRequest();
+      this.getLocations()
+      
     });
+    
     let id = await this.getData()
-    this.state.id = id
+    this.state.user_id = id
      let c = await this.getLocations()
      this.makeRequest()
    }
@@ -151,6 +146,8 @@ export default class MainScreen extends Component
       //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
       console.log( "------------" + JSON.stringify(responseJson))
 
+      
+
       this.setState({
         data: responseJson,
         loading : false
@@ -166,7 +163,8 @@ export default class MainScreen extends Component
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPost', {locs: this.state.locations})
+    console.log("USER IDDDD: " + JSON.stringify(this.state.user_id))
+    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
   editAreas = () =>
