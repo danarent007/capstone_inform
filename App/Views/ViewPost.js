@@ -28,7 +28,9 @@ export default class ViewPost extends Component {
     {
       id: this.props.navigation.getParam('id', 'Not Found'),
       title: this.props.navigation.getParam('title', 'Not Found'),
-      body: this.props.navigation.getParam('description', 'Not Found')
+      body: this.props.navigation.getParam('description', 'Not Found'),
+      user_id: this.props.navigation.getParam('user', 'No User'),
+      area: this.props.navigation.getParam('area', 'No User'),
     };
     //alert(this.state.id)
   }
@@ -39,6 +41,8 @@ export default class ViewPost extends Component {
     return (
       <View style={styles.container}>
             <Text style={styles.headingText}>{this.state.title}</Text>
+            <Text style={styles.bodyText}>{this.state.user_id}</Text>
+            <Text style={styles.bodyText}>{this.state.area}</Text>
             <ScrollView style={styles.scroll}>
               <Text style={styles.bodyText}>{this.state.body}</Text>
             </ScrollView>

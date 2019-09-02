@@ -29,6 +29,7 @@ class PostController
 
   publishPost = () => //Publish post to DB
   {
+    console.log("USER ID: " + JSON.stringify(postData.user_id))
     fetch(ADD_URL, { //JSon message
       method: 'POST',
       headers: {
@@ -38,7 +39,8 @@ class PostController
      body: JSON.stringify({
       title: postData.title,
       description: postData.body,
-      locationid: postData.location
+      locationid: postData.location,
+      user_id: postData.user_id
      })
    }).then((response) => response.text())
          .then((responseJson) => {

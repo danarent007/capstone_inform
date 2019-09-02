@@ -37,6 +37,7 @@ export default class NewPost extends Component {
         body: '',
         controller: this.props.navigation.getParam('controller', 'Not Found'),
         locations: this.props.navigation.getParam('locs', 'Not Found'),
+        user_id: this.props.navigation.getParam('user_id','Not Found'),
         selectedAreas: [],
         loading: 'initial',
 
@@ -64,7 +65,8 @@ export default class NewPost extends Component {
       {
         title: this.state.title,
         body: this.state.body,
-        location: this.state.selectedAreas
+        location: this.state.selectedAreas,
+        user_id: this.state.user_id
       }
   
     pc = new PostController(postData) //Start a new post controller

@@ -75,7 +75,7 @@ export default class MainScreen extends Component
         },
         body: JSON.stringify(
           {
-            id: this.state.id,
+            id: this.state.user_id,
           })
 
       })
@@ -104,8 +104,9 @@ export default class MainScreen extends Component
       this.getLocations()
       
     });
+    
     let id = await this.getData()
-    this.state.id = id
+    this.state.user_id = id
      let c = await this.getLocations()
      this.makeRequest()
    }
@@ -162,7 +163,8 @@ export default class MainScreen extends Component
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPost', {locs: this.state.locations})
+    console.log("USER IDDDD: " + JSON.stringify(this.state.user_id))
+    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
   editAreas = () =>
