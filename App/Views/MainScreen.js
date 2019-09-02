@@ -178,8 +178,9 @@ export default class MainScreen extends Component
 
   render() { //Render view
     var data = [["C", "Java", "JavaScript", "PHP"], ["Python", "Ruby"], ["Swift", "Objective-C"]];
-    console.log('RENDER')
     if(!this.state.loading)
+    {
+      
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
@@ -200,34 +201,7 @@ export default class MainScreen extends Component
         </Header>
 
 
-
-        <View style={{flex: 1}}>
-        <View style={{height: 64}} />
-        <DropdownMenu
-          style={{flex: 1}}
-          bgColor={'white'}
-          tintColor={'#666666'}
-          activityTintColor={'green'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data}
-        >
- 
-          <View style={{flex: 1}}>
-            <Text>
-              {this.state.text} is the best language in the world
-            </Text>
-          </View>
- 
-        </DropdownMenu>
-      </View>
-        
-
-
+      
 
         <View style={styles.pfeed}>
         <PostFeed 
