@@ -96,17 +96,27 @@ export default class MainScreen extends Component
 
   }
 
+  componentWillUnmount()
+  {
+    this.focusListener.remove();
+  }
+
+
   async componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener('didFocus', () => {
+      this.makeRequest();
+    });
     let id = await this.getData()
     this.state.id = id
      let c = await this.getLocations()
      this.makeRequest()
- 
    }
   
   makeRequest =  async() =>
   {
     console.log("LOCS: " + JSON.stringify(this.state.locations))
+    console.log("Refreshing Posts (GET)")
 
   
     // while(this.state.loading_locations)
@@ -175,15 +185,15 @@ export default class MainScreen extends Component
             <Title>Area Name</Title>
           </Body>
           <Right>
-            <Button transparent onPress={() => this.refreshPosts()}>
+            <Button transparent onPress={() => this.makeRequest()}>
               <Icon type='material-community' name={"settings"} />
             </Button>
           </Right>
         </Header>
         <View style={styles.pfeed}>
         <PostFeed 
-          data={this.state.data}
-          data={this.state}
+          posts={this.state.data}
+
           refreshing={this.state.refreshing}
           />
         </View>
