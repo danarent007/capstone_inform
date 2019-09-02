@@ -19,6 +19,8 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Left } from 'native-base';
+import { underline } from 'ansi-colors';
 
 
 
@@ -31,8 +33,6 @@ class PostFeed extends React.Component {
         posts: []
       }
   }
-
-  
 
   async getToken()
   {
@@ -53,10 +53,11 @@ class PostFeed extends React.Component {
     
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {id: item.post_id, title: item.title, description: item.description, controller: this})}> 
         <View style={styles.listpost}>
-          <Text style={{ fontSize: 15, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
-          <Text style={{ fontSize: 10, color: '#fff', }}>{item.description}</Text>
+          <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
+          <Text style={{ fontSize: 10, color: '#fff', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
+          <Text style={{ fontSize: 10, color: '#fff'}}>{item.description}</Text>
         </View>
-      </TouchableOpacity>  
+      </TouchableOpacity>
   )
 
   // _keyExtractor = (item, index) => item.post_id.toString();
