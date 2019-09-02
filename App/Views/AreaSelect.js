@@ -76,6 +76,7 @@ export default class AreaSelect extends Component {
 
     render() {
         const { selectedAreas } = this.state;
+        console.log("Selected: " + JSON.stringify(selectedAreas))
 
         if (this.state.loading === 'initial') 
         {

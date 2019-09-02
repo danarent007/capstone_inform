@@ -20,12 +20,12 @@ import {
   Image,
   View,
   Text,
-  Dimensions,
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { thisTypeAnnotation } from '@babel/types';
 
 export default class MainScreen extends Component 
 {
@@ -85,7 +85,6 @@ export default class MainScreen extends Component
       })
       .then(async response => await response.json())
       .then((responseJson) => {
-        //alert("HOSH" - JSON.stringify(responseJson))
         this.setState({locations: responseJson})
         return '5'
       }).catch((error) => {
@@ -166,6 +165,12 @@ export default class MainScreen extends Component
     this.props.navigation.navigate('NewPost', {locs: this.state.locations})
   }
 
+  editAreas = () =>
+  {
+    console.log("Pre-parsed: " + JSON.stringify(this.state.locations))
+    this.props.navigation.navigate('AreaEdit', {preSelectedAreas: this.state.locations})
+  }
+
 
   render() { //Render view
 
@@ -176,7 +181,7 @@ export default class MainScreen extends Component
         <Header style={{ backgroundColor: '#4682b4' }}
           androidStatusBarColor={'#4682b4'}>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent onPress={() => this.editAreas()}>
               <Icon type='material-community' name={"menu"} />
             </Button>
 
