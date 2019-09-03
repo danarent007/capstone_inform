@@ -9,13 +9,13 @@
 */
 
 import React, { Component } from 'react';
-import LoginController from '../Controllers/LoginController'
 import styles from '../Styles/styles'
 import {
     View,
     Text,
     Image,
     ActivityIndicator,
+    YellowBox
   } from 'react-native';
 
 
@@ -28,6 +28,9 @@ import {
         password: '',
         loading: 'initial'
       };
+      YellowBox.ignoreWarnings([
+        'Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'
+      ])
     }
   
     
@@ -41,7 +44,9 @@ import {
       return (
         
         <View style={styles.container}>
-          <Image source={require('../Views/stone.png')} />
+          <Image 
+          source={require('../Views/neighbourly_black.png')} 
+          style={{width: 300, height: 300}} />
               <Text style={styles.headingText}>Welcome To</Text>
               <Text style={styles.welcomeText}>Neighbourly</Text>
               <View style = {{paddingBottom:50}}>

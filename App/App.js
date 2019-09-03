@@ -14,6 +14,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { tsEnumDeclaration } from "@babel/types"
 import LoginController from "./Controllers/LoginController";
 //import console = require("console")
+
+
 const DrawerNavigator = createDrawerNavigator(
   {
     Main: {
@@ -170,15 +172,8 @@ const AppNavigator = createStackNavigator(
       screen: ViewPost,
       navigationOptions: 
       {
-        headerTintColor: '#ffffff',
-        headerStyle: {
           backgroundColor: '#4682b4',
-          borderBottomColor: '#ffffff',
-          borderBottomWidth: 0,
-        },
-        headerTitleStyle: {
-          fontSize: 18,
-        },
+          header: null,
       }
     },
     AreaSelect:

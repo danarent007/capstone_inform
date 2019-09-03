@@ -11,6 +11,7 @@ const HEIGHT = Dimensions.get('window').height
 const BG_DARK = '#4682b4'
 const BG_LIGHT = '#add8e6'
 const TEXT_LIGHT = '#ffffff'
+
 export default StyleSheet.create({ //Styles
     container: 
     {
@@ -29,6 +30,19 @@ export default StyleSheet.create({ //Styles
     view_headingText: 
     {
         color: 'white',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 10,
+        opacity: 1,
+        textAlign: "center",
+        position : "relative",
+        flex: 0,
+        marginBottom: 10
+        
+    },
+    view_headingText_dark: 
+    {
+        color: BG_DARK,
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 10,
@@ -200,6 +214,25 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
     },
+    creatPostFloatButtonLight:
+    {
+      borderWidth:0,
+      borderColor:'rgba(0,0,0,0.2)',
+      alignItems:'center',
+      justifyContent:'center',
+      width:70,
+      position: 'absolute',                                          
+      bottom: 10,                                                    
+      right: 10,
+      height:70,
+      backgroundColor:BG_LIGHT,
+      borderRadius:100,
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
+    },
     pfeed:
     {
       width: WIDTH,
@@ -258,7 +291,7 @@ export default StyleSheet.create({ //Styles
     },
     descText: 
     {
-        color: 'white',
+        color: BG_DARK,
         fontSize: 20,
         minWidth: this.WIDTH,
         marginTop: 0,
@@ -309,11 +342,14 @@ export default StyleSheet.create({ //Styles
       //paddingHorizontal: 20,
       flex: 9,
       borderWidth: 0,
+      //contentInset: {top: '10', bottom: '30'},
       borderColor: 'white',
-      width: WIDTH -24,
+      width: WIDTH -28,
+      //maxHeight: HEIGHT-50,
       paddingLeft: 10,
       paddingRight: 10,
       paddingTop: 10,
+      paddingBottom: 20,
       backgroundColor: '#4682b4',
       position: "relative", 
       shadowOffset: {width: 0, height: 2}, 
@@ -323,4 +359,37 @@ export default StyleSheet.create({ //Styles
       shadowRadius: 3.84          
 
     },
+    scroll_main:
+    {
+      //paddingHorizontal: 20,
+      flex: 9,
+      borderWidth: 0,
+      //contentInset: {top: '10', bottom: '30'},
+      borderColor: 'white',
+      width: WIDTH,
+      maxHeight: HEIGHT-80,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 10,
+      paddingBottom: 20,
+      backgroundColor: '#4682b4',
+      position: "relative", 
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84          
+
+    },
+    image_style:
+    {
+      width: WIDTH - 18, 
+      height: WIDTH - 18,
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84,
+      paddingBottom: 10 
+    }
   });

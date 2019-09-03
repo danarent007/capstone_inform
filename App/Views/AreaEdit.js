@@ -5,6 +5,7 @@ import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button, Icon } from 'native-base'
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
+const USER_LOCATION_FETCH_URL = "http://dulwich.dlinkddns.com/api/userLocations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
 export default class AreaEdit extends Component {
 
@@ -66,7 +67,7 @@ export default class AreaEdit extends Component {
     {
         console.log('FETCHING')
       this.setState({loading_locations:true})
-      await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+      await fetch(USER_LOCATION_FETCH_URL, //JSon Request
         {
           method: 'POST',
           headers:
@@ -97,7 +98,7 @@ export default class AreaEdit extends Component {
     };
 
 
-    async componentDidMount() {
+    async componentWillMount() {
         this.setState({ loading: 'true' });
         this.setState({ id: await this.getId() })
 

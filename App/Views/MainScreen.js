@@ -12,12 +12,10 @@ import React, { Component } from 'react';
 import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
-import { Header, Left, Right, Body, Title, Button } from 'native-base'
-import DropdownMenu from 'react-native-dropdown-menu';
-
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
- 
+const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 import {
   Image,
@@ -28,7 +26,6 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { thisTypeAnnotation } from '@babel/types';
 
 export default class MainScreen extends Component 
 {
@@ -39,17 +36,15 @@ export default class MainScreen extends Component
     this.state = {
       loading: true,
       data:[],
+      filtered_data:[],
       locations:[],
       loading_locations: false,
-      text: ''
+      text: '',
+      PickerValueHolder : '',
+      user_id: ''
     };
   }
 
-
-  display = async () => 
-  {
-    //this.props.navigation.openDrawer();
-  }
 
    async getData() 
    {
@@ -62,10 +57,15 @@ export default class MainScreen extends Component
   }
 
 
+GetSelectedPickerItem=()=>{
+  alert(this.state.PickerValueHolder);
+}
+
+
   async getLocations() 
   {
     this.setState({loading_locations:true})
-    await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+    await fetch(LOCATION_FETCH_URL, //JSon Request
       {
         method: 'POST',
         headers:
@@ -108,13 +108,13 @@ export default class MainScreen extends Component
     let id = await this.getData()
     this.state.user_id = id
      let c = await this.getLocations()
-     this.makeRequest()
+     //this.makeRequest()
    }
   
   makeRequest =  async() =>
   {
-    console.log("LOCS: " + JSON.stringify(this.state.locations))
-    console.log("Refreshing Posts (GET)")
+
+    console.log('Fetch Posts')
 
   
     // while(this.state.loading_locations)
@@ -144,15 +144,10 @@ export default class MainScreen extends Component
       //   loading: false
       // })
       //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
-      console.log( "------------" + JSON.stringify(responseJson))
-
-      
-
       this.setState({
         data: responseJson,
         loading : false
-      })
-      
+      }) 
     }).catch((error) => {
       alert(error)
       this.setState({
@@ -161,15 +156,58 @@ export default class MainScreen extends Component
     })
   }
 
+
+  filterData = () =>
+  {
+    if(this.state.PickerValueHolder == '-1' || this.state.PickerValueHolder == '')
+    {
+      this.state.filtered_data = this.state.data
+    }
+    else
+    {
+      this.state.filtered_data = []
+      for(i = 0; i < this.state.data.length;i++)
+      {
+        if(this.state.data[i].location_name == this.getLocName(this.state.PickerValueHolder))
+        {
+          this.state.filtered_data.push(this.state.data[i])
+        }
+      }
+
+    }
+  }
+
+
+  getItems = () =>
+  {
+    var items = [];      
+    for (i=0;i<this.state.locations.length;i++) {
+      items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
+    }
+
+    return items; 
+
+
+  }
+
+  getLocName = (id) =>
+  {
+    for(i=0;i<this.state.locations.length;i++)
+    {
+      if(this.state.locations[i].location_id == id)
+      {
+        return(this.state.locations[i].location_name)
+      }
+    }
+  }
+
   newPost = () =>
   {
-    console.log("USER IDDDD: " + JSON.stringify(this.state.user_id))
     this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
   editAreas = () =>
   {
-    console.log("Pre-parsed: " + JSON.stringify(this.state.locations))
     this.props.navigation.navigate('AreaEdit', {preSelectedAreas: this.state.locations})
   }
 
@@ -197,11 +235,24 @@ export default class MainScreen extends Component
             </Button>
           </Right>
         </Header>
+        
+        <View>
+        <Picker
+        selectedValue={this.state.PickerValueHolder}
+ 
+        onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
+
+        <Picker.Item label="All Areas" value='-1' key='-1' />
+        {this.getItems()}
+ 
+      </Picker>
+        </View>
+
         <View style={styles.pfeed}>
         <PostFeed 
           posts={this.state.data}
-
-          refreshing={this.state.refreshing}
+          selected = {this.state.PickerValueHolder}
+          current_user_id = {this.state.user_id}
           />
         </View>
         <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
