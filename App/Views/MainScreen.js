@@ -40,7 +40,8 @@ export default class MainScreen extends Component
       locations:[],
       loading_locations: false,
       text: '',
-      PickerValueHolder : ''
+      PickerValueHolder : '',
+      user_id: ''
     };
   }
 
@@ -107,13 +108,13 @@ GetSelectedPickerItem=()=>{
     let id = await this.getData()
     this.state.user_id = id
      let c = await this.getLocations()
-     this.makeRequest()
+     //this.makeRequest()
    }
   
   makeRequest =  async() =>
   {
-    console.log("LOCS: " + JSON.stringify(this.state.locations))
-    console.log("Refreshing Posts (GET)")
+
+    console.log('Fetch Posts')
 
   
     // while(this.state.loading_locations)
@@ -161,18 +162,15 @@ GetSelectedPickerItem=()=>{
     if(this.state.PickerValueHolder == '-1' || this.state.PickerValueHolder == '')
     {
       this.state.filtered_data = this.state.data
-      console.log('Default data')
     }
     else
     {
       this.state.filtered_data = []
       for(i = 0; i < this.state.data.length;i++)
       {
-        console.log('Location ID: ' + this.state.data[i].location_name + " --- Picker Value: " + this.getLocName(this.state.PickerValueHolder))
         if(this.state.data[i].location_name == this.getLocName(this.state.PickerValueHolder))
         {
           this.state.filtered_data.push(this.state.data[i])
-          console.log('Pushed: ' + this.state.data[i])
         }
       }
 
@@ -184,10 +182,8 @@ GetSelectedPickerItem=()=>{
   {
     var items = [];      
     for (i=0;i<this.state.locations.length;i++) {
-      console.log("Location to list: " + JSON.stringify(this.state.locations[i]))
       items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
     }
-    console.log('Selected Area: ' + this.state.PickerValueHolder)
 
     return items; 
 
@@ -207,13 +203,11 @@ GetSelectedPickerItem=()=>{
 
   newPost = () =>
   {
-    console.log("USER IDDDD: " + JSON.stringify(this.state.user_id))
     this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
   editAreas = () =>
   {
-    console.log("Pre-parsed: " + JSON.stringify(this.state.locations))
     this.props.navigation.navigate('AreaEdit', {preSelectedAreas: this.state.locations})
   }
 
@@ -258,6 +252,7 @@ GetSelectedPickerItem=()=>{
         <PostFeed 
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
+          current_user_id = {this.state.user_id}
           />
         </View>
         <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>

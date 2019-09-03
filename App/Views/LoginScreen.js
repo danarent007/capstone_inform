@@ -109,7 +109,7 @@ export default class LoginScreen extends Component {
     {
       return(
       <View style={styles.container}>
-      <Image source={require('../Views/stone.png')} />
+      <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
           <Text style={styles.headingText}>loading...</Text>
               <View style={styles.inputContainer}>
                   <TextInput 
@@ -146,7 +146,7 @@ export default class LoginScreen extends Component {
     return (
         
       <View style={styles.container}>
-        <Image source={require('../Views/stone.png')} />
+        <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
             <Text style={styles.headingText}>login</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 

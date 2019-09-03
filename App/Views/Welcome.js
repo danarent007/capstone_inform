@@ -44,7 +44,9 @@ import {
       return (
         
         <View style={styles.container}>
-          <Image source={require('../Views/stone.png')} />
+          <Image 
+          source={require('../Views/neighbourly_black.png')} 
+          style={{width: 300, height: 300}} />
               <Text style={styles.headingText}>Welcome To</Text>
               <Text style={styles.welcomeText}>Neighbourly</Text>
               <View style = {{paddingBottom:50}}>
