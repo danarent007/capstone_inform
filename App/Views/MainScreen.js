@@ -12,9 +12,7 @@ import React, { Component } from 'react';
 import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
-import { Header, Left, Right, Body, Title, Button } from 'native-base'
-import DropdownMenu from 'react-native-dropdown-menu';
-
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
@@ -28,7 +26,6 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { thisTypeAnnotation } from '@babel/types';
 
 export default class MainScreen extends Component 
 {
@@ -41,7 +38,8 @@ export default class MainScreen extends Component
       data:[],
       locations:[],
       loading_locations: false,
-      text: ''
+      text: '',
+      PickerValueHolder : ''
     };
   }
 
@@ -60,6 +58,11 @@ export default class MainScreen extends Component
       alert(error)
     }
   }
+
+
+GetSelectedPickerItem=()=>{
+  alert(this.state.PickerValueHolder);
+}
 
 
   async getLocations() 
@@ -197,6 +200,22 @@ export default class MainScreen extends Component
             </Button>
           </Right>
         </Header>
+        
+        <View>
+        <Picker
+        selectedValue={this.state.PickerValueHolder}
+ 
+        onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
+        <Picker.Item label="React Native" value="React Native" />
+        <Picker.Item label="Java" value="Java" />
+        <Picker.Item label="Html" value="Html" />
+        <Picker.Item label="Php" value="Php" />
+        <Picker.Item label="C++" value="C++" />
+        <Picker.Item label="JavaScript" value="JavaScript" />
+ 
+      </Picker>
+        </View>
+
         <View style={styles.pfeed}>
         <PostFeed 
           posts={this.state.data}

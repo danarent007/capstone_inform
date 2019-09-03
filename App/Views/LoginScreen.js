@@ -23,6 +23,9 @@ import {
   
 import AsyncStorage from '@react-native-community/async-storage';
 
+const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+
+
 export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +78,7 @@ export default class LoginScreen extends Component {
   async getLocations() 
   {
     this.setState({loading_locations:true})
-    await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+    await fetch(LOCATION_FETCH_URL, //JSon Request
       {
         method: 'POST',
         headers:
