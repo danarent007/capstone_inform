@@ -14,6 +14,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { tsEnumDeclaration } from "@babel/types"
 import LoginController from "./Controllers/LoginController";
 //import console = require("console")
+
+
 const DrawerNavigator = createDrawerNavigator(
   {
     Main: {

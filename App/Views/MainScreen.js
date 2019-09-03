@@ -17,7 +17,7 @@ import DropdownMenu from 'react-native-dropdown-menu';
 
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
- 
+const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 import {
   Image,
@@ -65,7 +65,7 @@ export default class MainScreen extends Component
   async getLocations() 
   {
     this.setState({loading_locations:true})
-    await fetch("http://dulwich.dlinkddns.com/api/userLocations", //JSon Request
+    await fetch(LOCATION_FETCH_URL, //JSon Request
       {
         method: 'POST',
         headers:
