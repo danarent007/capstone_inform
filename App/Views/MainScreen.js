@@ -164,6 +164,18 @@ GetSelectedPickerItem=()=>{
     })
   }
 
+  getItems = () =>
+  {
+    var items = [];      
+    for (i=0;i<this.state.locations.length;i++) {
+      console.log("Location to list: " + JSON.stringify(this.state.locations[i]))
+      items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
+    }
+    return items; 
+
+
+  }
+
   newPost = () =>
   {
     console.log("USER IDDDD: " + JSON.stringify(this.state.user_id))
@@ -206,12 +218,9 @@ GetSelectedPickerItem=()=>{
         selectedValue={this.state.PickerValueHolder}
  
         onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
-        <Picker.Item label="React Native" value="React Native" />
-        <Picker.Item label="Java" value="Java" />
-        <Picker.Item label="Html" value="Html" />
-        <Picker.Item label="Php" value="Php" />
-        <Picker.Item label="C++" value="C++" />
-        <Picker.Item label="JavaScript" value="JavaScript" />
+
+        <Picker.Item label="All Areas" value="All Areas" />
+        {this.getItems()}
  
       </Picker>
         </View>
