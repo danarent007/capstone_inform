@@ -15,8 +15,10 @@ import {
     ScrollView,
     View,
     Text,
-    Dimensions,
+    Dimensions
   } from 'react-native';
+  import styles from '../Styles/styles'
+
 
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
@@ -29,20 +31,21 @@ export default class ViewPost extends Component {
       id: this.props.navigation.getParam('id', 'Not Found'),
       title: this.props.navigation.getParam('title', 'Not Found'),
       body: this.props.navigation.getParam('description', 'Not Found'),
-      user_id: this.props.navigation.getParam('user', 'No User'),
+      user_id: this.props.navigation.getParam('user_id', 'No User'),
       area: this.props.navigation.getParam('area', 'No User'),
+      name: this.props.navigation.getParam('name','Not Found')
     };
-    //alert(this.state.id)
+    alert(this.state.user_id)
   }
 
   
   render() { //Render view
     console.log(this.body)
     return (
-      <View style={styles.container}>
-            <Text style={styles.headingText}>{this.state.title}</Text>
-            <Text style={styles.bodyText}>{this.state.user_id}</Text>
-            <Text style={styles.bodyText}>{this.state.area}</Text>
+      <View style={styles.view_container}>
+            <Text style={styles.view_headingText}>{this.state.title}</Text>
+            <Text style={styles.descText}>{this.state.name}</Text>
+            <Text style={styles.descText}>{this.state.area}</Text>
             <ScrollView style={styles.scroll}>
               <Text style={styles.bodyText}>{this.state.body}</Text>
             </ScrollView>
@@ -51,14 +54,8 @@ export default class ViewPost extends Component {
   }
 }
 
+/*
 const styles = StyleSheet.create({ //Styles
-    container: 
-    {
-      flex: 9,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#add8e6',
-    },
     engine: {
       position: 'absolute',
       right: 0,
@@ -74,30 +71,7 @@ const styles = StyleSheet.create({ //Styles
       color: "purple",
       textAlign: "center",
     },
-    headingText: 
-    {
-        color: 'white',
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginTop: 10,
-        opacity: 1,
-        textAlign: "center",
-        position : "relative",
-        flex: 0,
-        marginBottom: 10
-        
-    },
-    bodyText: 
-    {
-        color: 'white',
-        fontSize: 20,
-        minWidth: this.WIDTH,
-        marginTop: 0,
-        opacity: 1,
-        textAlign: "center",
-        position : "relative",
-        flex: 0, 
-    },
+
 
     lineStyle:
     {
@@ -106,25 +80,6 @@ const styles = StyleSheet.create({ //Styles
       margin:10,
     },
 
-    scroll:
-    {
-      //paddingHorizontal: 20,
-      flex: 9,
-      borderWidth: 0,
-      borderColor: 'white',
-      width: WIDTH -24,
-      paddingLeft: 10,
-      paddingRight: 10,
-      paddingTop: 30,
-      backgroundColor: '#4682b4',
-      position: "relative", 
-      shadowOffset: {width: 0, height: 2}, 
-      elevation: 5, 
-      shadowColor: '#000', 
-      shadowOpacity: 0.25, 
-      shadowRadius: 3.84          
-
-    },
 
     input: 
     {
@@ -167,3 +122,4 @@ const styles = StyleSheet.create({ //Styles
    
     
   });
+*/
