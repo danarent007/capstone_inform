@@ -98,7 +98,7 @@ export default class AreaEdit extends Component {
     };
 
 
-    async componentDidMount() {
+    async componentWillMount() {
         this.setState({ loading: 'true' });
         this.setState({ id: await this.getId() })
 

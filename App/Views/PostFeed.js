@@ -60,15 +60,12 @@ class PostFeed extends React.Component {
       </TouchableOpacity>
   )
 
-  // _keyExtractor = (item, index) => item.post_id.toString();
 
 
 
 
 
   render() { //Render view
-    
-   console.log(this.props.refreshing)
     return (
       <FlatList
         contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}

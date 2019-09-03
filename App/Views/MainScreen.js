@@ -39,15 +39,10 @@ export default class MainScreen extends Component
       locations:[],
       loading_locations: false,
       text: '',
-      PickerValueHolder : ''
+      PickerValueHolder : '-1'
     };
   }
 
-
-  display = async () => 
-  {
-    //this.props.navigation.openDrawer();
-  }
 
    async getData() 
    {
@@ -171,6 +166,7 @@ GetSelectedPickerItem=()=>{
       console.log("Location to list: " + JSON.stringify(this.state.locations[i]))
       items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
     }
+    console.log('Selected Area: ' + this.state.PickerValueHolder)
     return items; 
 
 
@@ -219,7 +215,7 @@ GetSelectedPickerItem=()=>{
  
         onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
 
-        <Picker.Item label="All Areas" value="All Areas" />
+        <Picker.Item label="All Areas" value='-1' key='-1' />
         {this.getItems()}
  
       </Picker>
@@ -228,8 +224,7 @@ GetSelectedPickerItem=()=>{
         <View style={styles.pfeed}>
         <PostFeed 
           posts={this.state.data}
-
-          refreshing={this.state.refreshing}
+          selected = {this.state.PickerValueHolder}
           />
         </View>
         <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
