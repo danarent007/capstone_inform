@@ -10,8 +10,12 @@
 
 import React, { Component} from 'react';
 
+import { Icon } from 'react-native-elements'
+
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
+
 import {
-    StyleSheet,
+    TouchableOpacity,
     ScrollView,
     View,
     Text,
@@ -25,7 +29,6 @@ const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 export default class ViewPost extends Component {
   constructor(props) {
     super(props);
-    //uc = new UserController()
     this.state = 
     {
       id: this.props.navigation.getParam('id', 'Not Found'),
@@ -35,13 +38,30 @@ export default class ViewPost extends Component {
       area: this.props.navigation.getParam('area', 'No User'),
       name: this.props.navigation.getParam('name','Not Found')
     };
-    alert(this.state.user_id)
   }
 
   
   render() { //Render view
     console.log(this.body)
     return (
+
+      <View style={{ flex: 1, width: '100%' }}>
+          <Header style={{ backgroundColor: '#4682b4' }}
+          androidStatusBarColor={'#4682b4'}>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack}>
+              <Icon type='material' name={"home"} />
+            </Button>
+          </Left>
+          <Body>
+
+          </Body>
+          <Right>
+            <Button transparent onPress={() => this.editAreas()}>
+              <Icon type='material' name={"report"} color='red' />
+            </Button>
+          </Right>
+        </Header>
       <View style={styles.view_container}>
             <Text style={styles.view_headingText}>{this.state.title}</Text>
             <Text style={styles.descText}>{this.state.name}</Text>
@@ -49,6 +69,10 @@ export default class ViewPost extends Component {
             <ScrollView style={styles.scroll}>
               <Text style={styles.bodyText}>{this.state.body}</Text>
             </ScrollView>
+            <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
+          <Icon type='material' name='edit' size={35} color="white" />
+        </TouchableOpacity>
+        </View>
         </View>
     );
   }

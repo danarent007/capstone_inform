@@ -36,10 +36,11 @@ export default class MainScreen extends Component
     this.state = {
       loading: true,
       data:[],
+      filtered_data:[],
       locations:[],
       loading_locations: false,
       text: '',
-      PickerValueHolder : '-1'
+      PickerValueHolder : ''
     };
   }
 
@@ -142,15 +143,10 @@ GetSelectedPickerItem=()=>{
       //   loading: false
       // })
       //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
-      console.log( "------------" + JSON.stringify(responseJson))
-
-      
-
       this.setState({
         data: responseJson,
         loading : false
-      })
-      
+      }) 
     }).catch((error) => {
       alert(error)
       this.setState({
@@ -158,6 +154,31 @@ GetSelectedPickerItem=()=>{
       })
     })
   }
+
+
+  filterData = () =>
+  {
+    if(this.state.PickerValueHolder == '-1' || this.state.PickerValueHolder == '')
+    {
+      this.state.filtered_data = this.state.data
+      console.log('Default data')
+    }
+    else
+    {
+      this.state.filtered_data = []
+      for(i = 0; i < this.state.data.length;i++)
+      {
+        console.log('Location ID: ' + this.state.data[i].location_name + " --- Picker Value: " + this.getLocName(this.state.PickerValueHolder))
+        if(this.state.data[i].location_name == this.getLocName(this.state.PickerValueHolder))
+        {
+          this.state.filtered_data.push(this.state.data[i])
+          console.log('Pushed: ' + this.state.data[i])
+        }
+      }
+
+    }
+  }
+
 
   getItems = () =>
   {
@@ -167,9 +188,21 @@ GetSelectedPickerItem=()=>{
       items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
     }
     console.log('Selected Area: ' + this.state.PickerValueHolder)
+
     return items; 
 
 
+  }
+
+  getLocName = (id) =>
+  {
+    for(i=0;i<this.state.locations.length;i++)
+    {
+      if(this.state.locations[i].location_id == id)
+      {
+        return(this.state.locations[i].location_name)
+      }
+    }
   }
 
   newPost = () =>
