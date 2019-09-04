@@ -19,6 +19,8 @@ import {
     Dimensions,
     TextInput,
     TouchableOpacity,
+    Animated,
+    TouchableWithoutFeedback
   } from 'react-native';
   
 import AsyncStorage from '@react-native-community/async-storage';
@@ -35,7 +37,9 @@ export default class LoginScreen extends Component {
       password: '',
       loading: false,
       userId: '',
-      locations: []
+      locations: [],
+      animation: new Animated.Value(0)
+
     };
   }
 
@@ -101,15 +105,34 @@ export default class LoginScreen extends Component {
         this.setState({loading: false})
       });
   }
-
+  startAnimation = () =>
+  {
+    Animated.timing(this.state.animation, 
+      {
+        toValue: 360,
+        duration: 1000
+      }).start();
+  }
 
 
   render() { //Render view
+    const rotateInterpolate = this.state.animation.interpolate({
+      inputRange: [0, 360],
+      outputRange: ["0deg", "180deg"]
+    })
+    const animatedStyles =
+    {
+      transform: [
+        {
+          rotate: rotateInterpolate
+        }
+      ]
+    }
     if(this.state.loading)
     {
       return(
-      <View style={styles.container}>
-      <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
+      <View style={styles.container}>     
+        <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
           <Text style={styles.headingText}>loading...</Text>
               <View style={styles.inputContainer}>
                   <TextInput 
@@ -146,7 +169,11 @@ export default class LoginScreen extends Component {
     return (
         
       <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={()=> this.startAnimation()}>
+      <Animated.View style={[animatedStyles]}>
         <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
+        </Animated.View>
+        </TouchableWithoutFeedback>
             <Text style={styles.headingText}>login</Text>
                 <View style={styles.inputContainer}>
                     <TextInput 

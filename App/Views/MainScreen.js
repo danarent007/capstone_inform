@@ -29,7 +29,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default class MainScreen extends Component 
 {
-
+  static navigationOptions = {
+    drawerIcon : ({tintColor}) => (
+      <Icon name="home" style={{fontSize: 24}} color={tintColor}/>
+    )
+  }
   constructor(props) 
   {
     super(props)
@@ -43,9 +47,11 @@ export default class MainScreen extends Component
       PickerValueHolder : '',
       user_id: ''
     };
+    
   }
+  
 
-
+  
    async getData() 
    {
     try {
