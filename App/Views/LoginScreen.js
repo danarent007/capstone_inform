@@ -74,6 +74,7 @@ export default class LoginScreen extends Component {
     else
     {
       this.props.navigation.navigate('Main')
+      //this.props.navigation.navigate('MainEvents')
     }
     //console.log('Locations : ' +  JSON.stringify(this.state.locations))
   }
