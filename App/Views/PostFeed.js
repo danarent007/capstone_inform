@@ -54,7 +54,7 @@ class PostFeed extends React.Component {
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name})}> 
         <View style={styles.listpost}>
           <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
-          <Text style={{ fontSize: 10, color: '#fff', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
+          <Text style={{ fontSize: 10, color: '#add8e6', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
           <Text style={{ fontSize: 10, color: '#fff'}}>{item.description}</Text>
         </View>
       </TouchableOpacity>
@@ -74,6 +74,7 @@ class PostFeed extends React.Component {
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
         refreshing ={this.props.refreshing}
+        
       />
     );
   }

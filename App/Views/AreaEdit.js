@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
-import { Header, Left, Right, Body, Title, Button, Icon } from 'native-base'
+import { Header, Left, Right, Body, Title, Button } from 'native-base'
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const USER_LOCATION_FETCH_URL = "http://dulwich.dlinkddns.com/api/userLocations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
@@ -121,34 +122,23 @@ export default class AreaEdit extends Component {
         if (this.state.loading === 'true') {
             return (
                 <View style={{ flex: 1 }}>
-                    <Header style={{ backgroundColor: '#4682b4' }}
-                        androidStatusBarColor={'#4682b4'}>
-                        <Left>
-                            <Button transparent onPress={() => this.props.navigation.goBack()}>
-                                <Icon name={"back-arrow"} />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>AreaSelect</Title>
-                        </Body>
-                    </Header>
-                    <Text>Loading...</Text>
+                    <Text style = {styles.headingText2}>Loading...</Text>
                 </View>
             );
         }
         return (
             <View style={{ flex: 1, backgroundColor: '#4682b4', alignContent: "center" }}>
                 <Header style={{ backgroundColor: '#4682b4' }}
-                    androidStatusBarColor={'#4682b4'}>
-                    <Left>
-                        <Button transparent onPress={() => this.props.navigation.goBack()}>
-                            <Icon name={"back-arrow"} />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>AreaEdit</Title>
-                    </Body>
-                </Header>
+          androidStatusBarColor={'#4682b4'}>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon type='material-community' name={"arrow-left"} />
+            </Button>
+          </Left>
+          <Body>
+            <Text style = {styles.headingText2}>User Posts</Text>
+          </Body>
+        </Header>
                 <View style={{ minHeight: 25 }}>
                 </View>
                 <View style={styles.selectorView}>

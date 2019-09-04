@@ -26,6 +26,7 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class MainScreen extends Component 
 {
@@ -58,7 +59,7 @@ export default class MainScreen extends Component
 
 
 GetSelectedPickerItem=()=>{
-  alert(this.state.PickerValueHolder);
+  alert('ALERTTTT' + this.state.PickerValueHolder);
 }
 
 
@@ -113,10 +114,7 @@ GetSelectedPickerItem=()=>{
   
   makeRequest =  async() =>
   {
-
     console.log('Fetch Posts')
-
-  
     // while(this.state.loading_locations)
     // {
     // }
@@ -145,7 +143,7 @@ GetSelectedPickerItem=()=>{
       // })
       //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
       this.setState({
-        data: responseJson,
+        data: this.filterData(responseJson),
         loading : false
       }) 
     }).catch((error) => {
@@ -157,24 +155,36 @@ GetSelectedPickerItem=()=>{
   }
 
 
-  filterData = () =>
+  updatePickerState = async (newState) =>
   {
+    this.setState({PickerValueHolder: newState})
+    await this.makeRequest()
+    console.log("Picker state updated")
+  }
+
+
+  filterData = (unfiltered) =>
+  {
+    console.log("FilterData")
+    output = [];
     if(this.state.PickerValueHolder == '-1' || this.state.PickerValueHolder == '')
     {
-      this.state.filtered_data = this.state.data
+      output = unfiltered
+      console.log('ALL')
     }
     else
     {
-      this.state.filtered_data = []
-      for(i = 0; i < this.state.data.length;i++)
+      output = []
+      for(i = 0; i < unfiltered.length;i++)
       {
-        if(this.state.data[i].location_name == this.getLocName(this.state.PickerValueHolder))
+        if(unfiltered[i].location_id == this.state.PickerValueHolder)
         {
-          this.state.filtered_data.push(this.state.data[i])
+          output.push(unfiltered[i])
+          console.log('HIT')
         }
       }
-
     }
+    return output;
   }
 
 
@@ -206,8 +216,11 @@ GetSelectedPickerItem=()=>{
     this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
-  editAreas = () =>
+   editAreas = () =>
   {
+
+    this.setState({PickerValueHolder: '-1'})
+
     this.props.navigation.navigate('AreaEdit', {preSelectedAreas: this.state.locations})
   }
 
@@ -216,7 +229,6 @@ GetSelectedPickerItem=()=>{
     console.log("Render")
     if(!this.state.loading)
     {
-      
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#4682b4' }}
@@ -227,11 +239,11 @@ GetSelectedPickerItem=()=>{
             </Button>
           </Left>
           <Body>
-
+            <Text style = {styles.headingText2}>User Posts</Text>
           </Body>
           <Right>
             <Button transparent onPress={() => this.editAreas()}>
-              <Icon type='material-community' name={"settings"} />
+              <Icon type='material-community' name={"map-marker-plus"} />
             </Button>
           </Right>
         </Header>
@@ -240,7 +252,7 @@ GetSelectedPickerItem=()=>{
         <Picker
         selectedValue={this.state.PickerValueHolder}
  
-        onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
+        onValueChange={(itemValue, itemIndex) => this.updatePickerState(itemValue)} >
 
         <Picker.Item label="All Areas" value='-1' key='-1' />
         {this.getItems()}
@@ -249,11 +261,15 @@ GetSelectedPickerItem=()=>{
         </View>
 
         <View style={styles.pfeed}>
+          <ScrollView>
         <PostFeed 
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
           current_user_id = {this.state.user_id}
+          removeClippedSubviews = {true}
+          columnWrapperStyle = {{color: 'red'}}
           />
+          </ScrollView>
         </View>
         <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.newPost()}>
           <Icon type='material-community' name='plus' size={35} color="white" />

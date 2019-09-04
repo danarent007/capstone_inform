@@ -23,9 +23,9 @@ import {
     Dimensions
   } from 'react-native';
   import styles from '../Styles/styles'
-
-
+import { ConfirmDialog } from 'react-native-simple-dialogs';
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
+const REPORT_URL = 'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
 
 export default class ViewPost extends Component {
   constructor(props) {
@@ -38,19 +38,48 @@ export default class ViewPost extends Component {
       user_id: this.props.navigation.getParam('user_id', 'No User'),
       current_user_id: this.props.navigation.getParam('current_user_id', 'Not Found'),
       area: this.props.navigation.getParam('area', 'No User'),
-      name: this.props.navigation.getParam('name','Not Found')
+      name: this.props.navigation.getParam('name','Not Found'),
+      dialogVisible: false
     };
   }
 
+  tryReportPost = () =>
+  {
+    this.setState({dialogVisible: true})
+  }
+
+  reportPost =  async() =>
+  {
+    this.setState({dialogVisible: false})
+    await fetch(REPORT_URL, { //JSon message
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+      user_id: this.state.current_user_id,
+      post_id: this.state.id
+     })
+   }).then((response) => response.text())
+         .then((responseJson) => {
+          }).catch((error) => {
+            console.error(error);
+         });
+         
+         alert('Post Reported!')
+         this.props.navigation.goBack()
+
+  }
   
+
   render() { //Render view
     console.log('Current user ID: ' + this.state.current_user_id)
     const edit= (this.state.current_user_id == this.state.user_id)
 
-    if(true) //if(edit)
+    if(true) //if(edit) TODO
     {
       return (
-
         <View style={{ flex: 1, width: '100%' }}>
             <Header style={{ backgroundColor: '#4682b4' }}
             androidStatusBarColor={'#4682b4'}>
@@ -63,11 +92,26 @@ export default class ViewPost extends Component {
               <Text style = {styles.view_headingText}>{this.state.area}</Text>
             </Body>
             <Right>
-              <Button transparent onPress={() => this.editAreas()}>
+              <Button transparent onPress={() => this.tryReportPost()}>
                 <Icon type='material' name={"report"} color='red' />
               </Button>
             </Right>
           </Header>
+
+          <ConfirmDialog
+    title="Report Post"
+    message="Are you sure?"
+    visible={this.state.dialogVisible}
+    onTouchOutside={() => this.setState({dialogVisible: false})}
+    positiveButton={{
+        title: "YES",
+        onPress: () => this.reportPost()
+    }}
+    negativeButton={{
+        title: "NO",
+        onPress: () => this.setState({dialogVisible: false})
+    }}
+/>
 
           <ScrollView style={styles.scroll_main}>
         <View style={styles.view_container}>
@@ -78,7 +122,7 @@ export default class ViewPost extends Component {
 
               <Image
           style={styles.image_style}
-          source={{uri: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}}
+          source={{uri: 'http://dulwich.dlinkddns.com/api2/server/public/file-lol.png'}}
           />
 
                 <Text style={styles.bodyText}>{this.state.body}</Text>
