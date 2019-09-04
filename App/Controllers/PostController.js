@@ -10,7 +10,7 @@
 
 const POST_URL = 'http://dulwich.dlinkddns.com/api/posts' //API post get url
 const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add' //API post add url
-
+const UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/upload'
 class PostController
 {
   constructor()
@@ -26,22 +26,40 @@ class PostController
     */
     //---------------------------CREATE
 
+  uploadPhoto = () => //Publish post to DB
+  {
+    alert("UPLOAD DATA: " + JSON.stringify(postData.photo))
+    fetch(UPLOAD_URL, { //JSon message
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+       'Content-Type': 'multipart/form-data',
+     },
+      body: postData.photo
+   }).then((response) => response.text())
+         .then((responseJson) => {
+           alert(responseJson)
+          }).catch((error) => {
+            console.error(error);
+         });
+}
+
 
   publishPost = () => //Publish post to DB
   {
-    console.log("USER ID: " + JSON.stringify(postData.user_id))
+    console.log("POST DATA: " + JSON.stringify(postData))
     fetch(ADD_URL, { //JSon message
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-       'Content-Type': 'application/json',
+       'Content-Type': 'multipart/form-data, application/json',
      },
-     body: JSON.stringify({
+     body: {
       title: postData.title,
       description: postData.body,
       locationid: postData.location,
-      photo_uri: postData.photo
-     })
+      photo: postData.photo
+     }
    }).then((response) => response.text())
          .then((responseJson) => {
            alert(responseJson )
@@ -49,6 +67,8 @@ class PostController
             console.error(error);
          });
 }
+
+
 
 getPosts = () => //Fetch posts from DB
 {

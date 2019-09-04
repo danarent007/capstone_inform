@@ -25,7 +25,8 @@ import {
   Picker,
   TextArea,
   Button,
-  Image
+  Image,
+  Platform
 } from 'react-native';
 
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
@@ -63,6 +64,24 @@ export default class NewPost extends Component {
   
   }
 
+  createFormData = (photo, body) => {
+    const data = new FormData();
+    data.append("file", {
+      name: photo.fileName,
+      type: photo.type,
+      uri:
+        Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+
+      
+    });
+  
+    // Object.keys(body).forEach(key => {
+    //   data.append(key, body[key]);
+    // });
+  
+    return data;
+  };
+
   handleChoosePhoto = () => {
     const options = {
       noData: true,
@@ -81,13 +100,12 @@ export default class NewPost extends Component {
         title: this.state.title,
         body: this.state.body,
         location: this.state.selectedAreas,
-        photo: this.state.photo,
-        user_id: this.state.user_id
+        user_id: this.state.user_id,
+        photo: this.createFormData(this.state.photo, { userId: this.state.user_id })
       }
-  
     pc = new PostController(postData) //Start a new post controller
-    pc.publishPost() //Publish post
-
+   // pc.publishPost() //Publish post
+    pc.uploadPhoto();
     //TODO:
     /*
     -Post field verification ie, no empty fields

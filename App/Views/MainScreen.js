@@ -30,7 +30,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default class MainScreen extends Component 
 {
-
+  static navigationOptions = {
+    drawerIcon : ({tintColor}) => (
+      <Icon name="home" style={{fontSize: 24}} color={tintColor}/>
+    )
+  }
   constructor(props) 
   {
     super(props)
@@ -44,9 +48,11 @@ export default class MainScreen extends Component
       PickerValueHolder : '',
       user_id: ''
     };
+    
   }
+  
 
-
+  
    async getData() 
    {
     try {
