@@ -87,6 +87,14 @@ export default StyleSheet.create({ //Styles
         marginTop: 10,
         opacity: 0.5,
     },
+    headingText2: 
+    {
+        color: TEXT_LIGHT,
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginTop: 0,
+        opacity: 0.5,
+    },
     welcomeText:
     {
       color: TEXT_LIGHT,
@@ -316,11 +324,11 @@ export default StyleSheet.create({ //Styles
     textAreaInput: 
     {
       width: WIDTH - 55,
-      height: 45,
+      //height: 20,
       borderRadius: 0,
       fontSize: 16,
-      paddingTop: 30,
-      paddingLeft: 45,
+      paddingTop: 10,
+      paddingLeft: 10,
       backgroundColor: BG_LIGHT,
       fontWeight: 'bold',
       color: TEXT_LIGHT,
@@ -329,13 +337,29 @@ export default StyleSheet.create({ //Styles
     },
     selectorViews:
     {
+      paddingRight: 0,
+      paddingTop: 20,
       flex:1, 
-      width: WIDTH-50,
+      width: WIDTH-55,
       height: HEIGHT-20,
-      marginLeft: 25,
-      marginTop: 10
-      
-      //justifyContent: "center"
+      //marginLeft: 25,
+      //marginTop: 10,
+      //justifyContent: "center",
+      //justifyContent: 'center',
+      //alignItems: 'center'
+    },
+    selectorViews2:
+    {
+      paddingRight: 0,
+      paddingTop: 20,
+      flex:1, 
+      width: WIDTH-55,
+      height: 100,
+      //marginLeft: 25,
+      //marginTop: 10,
+      //justifyContent: "center",
+      //justifyContent: 'center',
+      //alignItems: 'center'
     },
     scroll:
     {

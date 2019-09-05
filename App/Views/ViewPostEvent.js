@@ -5,7 +5,7 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
-** ViewPost.js
+** ViewPostEvent.js
 */
 
 import React, { Component} from 'react';
@@ -27,7 +27,7 @@ import { ConfirmDialog } from 'react-native-simple-dialogs';
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 const REPORT_URL = 'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
 
-export default class ViewPost extends Component {
+export default class ViewPostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = 
@@ -122,7 +122,7 @@ export default class ViewPost extends Component {
 
               <Image
           style={styles.image_style}
-          source={{uri: 'http://dulwich.dlinkddns.com/api2/server/public/file-lol.png'}}
+          source={{uri: 'https://fsmedia.imgix.net/7a/9e/5a/86/2bcf/435a/920d/0698fcbf9820/cat-imgurjpg.jpeg?auto=compress&h=1200&w=1200&crop=edges&fit=crop'}}
           />
 
                 <Text style={styles.bodyText}>{this.state.body}</Text>

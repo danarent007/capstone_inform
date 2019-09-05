@@ -9,12 +9,12 @@
 */
 
 import React, { Component } from 'react';
-import PostFeed from './PostFeed'
+import PostFeedEvent from './PostFeedEvent'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/events' //URL for fetching posts.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 import {
@@ -28,7 +28,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
-export default class MainScreen extends Component 
+export default class MainScreenEvent extends Component 
 {
   static navigationOptions = {
     drawerIcon : ({tintColor}) => (
@@ -105,7 +105,8 @@ GetSelectedPickerItem=()=>{
   }
 
 
-  async componentDidMount() {
+  async componentDidMount() 
+  {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       this.getLocations()
@@ -120,7 +121,7 @@ GetSelectedPickerItem=()=>{
   
   makeRequest =  async() =>
   {
-    console.log('Fetch Posts')
+    console.log('Fetch Events')
     // while(this.state.loading_locations)
     // {
     // }
@@ -219,7 +220,7 @@ GetSelectedPickerItem=()=>{
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
+    this.props.navigation.navigate('NewPostEvent', {locs: this.state.locations, user_id: this.state.user_id})
   }
 
    editAreas = () =>
@@ -245,7 +246,7 @@ GetSelectedPickerItem=()=>{
             </Button>
           </Left>
           <Body>
-            <Text style = {styles.headingText2}>User Posts</Text>
+            <Text style = {styles.headingText2}>Events</Text>
           </Body>
           <Right>
             <Button transparent onPress={() => this.editAreas()}>
@@ -268,7 +269,7 @@ GetSelectedPickerItem=()=>{
 
         <View style={styles.pfeed}>
           <ScrollView>
-        <PostFeed 
+        <PostFeedEvent 
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
           current_user_id = {this.state.user_id}

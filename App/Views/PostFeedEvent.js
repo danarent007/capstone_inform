@@ -25,7 +25,7 @@ import { underline } from 'ansi-colors';
 
 
 
-class PostFeed extends React.Component {
+class PostFeedEvent extends React.Component {
   constructor() {
     super()
     this.state =
@@ -51,7 +51,7 @@ class PostFeed extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name})}> 
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPostEvent', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name})}> 
         <View style={styles.listpost}>
           <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: '#add8e6', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
@@ -82,4 +82,4 @@ class PostFeed extends React.Component {
    
 
 }
-export default withNavigation(PostFeed);
+export default withNavigation(PostFeedEvent);
