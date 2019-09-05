@@ -222,8 +222,7 @@ export default class NewPost extends Component {
         </View>
       </View>
       
-      <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 0,
-        backgroundColor: ''}}>
+      <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 0,backgroundColor: '', paddingBottom:10}}>
         <Text style={styles.postText}>You are posting to:</Text>
       </View>
 

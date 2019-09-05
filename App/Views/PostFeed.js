@@ -14,7 +14,7 @@ import styles from '../Styles/styles'
 import { withNavigation } from 'react-navigation';
 import {
   View,
-  Dimensions
+  Image
   
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -51,11 +51,19 @@ class PostFeed extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name})}> 
-        <View style={styles.listpost}>
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
+        <View style={styles.listpost_row}>
+        <View style={{flex:8}}>
           <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
           <Text style={{ fontSize: 10, color: '#add8e6', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
-          <Text style={{ fontSize: 10, color: '#fff'}}>{item.description}</Text>
+          <Text style={{ fontSize: 10, color: '#fff',maxHeight: 75, paddingRight: 20}}>{item.description}</Text>
+        </View>
+        <View style={{flex:3,alignItems:'flex-end'}}>
+        <Image
+          style={styles.postfeed_image_style}
+          source={{uri:item.photo_uri}}
+          />
+        </View>
         </View>
       </TouchableOpacity>
   )

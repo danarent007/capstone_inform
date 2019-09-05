@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native"
-import {
-  Dimensions
-} from 'react-native';
+import {Dimensions} from 'react-native';
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
+import { Row } from "native-base";
 
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
@@ -270,6 +269,27 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
     },
+    listpost_row:
+    {
+      flexDirection: 'row',
+      height: 120, 
+      width: WIDTH - 30, 
+      paddingLeft: 5, 
+      paddingRight: 5, 
+      marginTop: 10, 
+      marginLeft: 10, 
+      marginRight: 10, 
+      backgroundColor: BG_DARK, 
+      borderColor: 'grey', 
+      borderWidth: 0, 
+      alignItems: 'center', 
+      borderRadius: 0, 
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 8, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
+    },
     btnSave: 
     {
       width: WIDTH - 150,
@@ -415,5 +435,17 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84,
       paddingBottom: 10 
+    },
+    postfeed_image_style:
+    {
+      width: 100, 
+      height: 100,
+      borderRadius: 10,
+      shadowOffset: {width: 0, height: 2}, 
+      elevation: 5, 
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84,
+      paddingRight: 10 
     }
   });

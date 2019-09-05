@@ -39,6 +39,7 @@ export default class ViewPost extends Component {
       current_user_id: this.props.navigation.getParam('current_user_id', 'Not Found'),
       area: this.props.navigation.getParam('area', 'No User'),
       name: this.props.navigation.getParam('name','Not Found'),
+      photo_uri: this.props.navigation.getParam('photo_uri','Not Found'),
       dialogVisible: false
     };
   }
@@ -122,7 +123,7 @@ export default class ViewPost extends Component {
 
               <Image
           style={styles.image_style}
-          source={{uri: 'http://dulwich.dlinkddns.com/api2/server/public/file-lol.png'}}
+          source={{uri: this.state.photo_uri}}
           />
 
                 <Text style={styles.bodyText}>{this.state.body}</Text>

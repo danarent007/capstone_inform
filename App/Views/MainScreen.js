@@ -12,10 +12,13 @@ import React, { Component } from 'react';
 import PostFeed from './PostFeed'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
+import {Dimensions} from 'react-native';
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+
+const HEIGHT = Dimensions.get('window').height
 
 import {
   Image,
@@ -118,14 +121,10 @@ GetSelectedPickerItem=()=>{
      //this.makeRequest()
    }
   
+//Fetch posts for only selected locations
   makeRequest =  async() =>
   {
     console.log('Fetch Posts')
-    // while(this.state.loading_locations)
-    // {
-    // }
-
-   // let token = this.getToken()
     await fetch(POST_FETCH_URL, {
       method: 'POST',
       headers: 
@@ -142,12 +141,7 @@ GetSelectedPickerItem=()=>{
     })
     .then(async response => await response.json())
     .then((responseJson) => {
-      // this.setState 
-      // ({
-      //   data: responseJson,
-      //   loading: false
-      // })
-      //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
+      console.log(JSON.stringify(responseJson))
       this.setState({
         data: this.filterData(responseJson),
         loading : false
@@ -168,7 +162,7 @@ GetSelectedPickerItem=()=>{
     console.log("Picker state updated")
   }
 
-
+//Filter data to match "search" query
   filterData = (unfiltered) =>
   {
     console.log("FilterData")
@@ -267,7 +261,7 @@ GetSelectedPickerItem=()=>{
         </View>
 
         <View style={styles.pfeed}>
-          <ScrollView>
+          <ScrollView style = {{maxHeight: HEIGHT - 100}}>
         <PostFeed 
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
