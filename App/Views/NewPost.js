@@ -66,19 +66,18 @@ export default class NewPost extends Component {
 
   createFormData = (photo, body) => {
     const data = new FormData();
-    data.append("file", {
-      name: photo.fileName,
-      type: photo.type,
-      uri:
-        Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
-
-      
-    });
-  
+    
+      data.append("image", {
+        name: photo.fileName,
+        type: photo.type,
+        uri:
+          Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+      });
+    
     // Object.keys(body).forEach(key => {
     //   data.append(key, body[key]);
     // });
-  
+    
     return data;
   };
 
@@ -93,25 +92,26 @@ export default class NewPost extends Component {
     })
   }
 
-  createPost = () => //Create a new post
+    createPost = () => //Create a new post
   {
-    postData =
-      {
-        title: this.state.title,
-        body: this.state.body,
-        location: this.state.selectedAreas,
-        user_id: this.state.user_id,
-        photo: this.createFormData(this.state.photo, { userId: this.state.user_id })
-      }
+    postData = this.createFormData(this.state.photo, { userId: this.state.user_id })
+    // postData.append("postData",{
+    //   title: this.state.title,
+    //   body: this.state.body,
+    //   location: this.state.selectedAreas,
+    //   user_id: this.state.user_id,
+    // });
+    postData.append("title",this.state.title);
+    postData.append("description",this.state.body);
+    postData.append("location",this.state.selectedAreas[0]);
+    postData.append("user_id",this.state.user_id);
+    
+    
+      //alert("PD: "+JSON.stringify(postData))
     pc = new PostController(postData) //Start a new post controller
-   // pc.publishPost() //Publish post
-    pc.uploadPhoto();
-    //TODO:
-    /*
-    -Post field verification ie, no empty fields
-    -Display if post has been added successfully
-    -Refresh post feed
-    */
+   //pc.publishPost() //Publish post
+     pc.uploadPhoto();
+    
 
     this.props.navigation.goBack() //Return to main screen
   }

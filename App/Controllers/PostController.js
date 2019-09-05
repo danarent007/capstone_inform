@@ -18,24 +18,18 @@ class PostController
     data = []
   }
 
- //TODO:
-    /*
-    -Post field verification ie, no empty fields
-    -Display if post has been added successfully
-    -Refresh post feed
-    */
-    //---------------------------CREATE
+
 
   uploadPhoto = () => //Publish post to DB
   {
-    alert("UPLOAD DATA: " + JSON.stringify(postData.photo))
+    alert("UPLOAD DATA: " + JSON.stringify(postData))
     fetch(UPLOAD_URL, { //JSon message
       method: 'POST',
       headers: {
         'Accept': 'application/json',
        'Content-Type': 'multipart/form-data',
      },
-      body: postData.photo
+      body: postData
    }).then((response) => response.text())
          .then((responseJson) => {
            alert(responseJson)
@@ -52,14 +46,14 @@ class PostController
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-       'Content-Type': 'multipart/form-data, application/json',
+       'Content-Type': 'application/json',
      },
-     body: {
+     body: JSON.stringify({
       title: postData.title,
       description: postData.body,
       locationid: postData.location,
-      photo: postData.photo
-     }
+      // photo: postData.photo
+     })
    }).then((response) => response.text())
          .then((responseJson) => {
            alert(responseJson )
