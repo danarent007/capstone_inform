@@ -49,7 +49,8 @@ export default class MainScreen extends Component
       loading_locations: false,
       text: '',
       PickerValueHolder : '',
-      user_id: ''
+      user_id: '',
+      refreshing: false
     };
     
   }
@@ -124,7 +125,10 @@ GetSelectedPickerItem=()=>{
 //Fetch posts for only selected locations
   makeRequest =  async() =>
   {
-    console.log('Fetch Posts')
+
+    console.log('Fetch Posts 1')
+    this.setState({refreshing: true})
+    console.log('Start refresh')
     await fetch(POST_FETCH_URL, {
       method: 'POST',
       headers: 
@@ -141,15 +145,18 @@ GetSelectedPickerItem=()=>{
     })
     .then(async response => await response.json())
     .then((responseJson) => {
-      console.log(JSON.stringify(responseJson))
+      //console.log(JSON.stringify(responseJson))
+      console.log('End refresh')
       this.setState({
         data: this.filterData(responseJson),
-        loading : false
+        loading : false,
+        refreshing: false
       }) 
     }).catch((error) => {
       alert(error)
       this.setState({
-        loading: false
+        loading: false,
+        refreshing: false
       })
     })
   }
@@ -194,7 +201,6 @@ GetSelectedPickerItem=()=>{
     for (i=0;i<this.state.locations.length;i++) {
       items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
     }
-
     return items; 
 
 
@@ -231,43 +237,42 @@ GetSelectedPickerItem=()=>{
     {
     return (
       <View style={{ flex: 1, width: '100%' }}>
-        <Header style={{ backgroundColor: '#4682b4' }}
-          androidStatusBarColor={'#4682b4'}>
+        <Header style={{ backgroundColor: '#000' }}
+          androidStatusBarColor={'#000'}>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-              <Icon type='material-community' name={"menu"} />
-            </Button>
+          <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+          <Icon type='material-community' name={"menu"} color ={'white'} />
+          </Button>
           </Left>
           <Body>
-            <Text style = {styles.headingText2}>User Posts</Text>
+          <Text style = {styles.headingText2}>POSTS</Text>
           </Body>
           <Right>
-            <Button transparent onPress={() => this.editAreas()}>
-              <Icon type='material-community' name={"map-marker-plus"} />
-            </Button>
+          <Button transparent onPress={() => this.editAreas()}>
+          <Icon type='material-community' name={"map-marker-plus"} color={'white'} />
+          </Button>
           </Right>
         </Header>
         
         <View>
-        <Picker
-        selectedValue={this.state.PickerValueHolder}
- 
-        onValueChange={(itemValue, itemIndex) => this.updatePickerState(itemValue)} >
-
-        <Picker.Item label="All Areas" value='-1' key='-1' />
-        {this.getItems()}
- 
-      </Picker>
+          <Picker
+          selectedValue={this.state.PickerValueHolder}
+          onValueChange={(itemValue, itemIndex) => this.updatePickerState(itemValue)} >
+          <Picker.Item label="All Areas" value='-1' key='-1' />
+          {this.getItems()}
+          </Picker>
         </View>
 
         <View style={styles.pfeed}>
-          <ScrollView style = {{maxHeight: HEIGHT - 100}}>
+          <ScrollView style={{maxHeight:HEIGHT - 130}}>
         <PostFeed 
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
           current_user_id = {this.state.user_id}
           removeClippedSubviews = {true}
           columnWrapperStyle = {{color: 'red'}}
+          controller = {this}
+          refreshing = {this.state.refreshing}
           />
           </ScrollView>
         </View>
@@ -282,7 +287,7 @@ GetSelectedPickerItem=()=>{
     {
       return(
         <View style={styles.container}>
-        <Image source={require('../Views/stone.png')} />
+        <Image source={require('../Views/logo_lx_on.png')} style={{height: 200,width:200}} />
             <Text style={styles.headingText}></Text>
             <Text style={styles.welcomeText}>Loading...</Text>
             <View style = {{paddingBottom:50}}>

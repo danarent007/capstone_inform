@@ -151,21 +151,10 @@ const AppNavigator = createStackNavigator(
       screen: NewPost,
       navigationOptions:
       {
-        headerTintColor: '#ffffff',
-      headerStyle: {
-        backgroundColor: '#add8e6',
-        borderBottomColor: '#add8e6',
-        borderBottomWidth: 2,
-        shadowOffset: {width: 0, height: 2}, 
-        elevation: 5, 
-        shadowColor: '#000', 
-        shadowOpacity: 0.25, 
-        shadowRadius: 3.84
-      },
-      headerTitleStyle: {
-        fontSize: 18,
-      },
+        header: null,
+        backgroundColor: '#999'
       }
+
     },
     VPost:
     {

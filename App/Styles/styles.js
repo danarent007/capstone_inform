@@ -7,9 +7,11 @@ import { Row } from "native-base";
 
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
-const BG_DARK = '#4682b4'
-const BG_LIGHT = '#add8e6'
+const BG_DARK = '#000'
+const BG_LIGHT = '#fff'
 const TEXT_LIGHT = '#ffffff'
+const TEXT_DARK = '#000'
+const FONT = 'Roboto'
 
 export default StyleSheet.create({ //Styles
     container: 
@@ -90,9 +92,15 @@ export default StyleSheet.create({ //Styles
     {
         color: TEXT_LIGHT,
         fontSize: 25,
-        fontWeight: 'bold',
         marginTop: 0,
-        opacity: 0.5,
+    },
+    headingText3: 
+    {
+        color: TEXT_LIGHT,
+        fontSize: 25,
+        marginTop: 0,
+        borderWidth: 1,
+        borderColor: 'white'
     },
     welcomeText:
     {
@@ -106,44 +114,119 @@ export default StyleSheet.create({ //Styles
     input: 
     {
       width: WIDTH - 55,
-      height: 45,
+      height: 55,
+      fontFamily: FONT,
+      textAlign: 'center',
       borderRadius: 0,
+      borderColor: BG_LIGHT,
+      borderWidth: 1,
       fontSize: 16,
-      paddingLeft: 45,
-      backgroundColor: BG_LIGHT,
-      fontWeight: 'bold',
-      color: TEXT_LIGHT,
+      paddingLeft: 10,
+      paddingRight: 10,
+      backgroundColor: BG_DARK,
+      color: BG_LIGHT,
       marginHorizontal: 25,
-      opacity: 0.6
+    },
+    inputLarge: 
+    {
+      width: WIDTH - 55,
+      height: 200,
+      fontFamily: FONT,
+      //textAlign: 'center'
+      textAlignVertical: 'top',
+      borderRadius: 0,
+      borderColor: BG_LIGHT,
+      borderWidth: 1,
+      fontSize: 16,
+      paddingLeft: 10,
+      paddingRight: 10,
+      backgroundColor: BG_DARK,
+      color: BG_LIGHT,
+      marginHorizontal: 25,
+    },
+    inputTop: 
+    {
+      width: WIDTH - 55,
+      textAlignVertical: 'top',
+      height: 55,
+      fontFamily: FONT,
+      borderRadius: 0,
+      borderColor: BG_LIGHT,
+      borderWidth: 1,
+      fontSize: 16,
+      paddingLeft: 0,
+      backgroundColor: BG_DARK,
+      color: BG_LIGHT,
+      marginHorizontal: 25,
     },
     inputContainer: 
+    {
+        marginTop: 10,
+    },
+    inputContainerLarge: 
     {
         marginTop: 10,
     },
     btnLogin: 
     {
       width: WIDTH - 150,
-      height: 45,
-      borderRadius: 0,
+      height: 55,
+      borderRadius: 50,
       fontSize: 16,
       marginTop: 25,
-      backgroundColor: BG_LIGHT,
+      backgroundColor: BG_DARK,
       color: TEXT_LIGHT,
       justifyContent: 'center',
-      shadowOffset: {width: 0, height: 2}, 
-      elevation: 5, 
-      shadowColor: '#000', 
-      shadowOpacity: 0.25, 
-      shadowRadius: 3.84
+      borderColor: BG_LIGHT,
+      borderWidth: 1,
     },
     loginText: 
     {
         color: TEXT_LIGHT,
         fontSize: 20,
+        fontFamily: FONT,
         textAlign: 'center',
-        fontWeight: 'bold',
-        opacity: 0.6
     },
+
+    btnLoginSml: 
+    {
+      width: WIDTH - 250,
+      height: 38,
+      borderRadius: 50,
+      fontSize: 16,
+      marginTop: 0,
+      backgroundColor: BG_LIGHT,
+      color: TEXT_DARK,
+      justifyContent: 'center',
+      borderColor: BG_DARK,
+      borderWidth: 1,
+    },
+    loginTextSml: 
+    {
+        color: TEXT_DARK,
+        fontSize: 20,
+        fontFamily: FONT,
+        textAlign: 'center',
+        //opacity: 0.6
+    },
+    explainText: 
+    {
+        color: TEXT_LIGHT,
+        fontSize: 20,
+        fontFamily: FONT,
+        textAlign: 'center',
+        //opacity: 0.6
+    },
+
+    explainTextDark: 
+    {
+        color: TEXT_DARK,
+        fontSize: 20,
+        fontFamily: FONT,
+        textAlign: 'center',
+        //opacity: 0.6
+    },
+
     selectorView:
     {
       flex:1, 
@@ -204,8 +287,8 @@ export default StyleSheet.create({ //Styles
     },
     creatPostFloatButton:
     {
-      borderWidth:0,
-      borderColor:'rgba(0,0,0,0.2)',
+      borderWidth:1,
+      borderColor:'#fff',
       alignItems:'center',
       justifyContent:'center',
       width:70,
@@ -244,9 +327,15 @@ export default StyleSheet.create({ //Styles
     {
       width: WIDTH,
       alignItems:'center', 
-      backgroundColor: BG_LIGHT,
+      backgroundColor: BG_DARK,
       minHeight: HEIGHT - 80,
       maxHeight: HEIGHT - 80
+    },
+    flatListContentStyle:
+    {
+      alignContent: 'center', 
+      backgroundColor: BG_DARK,
+      //maxHeight: HEIGHT-100
     },
     listpost:
     {
@@ -272,14 +361,14 @@ export default StyleSheet.create({ //Styles
     listpost_row:
     {
       flexDirection: 'row',
-      height: 120, 
+      height: 80, 
       width: WIDTH - 30, 
       paddingLeft: 5, 
       paddingRight: 5, 
       marginTop: 10, 
       marginLeft: 10, 
       marginRight: 10, 
-      backgroundColor: BG_DARK, 
+      backgroundColor: BG_LIGHT, 
       borderColor: 'grey', 
       borderWidth: 0, 
       alignItems: 'center', 
@@ -430,7 +519,6 @@ export default StyleSheet.create({ //Styles
       width: WIDTH - 18, 
       height: WIDTH - 18,
       shadowOffset: {width: 0, height: 2}, 
-      elevation: 5, 
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84,
@@ -438,14 +526,13 @@ export default StyleSheet.create({ //Styles
     },
     postfeed_image_style:
     {
-      width: 100, 
-      height: 100,
+      width: 60, 
+      height: 60,
       borderRadius: 10,
       shadowOffset: {width: 0, height: 2}, 
-      elevation: 5, 
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84,
-      paddingRight: 10 
+      paddingRight: 20 
     }
   });

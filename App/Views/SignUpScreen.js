@@ -29,7 +29,7 @@ class SignUpScreen extends Component {
     this.state = 
     {
       firstName: '',
-      lastName: '',
+      lastName: 'NULL',
       email: '',
       password: '',
     };
@@ -37,7 +37,7 @@ class SignUpScreen extends Component {
 
   doSignup() //Method run from controller. Signs user up, initiates next screen
   {
-    this.props.navigation.goBack()
+    this.props.navigation.replace('Login')
   }
 
   trySignup = () => //Launch controller and attempt to sign up.
@@ -57,55 +57,58 @@ class SignUpScreen extends Component {
     return (
       
       <View style={styles.container}>
-            <Text style={styles.headingText}>SIGN UP</Text>
-            <View style={styles.inputContainer}>
-                
+        
+            <View style={{height:50}}></View>
+            <View style={{flex:17}}>
+                <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:40}}>SIGN UP</Text>
+            </View>
+
+            <View style={{flex:13}}>
+                <Text style = {styles.explainText}>use your email for registration</Text>
+            </View>
+
+            <View style={{flex:33,justifyContent:'space-evenly'}}>
+              <View>
                 <TextInput 
                 style={styles.input}
-                placeholder={"First Name"}
+                placeholder={"NAME"}
                 placeholderTextColor={'#fff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({firstName:text})}
                 ></TextInput>
-                </View>
-
-                <View style={styles.inputContainer}>
-                <TextInput 
-                style={styles.input}
-                placeholder={"Last Name"}
-                placeholderTextColor={'#fff'}
-                underLineColorAndroid='transparent'
-                onChangeText={(text) => this.setState({lastName:text})}
-                ></TextInput>
-
-                </View>
-                <View style={styles.inputContainer}>
+              </View>
+              <View>
                     <TextInput 
                     style={styles.input}
-                    placeholder={"Email"}
+                    placeholder={"EMAIL"}
                     placeholderTextColor={'#fff'}
                     underLineColorAndroid='transparent'
                     onChangeText={(text) => this.setState({email:text})}
                     ></TextInput>
-                </View>
-            <View style={styles.inputContainer}>
-                
+              </View>
+              <View>
                 <TextInput 
                 style={styles.input}
-                placeholder={"Password"}
+                placeholder={"PASSWORD"}
                 secureTextEntry={true}
                 placeholderTextColor={'#fff'}
                 underLineColorAndroid='transparent'
                 onChangeText={(text) => this.setState({password:text})}
                 ></TextInput>
-                </View>
-                
+              </View>
+            </View>
+
+            <View style={{flex:25,justifyContent: 'space-evenly'}}>
                 <TouchableOpacity style={styles.btnLogin} onPress={this.trySignup}>
-                    <Text style={styles.loginText}>Sign Up</Text>
+                <Text style={styles.loginText}>SIGN UP</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.goBack()}>
-                    <Text style={styles.loginText}>Back</Text>
-                </TouchableOpacity>
+            </View>
+            <View style={{flex:12, backgroundColor:'white',width: WIDTH,alignItems: "center",justifyContent:'space-evenly'}}>
+              <Text style={styles.explainTextDark}>have an account?</Text>
+              <TouchableOpacity style={styles.btnLoginSml} onPress={() => this.props.navigation.replace('Login')}>
+              <Text style={styles.loginTextSml}>LOGIN</Text>
+              </TouchableOpacity>
+            </View>
         </View>
     );
   }

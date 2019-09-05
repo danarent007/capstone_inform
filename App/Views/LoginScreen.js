@@ -26,6 +26,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 
 
 export default class LoginScreen extends Component {
@@ -117,92 +118,106 @@ export default class LoginScreen extends Component {
 
 
   render() { //Render view
-    const rotateInterpolate = this.state.animation.interpolate({
-      inputRange: [0, 360],
-      outputRange: ["0deg", "180deg"]
-    })
-    const animatedStyles =
-    {
-      transform: [
-        {
-          rotate: rotateInterpolate
-        }
-      ]
-    }
+
     if(this.state.loading)
     {
       return(
-      <View style={styles.container}>     
-        <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
-          <Text style={styles.headingText}>loading...</Text>
-              <View style={styles.inputContainer}>
-                  <TextInput 
-                  style={styles.input}
-                  //placeholder={"Username"}
-                  placeholder={"Email"}
-                  placeholderTextColor={'#ffffff'}
-                  underLineColorAndroid='transparent'
-                  onChangeText={(text) => this.setState({email:text})}
-                  ></TextInput>
-              </View>
-          <View style={styles.inputContainer}>
-              <TextInput 
-              style={styles.input}
-              //placeholder={"Password"}
-              placeholder={"Password"}
-              secureTextEntry={true}
-              placeholderTextColor={'#ffffff'}
-              underLineColorAndroid='transparent'
-              onChangeText={(text) => this.setState({password:text})}
-              ></TextInput>
-              </View>
-              <TouchableOpacity style={styles.btnLogin} onPress={ this.tryLogin}>
-                  <Text style={styles.loginText}>Login</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>
-                  <Text style={styles.loginText}>Sign Up</Text>
-              </TouchableOpacity>
+      <View style={styles.container}>
+      <View style={{height:50}}></View>
+      <View style={{flex:17}}>
+          <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:40}}>LOGIN</Text>
       </View>
+
+      <View style={{flex:13}}>
+                <Text style = {styles.explainText}>use your account</Text>
+      </View>
+
+      <View style={{flex:33,justifyContent:'space-evenly'}}>
+        <View style={styles.inputContainer}>
+          <TextInput 
+          style={styles.input}
+          placeholder={"EMAIL"}
+          placeholderTextColor={'#ffffff'}
+          underLineColorAndroid='transparent'
+          onChangeText={(text) => this.setState({email:text})}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput 
+          style={styles.input}
+          placeholder={"PASSWORD"}
+          secureTextEntry={true}
+          placeholderTextColor={'#ffffff'}
+          underLineColorAndroid='transparent'
+          onChangeText={(text) => this.setState({password:text})}
+          ></TextInput>
+        </View>
+      </View>
+
+      <View style={{flex:25,justifyContent: 'space-evenly'}}>
+        <TouchableOpacity style={styles.btnLogin} onPress={this.tryLogin}>
+        <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{flex:12, backgroundColor:'white',width: WIDTH,alignItems: "center",justifyContent:'space-evenly'}}>
+        <Text style={styles.explainTextDark}>don't have an account?</Text>
+        <TouchableOpacity style={styles.btnLoginSml} onPress={() => this.props.navigation.replace('SignUp')}>
+        <Text style={styles.loginTextSml}>SIGN UP</Text>
+        </TouchableOpacity>
+      </View>
+
+        </View>
       )
     }
     else
     {
-    return (
-        
-      <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={()=> this.startAnimation()}>
-      <Animated.View style={[animatedStyles]}>
-        <Image source={require('../Views/neighbourly_black.png')} style={{width: 200, height: 200}} />
-        </Animated.View>
-        </TouchableWithoutFeedback>
-            <Text style={styles.headingText}>login</Text>
-                <View style={styles.inputContainer}>
-                    <TextInput 
-                    style={styles.input}
-                    //placeholder={"Username"}
-                    placeholder={"Email"}
-                    placeholderTextColor={'#ffffff'}
-                    underLineColorAndroid='transparent'
-                    onChangeText={(text) => this.setState({email:text})}
-                    ></TextInput>
-                </View>
-            <View style={styles.inputContainer}>
-                <TextInput 
-                style={styles.input}
-                //placeholder={"Password"}
-                placeholder={"Password"}
-                secureTextEntry={true}
-                placeholderTextColor={'#ffffff'}
-                underLineColorAndroid='transparent'
-                onChangeText={(text) => this.setState({password:text})}
-                ></TextInput>
-                </View>
-                <TouchableOpacity style={styles.btnLogin} onPress={ this.tryLogin}>
-                    <Text style={styles.loginText}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('SignUp')}>
-                    <Text style={styles.loginText}>Sign Up</Text>
-                </TouchableOpacity>
+    return ( 
+  <View style={styles.container}>
+      <View style={{height:50}}></View>
+      <View style={{flex:17}}>
+          <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:40}}>LOGIN</Text>
+      </View>
+
+      <View style={{flex:13}}>
+                <Text style = {styles.explainText}>use your account</Text>
+      </View>
+
+      <View style={{flex:33,justifyContent:'space-evenly'}}>
+        <View style={styles.inputContainer}>
+          <TextInput 
+          style={styles.input}
+          placeholder={"EMAIL"}
+          placeholderTextColor={'#ffffff'}
+          underLineColorAndroid='transparent'
+          onChangeText={(text) => this.setState({email:text})}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput 
+          style={styles.input}
+          placeholder={"PASSWORD"}
+          secureTextEntry={true}
+          placeholderTextColor={'#ffffff'}
+          underLineColorAndroid='transparent'
+          onChangeText={(text) => this.setState({password:text})}
+          ></TextInput>
+        </View>
+      </View>
+
+      <View style={{flex:25,justifyContent: 'space-evenly'}}>
+        <TouchableOpacity style={styles.btnLogin} onPress={this.tryLogin}>
+        <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{flex:12, backgroundColor:'white',width: WIDTH,alignItems: "center",justifyContent:'space-evenly'}}>
+        <Text style={styles.explainTextDark}>don't have an account?</Text>
+        <TouchableOpacity style={styles.btnLoginSml} onPress={() => this.props.navigation.replace('SignUp')}>
+        <Text style={styles.loginTextSml}>SIGN UP</Text>
+        </TouchableOpacity>
+      </View>
+
         </View>
     );
     }

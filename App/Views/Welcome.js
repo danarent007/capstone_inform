@@ -15,7 +15,10 @@ import {
     Text,
     Image,
     ActivityIndicator,
-    YellowBox
+    YellowBox,
+    Animated,
+    TouchableWithoutFeedback,
+    TouchableOpacity
   } from 'react-native';
 
 
@@ -26,33 +29,69 @@ import {
       {
         email: '',
         password: '',
-        loading: 'initial'
+        loading: 'initial',
+        animation: new Animated.Value(0)
       };
-      YellowBox.ignoreWarnings([
-        'Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'
-      ])
     }
   
+    startAnimation = () =>
+    {
+      Animated.timing(this.state.animation, 
+        {
+          toValue: 360,
+          duration: 1000
+        }).start();
+    }
     
     componentDidMount () {
-        setTimeout (() => {
-            this.props.navigation.replace('Login');
-        }, 2000);
     }
 
     render() { //Render view
+
+      const rotateInterpolate = this.state.animation.interpolate({
+        inputRange: [0, 360],
+        outputRange: ["0deg", "180deg"]
+      })
+  
+      const animatedStyles =
+      {
+        transform: [
+          {
+            rotate: rotateInterpolate
+          }
+        ]
+      }
+
       return (
-        
-        <View style={styles.container}>
-          <Image 
-          source={require('../Views/neighbourly_black.png')} 
-          style={{width: 300, height: 300}} />
-              <Text style={styles.headingText}>Welcome To</Text>
-              <Text style={styles.welcomeText}>Neighbourly</Text>
-              <View style = {{paddingBottom:50}}>
-              </View>
-              <ActivityIndicator size="large" color="#ffffff" />
-          </View>
+
+      <View style={styles.container}>
+        <View style={{height: 20}}></View>
+        <View style = {{flex:25,justifyContent: "space-between"}}>
+          <TouchableWithoutFeedback onPress={()=> this.startAnimation()}>
+          <Animated.View style={[animatedStyles]}>
+          <Image source={require('../Views/logo_lx_on.png')} style={{width: 150, height: 150}} />
+          </Animated.View>
+          </TouchableWithoutFeedback>
+        </View>
+
+        <View style = {{flex:14,alignContent: 'center'}}>
+          <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:22}}>WELCOME TO</Text>
+          <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:40}}>NEIGHBOURLY</Text>
+        </View>
+
+        <View style = {{flex:46,alignContent: 'center',justifyContent: 'space-evenly'}}>
+          <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.replace('Login')}>
+          <Text style={styles.loginText}>LOGIN</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.replace('SignUp')}>
+          <Text style={styles.loginText}>SIGN UP</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{height: 50}}></View>
+
+      </View>
           
       );
       

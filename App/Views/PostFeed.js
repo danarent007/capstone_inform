@@ -21,6 +21,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Left } from 'native-base';
 import { underline } from 'ansi-colors';
+import MainScreen from './MainScreen';
 
 
 
@@ -30,7 +31,8 @@ class PostFeed extends React.Component {
     super()
     this.state =
       {
-        posts: []
+        posts: [],
+        screen: MainScreen
       }
   }
 
@@ -54,9 +56,14 @@ class PostFeed extends React.Component {
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
         <View style={styles.listpost_row}>
         <View style={{flex:8}}>
-          <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
-          <Text style={{ fontSize: 10, color: '#add8e6', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
-          <Text style={{ fontSize: 10, color: '#fff',maxHeight: 75, paddingRight: 20}}>{item.description}</Text>
+          <Text 
+          style={{ fontSize: 25, color: '#000', textAlign: 'center'}}
+          numberOfLines={1}>{item.title.toUpperCase()}</Text>
+          <Text 
+          style={{ fontSize: 15, color: '#000', fontWeight: "bold",textAlign: 'center', fontStyle: "italic"}}>{item.location_name}</Text>
+          <Text 
+          style={{ fontSize: 10, color: '#000', fontWeight: "bold", fontStyle: "italic",textAlign: 'center'}}
+          numberOfLines={1}>{item.date_posted}</Text>
         </View>
         <View style={{flex:3,alignItems:'flex-end'}}>
         <Image
@@ -68,15 +75,10 @@ class PostFeed extends React.Component {
       </TouchableOpacity>
   )
 
-
-
-
-
-
   render() { //Render view
     return (
       <FlatList
-        contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
+        contentContainerStyle={styles.flatListContentStyle}
         data={this.props.posts}
         extraData={this.state}
         keyExtractor={this._keyExtractor}
