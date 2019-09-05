@@ -6,6 +6,8 @@ import LoginScreen from './Views/LoginScreen'
 import SignUpScreen from './Views/SignUpScreen'
 import MainScreen from './Views/MainScreen'
 import NewPost from './Views/NewPost'
+import MainScreenEvent from './Views/MainScreenEvent'
+import ViewPostEvent from './Views/ViewPostEvent'
 import Welcome from './Views/Welcome'
 import ViewPost from './Views/ViewPost'
 import AreaSelect from './Views/AreaSelect'
@@ -23,13 +25,13 @@ const drawerComponent = (props) => (
         <Image style={{height:120, width:120, borderRadius: 60}} source={require('./Views/neighbourly_black.png')}/>
       </View>
         <DrawerItems {...props} />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>alert("POSTS")}>
           <Text style={{margin: 16,fontWeight: 'bold',color: 'black'}}>Posts</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>alert("EVENTS")}>
           <Text style={{margin: 16,fontWeight: 'bold',color: 'black'}}>Events</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{backgroundColor: 'red'}} onPress={()=>
+        <TouchableOpacity style={{backgroundColor: 'blue'}} onPress={()=>
           Alert.alert(
             'Log out',
             'Do you want to logout?',
@@ -62,6 +64,33 @@ const DrawerNavigator = createDrawerNavigator(
     {
       activeTintColor : '#4682b4'
     }
+  },
+  {
+    MainEvents: {
+      screen: MainScreenEvent
+    },
+  },
+  {
+    contentComponent: drawerComponent,
+    contentOptions: 
+    {
+      activeTintColor : '#4682b4'
+    }
+  }
+);
+
+const DrawerNavigator2 = createDrawerNavigator(
+  {
+    MainEvents: {
+      screen: MainScreenEvent
+    },
+  },
+  {
+    contentComponent: drawerComponent,
+    contentOptions: 
+    {
+      activeTintColor : '#4682b4'
+    }
   }
 );
 
@@ -86,6 +115,14 @@ const AppNavigator = createStackNavigator(
     Main: 
     {
       screen: DrawerNavigator,
+      navigationOptions: 
+      {
+        header: null,
+      }
+    },
+    MainEvents: 
+    {
+      screen: DrawerNavigator2,
       navigationOptions: 
       {
         header: null,
@@ -133,6 +170,15 @@ const AppNavigator = createStackNavigator(
     VPost:
     {
       screen: ViewPost,
+      navigationOptions: 
+      {
+          backgroundColor: '#4682b4',
+          header: null,
+      }
+    },
+    VPostEvent:
+    {
+      screen: ViewPostEvent,
       navigationOptions: 
       {
           backgroundColor: '#4682b4',

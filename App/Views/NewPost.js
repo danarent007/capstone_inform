@@ -11,9 +11,11 @@
 import React, { Component } from 'react';
 import PostController from '../Controllers/PostController'
 import styles from '../Styles/styles'
-import AsyncStorage from '@react-native-community/async-storage';
+import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import ImagePicker from 'react-native-image-picker'
+import { ScrollView } from 'react-native-gesture-handler';
+
 
 import {
   StyleSheet,
@@ -44,12 +46,11 @@ export default class NewPost extends Component {
         user_id: this.props.navigation.getParam('user_id','Not Found'),
         selectedAreas: [],
         loading: 'initial',
-        photo: null
-
+        photo: null,
+        event: false
       };
-      
-
   }
+
   async setMyState(myState)
   {
     this.state.loading = await 'true'
@@ -57,6 +58,7 @@ export default class NewPost extends Component {
     this.state.loading = await 'false'
     //alert("New function "+this.state.data)
   }
+
   async componentDidMount() {
    // let a = await AsyncStorage.getItem('userLocations');
     //alert(JSON.stringify(a))
@@ -95,6 +97,7 @@ export default class NewPost extends Component {
 
   createPost = () => //Create a new post
   {
+    console.log('Creating Post')
     postData =
       {
         title: this.state.title,
@@ -124,7 +127,8 @@ export default class NewPost extends Component {
     const { selectedAreas } = this.state;
     const { photo } = this.state
 
-  if (this.state.loading === 'true') {
+  if (this.state.loading === 'true') 
+  {
 
       return (
           <View style={{flex:1}}>
@@ -136,31 +140,45 @@ export default class NewPost extends Component {
     
     return (
       <View style={styles.container}>
+
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.createPost()}>
+        <Icon type='material' name='done' size={35} color="white" />
+        </TouchableOpacity>
+
+      <View style={{flex:1, backgroundColor:''}}>
         <Text style={styles.headingText}>NEW POST</Text>
-        <View style={styles.inputContainer}>
+      </View>
+
+      <View style={{flex:5, backgroundColor: ''}}>
+          <View style={{flex:1}}>
           <TextInput
             style={styles.textAreaInput}
             multiline={true}
+            numberOfLines={2}
             placeholder={"Title"}
-            height={80}
+            //height={40}
+            
             placeholderTextColor={'#ffffff'}
             underLineColorAndroid='transparent'
             onChangeText={(text) => this.setState({ title: text })}
           ></TextInput>
-        </View>
+          </View>
 
-        <View style={styles.inputContainer}>
+          <View style={{flex:3, paddingTop: 10}}>
           <TextInput
             style={styles.textAreaInput}
             placeholder={"Body"}
             multiline={true}
-            height={120}
+            numberOfLines={10}
+            //height={120}
             placeholderTextColor={'#ffffff'}
             underLineColorAndroid='transparent'
             onChangeText={(text) => this.setState({ body: text })}
           ></TextInput>
-        </View>
-        <View style={styles.selectorViews}>
+          </View>
+      </View>
+
+      <View style={{width: WIDTH-55,flex:1,backgroundColor: ''}}>
         <MultiSelect
           hideTags
           items={this.state.locations}
@@ -184,30 +202,37 @@ export default class NewPost extends Component {
           submitButtonColor="#CCC"
           submitButtonText="Done"
         />
-        </View>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      </View>
+
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '',flexDirection: "row"}}>
         
+        <View style = {{paddingRight: 0}}>
         <TouchableOpacity onPress={this.handleChoosePhoto}>
           <Text style={{fontSize:20, backgroundColor: '#add8e6'}}>Choose Photo</Text>
         </TouchableOpacity>
+        </View>
+        <View>
         {photo && (
           <Image
             source={{ uri: photo.uri }}
-            style={{ width: 150, height: 150 }}
+            style={{ width: 80, height: 80, paddingLeft:10 }}
           />
         )}
-      </View>
-        <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 2,
-        borderBottomColor: 'black',
-        borderBottomWidth: 1}}>
-        <Text style={styles.postText}>You are posting to:</Text>
+
         </View>
+      </View>
+      
+      <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 0,
+        backgroundColor: ''}}>
+        <Text style={styles.postText}>You are posting to:</Text>
+      </View>
+
+      <View style={{flex: 1,backgroundColor:''}}>
         <View style={{flex:0.2, justifyContent: 'center'}}>
           {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
         </View>
-        <TouchableOpacity style={styles.btnLogin} onPress={this.createPost}>
-          <Text style={styles.loginText}>Publish Post</Text>
-        </TouchableOpacity>
+      </View>
+      
       </View>
     );
   }
