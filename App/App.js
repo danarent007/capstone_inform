@@ -25,10 +25,10 @@ const drawerComponent = (props) => (
         <Image style={{height:120, width:120, borderRadius: 60}} source={require('./Views/neighbourly_black.png')}/>
       </View>
         <DrawerItems {...props} />
-        <TouchableOpacity onPress={()=>alert("POSTS")}>
+        <TouchableOpacity onPress={()=>props.navigation.navigate('Main')}>
           <Text style={{margin: 16,fontWeight: 'bold',color: 'black'}}>Posts</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>alert("EVENTS")}>
+        <TouchableOpacity onPress={()=>props.navigation.navigate('MainEvents')}>
           <Text style={{margin: 16,fontWeight: 'bold',color: 'black'}}>Events</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{backgroundColor: 'blue'}} onPress={()=>
@@ -64,19 +64,8 @@ const DrawerNavigator = createDrawerNavigator(
     {
       activeTintColor : '#4682b4'
     }
-  },
-  {
-    MainEvents: {
-      screen: MainScreenEvent
-    },
-  },
-  {
-    contentComponent: drawerComponent,
-    contentOptions: 
-    {
-      activeTintColor : '#4682b4'
-    }
   }
+
 );
 
 const DrawerNavigator2 = createDrawerNavigator(
@@ -92,6 +81,7 @@ const DrawerNavigator2 = createDrawerNavigator(
       activeTintColor : '#4682b4'
     }
   }
+
 );
 
 const AppNavigator = createStackNavigator(
@@ -201,10 +191,6 @@ const AppNavigator = createStackNavigator(
 });
 
 
-
-
-
-//new LoginController();
 export default createAppContainer(AppNavigator);
 
 
