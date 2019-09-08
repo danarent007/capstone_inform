@@ -5,17 +5,20 @@
 ** Sheldon Reay (RXYSHE002)
 ** Sabir Buxsoo (BXSMUH001)
 ** Daniel Vorster (VRSDAN004)
-** MainScreen.js
+** MainScreenEvent.js
 */
 
 import React, { Component } from 'react';
 import PostFeedEvent from './PostFeedEvent'
 import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
+import {Dimensions} from 'react-native';
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/events' //URL for fetching posts.
+const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+
+const HEIGHT = Dimensions.get('window').height
 
 import {
   Image,
@@ -46,7 +49,8 @@ export default class MainScreenEvent extends Component
       loading_locations: false,
       text: '',
       PickerValueHolder : '',
-      user_id: ''
+      user_id: '',
+      refreshing: false
     };
     
   }
@@ -105,8 +109,7 @@ GetSelectedPickerItem=()=>{
   }
 
 
-  async componentDidMount() 
-  {
+  async componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       this.getLocations()
@@ -119,14 +122,13 @@ GetSelectedPickerItem=()=>{
      //this.makeRequest()
    }
   
+//Fetch posts for only selected locations
   makeRequest =  async() =>
   {
-    console.log('Fetch Events')
-    // while(this.state.loading_locations)
-    // {
-    // }
 
-   // let token = this.getToken()
+    console.log('Fetch Posts 1')
+    this.setState({refreshing: true})
+    console.log('Start refresh')
     await fetch(POST_FETCH_URL, {
       method: 'POST',
       headers: 
@@ -143,20 +145,18 @@ GetSelectedPickerItem=()=>{
     })
     .then(async response => await response.json())
     .then((responseJson) => {
-      // this.setState 
-      // ({
-      //   data: responseJson,
-      //   loading: false
-      // })
-      //alert("HUUUUGE DUB: \n"+JSON.stringify(responseJson))
+      //console.log(JSON.stringify(responseJson))
+      console.log('End refresh')
       this.setState({
         data: this.filterData(responseJson),
-        loading : false
+        loading : false,
+        refreshing: false
       }) 
     }).catch((error) => {
       alert(error)
       this.setState({
-        loading: false
+        loading: false,
+        refreshing: false
       })
     })
   }
@@ -169,7 +169,7 @@ GetSelectedPickerItem=()=>{
     console.log("Picker state updated")
   }
 
-
+//Filter data to match "search" query
   filterData = (unfiltered) =>
   {
     console.log("FilterData")
@@ -201,7 +201,6 @@ GetSelectedPickerItem=()=>{
     for (i=0;i<this.state.locations.length;i++) {
       items.push(<Picker.Item key ={this.state.locations[i].location_id} value={this.state.locations[i].location_id} label={this.state.locations[i].location_name} />);
     }
-
     return items; 
 
 
@@ -220,7 +219,7 @@ GetSelectedPickerItem=()=>{
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPostEvent', {locs: this.state.locations, user_id: this.state.user_id})
+    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id, mode: 'events'})
   }
 
    editAreas = () =>
@@ -238,43 +237,42 @@ GetSelectedPickerItem=()=>{
     {
     return (
       <View style={{ flex: 1, width: '100%' }}>
-        <Header style={{ backgroundColor: '#4682b4' }}
-          androidStatusBarColor={'#4682b4'}>
+        <Header style={{ backgroundColor: '#000' }}
+          androidStatusBarColor={'#000'}>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-              <Icon type='material-community' name={"menu"} />
-            </Button>
+          <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+          <Icon type='material-community' name={"menu"} color ={'white'} />
+          </Button>
           </Left>
           <Body>
-            <Text style = {styles.headingText2}>Events</Text>
+          <Text style = {styles.headingText2}>EVENTS</Text>
           </Body>
           <Right>
-            <Button transparent onPress={() => this.editAreas()}>
-              <Icon type='material-community' name={"map-marker-plus"} />
-            </Button>
+          <Button transparent onPress={() => this.editAreas()}>
+          <Icon type='material-community' name={"map-marker-plus"} color={'white'} />
+          </Button>
           </Right>
         </Header>
         
         <View>
-        <Picker
-        selectedValue={this.state.PickerValueHolder}
- 
-        onValueChange={(itemValue, itemIndex) => this.updatePickerState(itemValue)} >
-
-        <Picker.Item label="All Areas" value='-1' key='-1' />
-        {this.getItems()}
- 
-      </Picker>
+          <Picker
+          selectedValue={this.state.PickerValueHolder}
+          onValueChange={(itemValue, itemIndex) => this.updatePickerState(itemValue)} >
+          <Picker.Item label="All Areas" value='-1' key='-1' />
+          {this.getItems()}
+          </Picker>
         </View>
 
         <View style={styles.pfeed}>
-          <ScrollView>
-        <PostFeedEvent 
+          <ScrollView style={{maxHeight:HEIGHT - 130}}>
+        <PostFeedEvent
           posts={this.state.data}
           selected = {this.state.PickerValueHolder}
           current_user_id = {this.state.user_id}
           removeClippedSubviews = {true}
           columnWrapperStyle = {{color: 'red'}}
+          controller = {this}
+          refreshing = {this.state.refreshing}
           />
           </ScrollView>
         </View>
@@ -289,7 +287,7 @@ GetSelectedPickerItem=()=>{
     {
       return(
         <View style={styles.container}>
-        <Image source={require('../Views/stone.png')} />
+        <Image source={require('../Views/logo_lx_on.png')} style={{height: 200,width:200}} />
             <Text style={styles.headingText}></Text>
             <Text style={styles.welcomeText}>Loading...</Text>
             <View style = {{paddingBottom:50}}>

@@ -219,7 +219,7 @@ GetSelectedPickerItem=()=>{
 
   newPost = () =>
   {
-    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id})
+    this.props.navigation.navigate('NewPost', {locs: this.state.locations, user_id: this.state.user_id, mode: 'news'})
   }
 
    editAreas = () =>

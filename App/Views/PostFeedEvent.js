@@ -14,13 +14,14 @@ import styles from '../Styles/styles'
 import { withNavigation } from 'react-navigation';
 import {
   View,
-  Dimensions
+  Image
   
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Left } from 'native-base';
 import { underline } from 'ansi-colors';
+import MainScreen from './MainScreen';
 
 
 
@@ -30,7 +31,8 @@ class PostFeedEvent extends React.Component {
     super()
     this.state =
       {
-        posts: []
+        posts: [],
+        screen: MainScreen
       }
   }
 
@@ -51,24 +53,33 @@ class PostFeedEvent extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPostEvent', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name})}> 
-        <View style={styles.listpost}>
-          <Text style={{ fontSize: 19, color: '#fff', fontWeight: "bold"}}>{item.title}</Text>
-          <Text style={{ fontSize: 10, color: '#add8e6', fontWeight: "bold", fontStyle: "italic"}}>{item.location_name}</Text>
-          <Text style={{ fontSize: 10, color: '#fff'}}>{item.description}</Text>
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
+        <View style={styles.listpost_row}>
+        <View style={{flex:3,alignItems: 'center'}}>
+        <Image
+          style={styles.postfeed_image_style}
+          source={{uri:item.photo_uri}}
+          />
+        </View>
+        <View style={{flex:11,alignItems: "flex-start"}}>
+          <Text 
+          style={{ fontSize: 25, color: '#000', textAlign: 'center'}}
+          numberOfLines={1}>{item.title.toUpperCase()}</Text>
+          <Text 
+          style={{ fontSize: 15, color: '#000', fontWeight: "bold",textAlign: 'center', fontStyle: "italic"}}>{item.location_name}</Text>
+          <Text 
+          style={{ fontSize: 10, color: '#000', fontWeight: "bold", fontStyle: "italic",textAlign: 'center'}}
+          numberOfLines={1}>{item.date_posted}</Text>
+        </View>
+        
         </View>
       </TouchableOpacity>
   )
 
-
-
-
-
-
   render() { //Render view
     return (
       <FlatList
-        contentContainerStyle={{ alignContent: 'center', backgroundColor: '#add8e6' }}
+        contentContainerStyle={styles.flatListContentStyle}
         data={this.props.posts}
         extraData={this.state}
         keyExtractor={this._keyExtractor}

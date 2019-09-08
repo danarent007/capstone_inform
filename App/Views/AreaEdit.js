@@ -10,7 +10,7 @@ const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const USER_LOCATION_FETCH_URL = "http://dulwich.dlinkddns.com/api/userLocations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
 const WIDTH = Dimensions.get('window').width
-
+const HEIGHT = Dimensions.get('window').height
 
 export default class AreaEdit extends Component {
 
@@ -141,12 +141,12 @@ export default class AreaEdit extends Component {
             </Button>
             </Left>
             <Body>
-            <Text style = {styles.headerText}>User Posts</Text>
+            <Text style = {styles.headerText}>Edit Areas</Text>
             </Body>
             </Header>
         <View style={{ minHeight: 25 }}>
         </View>
-        <View style={{width:WIDTH,zIndex:500}}>
+        <View style={{width:WIDTH,zIndex:500,flex:4}}>
             <MultiSelect
                         items={this.state.locations}
                         uniqueKey={"location_id"}
@@ -176,7 +176,7 @@ export default class AreaEdit extends Component {
                         
                     />
         </View>
-                <View style={{alignItems: "center",flexDirection:bott}}>
+                <View style={{alignItems: "center",justifyContent: 'flex-end',flex:1}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={() => this.saveAreas()}>
                         <Text style={styles.loginText}>Save Areas</Text>
                     </TouchableOpacity>

@@ -96,12 +96,12 @@ export default class ViewPost extends Component {
      })
    }).then((response) => response.text())
          .then((responseJson) => {
-           alert(JSON.stringify(responseJson))
+           //alert(JSON.stringify(responseJson))
           }).catch((error) => {
             console.error(error);
          });
          
-         //alert('Post Deleted!')
+         alert('Post Deleted.')
          this.props.navigation.goBack()
 
   }
@@ -111,19 +111,19 @@ export default class ViewPost extends Component {
     console.log('Current user ID: ' + this.state.current_user_id)
     const edit= (this.state.current_user_id == this.state.user_id)
 
-    if(edit) //if(edit) TODO
+    if(true) //if(edit) TODO
     {
       return (
         <View style={{ flex: 1, width: '100%' }}>
-            <Header style={{ backgroundColor: '#4682b4' }}
+            <Header style={{ backgroundColor: '#000',borderBottomWidth:1, borderBottomColor:'white'}}
             androidStatusBarColor={'#4682b4'}>
             <Left>
-              <Button transparent onPress={() => this.props.navigation.goBack}>
-                <Icon type='material' name={"home"} />
-              </Button>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon type='material' name={"home"} color='white' />
+            </Button>
             </Left>
             <Body>
-              <Text style = {styles.view_headingText}>{this.state.area}</Text>
+            <Text style = {styles.headingText2}>{this.state.area}</Text>
             </Body>
             <Right>
               <Button transparent onPress={() => this.tryReportPost()}>
@@ -133,54 +133,54 @@ export default class ViewPost extends Component {
           </Header>
 
           <ConfirmDialog
-    title="Report Post"
-    message="Are you sure?"
-    visible={this.state.dialogVisible}
-    onTouchOutside={() => this.setState({dialogVisible: false})}
-    positiveButton={{
-        title: "YES",
-        onPress: () => this.reportPost()
-    }}
-    negativeButton={{
-        title: "NO",
-        onPress: () => this.setState({dialogVisible: false})
-    }}
-/>
-<ConfirmDialog
-  title="Delete Post"
-  message="Are you sure?"
-  visible={this.state.delDialogVisible}
-  onTouchOutside={() => this.setState({delDialogVisible: false})}
-  positiveButton={{
-      title: "YES",
-      onPress: () => this.deletePost()
-  }}
-  negativeButton={{
-      title: "NO",
-      onPress: () => this.setState({delDialogVisible: false})
-  }}
-/>
+          title="Report Post"
+          message="Are you sure?"
+          visible={this.state.dialogVisible}
+          onTouchOutside={() => this.setState({dialogVisible: false})}
+          positiveButton={{
+          title: "YES",
+          onPress: () => this.reportPost()
+          }}
+          negativeButton={{
+          title: "NO",
+          onPress: () => this.setState({dialogVisible: false})
+          }}
+          />
+          <ConfirmDialog
+          title="Delete Post"
+          message="Are you sure?"
+          visible={this.state.delDialogVisible}
+          onTouchOutside={() => this.setState({delDialogVisible: false})}
+          positiveButton={{
+          title: "YES",
+          onPress: () => this.deletePost()
+          }}
+          negativeButton={{
+          title: "NO",
+          onPress: () => this.setState({delDialogVisible: false})
+          }}
+          />
 
           <ScrollView style={styles.scroll_main}>
-        <View style={styles.view_container}>
-              <Text style={styles.view_headingText_dark}>{this.state.title}</Text>
-              <Text style={styles.descText}>{this.state.name}</Text>
-              
-
+          <View style={styles.view_container}>
               <ScrollView style={styles.scroll}>
-
               <Image
           style={styles.image_style}
           source={{uri: this.state.photo_uri}}
           />
+          <Text style={styles.headingText2_dark}>{this.state.title}</Text>
+          <Text style={styles.descText_dark}>{this.state.name}</Text>
+
 
                 <Text style={styles.bodyText}>{this.state.body}</Text>
               </ScrollView>
-              <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeletePost()}>
-            <Icon type='material' name='delete' size={35} color="white" />
-          </TouchableOpacity>
+              
+          
           </View>
           </ScrollView>
+          <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeletePost()}>
+            <Icon type='material' name='delete' size={35} color="white"/>
+          </TouchableOpacity>
           </View>
       );
     }

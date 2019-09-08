@@ -33,7 +33,8 @@ export default StyleSheet.create({ //Styles
       flex: 9,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#add8e6',
+      backgroundColor: BG_DARK,
+      height: HEIGHT-100
     },
     view_headingText: 
     {
@@ -49,6 +50,19 @@ export default StyleSheet.create({ //Styles
         
     },
     view_headingText_dark: 
+    {
+        color: BG_DARK,
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 10,
+        opacity: 1,
+        textAlign: "center",
+        position : "relative",
+        flex: 0,
+        marginBottom: 10
+        
+    },
+    view_headingText_light: 
     {
         color: BG_DARK,
         fontSize: 30,
@@ -100,6 +114,14 @@ export default StyleSheet.create({ //Styles
         color: TEXT_LIGHT,
         fontSize: 25,
         marginTop: 0,
+    },
+    headingText2_dark: 
+    {
+        color: TEXT_DARK,
+        fontSize: 25,
+        marginTop: 0,
+        textAlign: "center",
+        position : "relative",
     },
     headingText3: 
     {
@@ -168,11 +190,11 @@ export default StyleSheet.create({ //Styles
     },
     inputContainer: 
     {
-        marginTop: 10,
+        marginTop: 0,
     },
     inputContainerLarge: 
     {
-        marginTop: 10,
+        marginTop: 20,
     },
     btnLogin: 
     {
@@ -317,8 +339,8 @@ export default StyleSheet.create({ //Styles
     },
     creatPostFloatButtonLight:
     {
-      borderWidth:0,
-      borderColor:'rgba(0,0,0,0.2)',
+      borderWidth:1,
+      borderColor:BG_LIGHT,
       alignItems:'center',
       justifyContent:'center',
       width:70,
@@ -326,7 +348,7 @@ export default StyleSheet.create({ //Styles
       bottom: 10,                                                    
       right: 10,
       height:70,
-      backgroundColor:BG_LIGHT,
+      backgroundColor:BG_DARK,
       borderRadius:100,
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -408,10 +430,10 @@ export default StyleSheet.create({ //Styles
     },
     bodyText: 
     {
-        color: 'white',
+        color: TEXT_DARK,
         fontSize: 20,
         minWidth: this.WIDTH,
-        marginTop: 0,
+        marginTop: 10,
         opacity: 1,
         textAlign: "left",
         position : "relative",
@@ -419,13 +441,26 @@ export default StyleSheet.create({ //Styles
     },
     descText: 
     {
-        color: BG_DARK,
+        color: BG_LIGHT,
         fontSize: 20,
         minWidth: this.WIDTH,
         marginTop: 0,
         marginBottom: 10,
         opacity: 1,
         textAlign: "left",
+        position : "relative",
+        flex: 0,
+        textDecorationLine: "underline",
+    },
+    descText_dark: 
+    {
+        color: BG_DARK,
+        fontSize: 20,
+        minWidth: this.WIDTH,
+        marginTop: 0,
+        marginBottom: 10,
+        opacity: 1,
+        textAlign: "center",
         position : "relative",
         flex: 0,
         textDecorationLine: "underline",
@@ -486,7 +521,7 @@ export default StyleSheet.create({ //Styles
     {
       //paddingHorizontal: 20,
       flex: 9,
-      borderWidth: 0,
+      borderWidth: 1,
       //contentInset: {top: '10', bottom: '30'},
       borderColor: 'white',
       width: WIDTH -28,
@@ -495,7 +530,7 @@ export default StyleSheet.create({ //Styles
       paddingRight: 10,
       paddingTop: 10,
       paddingBottom: 20,
-      backgroundColor: '#4682b4',
+      backgroundColor: '#fff',
       position: "relative", 
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
@@ -517,7 +552,7 @@ export default StyleSheet.create({ //Styles
       paddingRight: 10,
       paddingTop: 10,
       paddingBottom: 20,
-      backgroundColor: '#4682b4',
+      backgroundColor: BG_DARK,
       position: "relative", 
       shadowOffset: {width: 0, height: 2}, 
       elevation: 5, 
