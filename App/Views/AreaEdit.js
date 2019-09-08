@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
+
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const USER_LOCATION_FETCH_URL = "http://dulwich.dlinkddns.com/api/userLocations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
+const WIDTH = Dimensions.get('window').width
+
+
 export default class AreaEdit extends Component {
+
 
     constructor(props) {
         super(props)
@@ -127,34 +132,36 @@ export default class AreaEdit extends Component {
             );
         }
         return (
-            <View style={{ flex: 1, backgroundColor: '#4682b4', alignContent: "center" }}>
-                <Header style={{ backgroundColor: '#4682b4' }}
-          androidStatusBarColor={'#4682b4'}>
-          <Left>
+    <View style={{ flex: 1, backgroundColor: '#000', alignContent: "center" }}>
+            <Header style={{ backgroundColor: '#000' }}
+            androidStatusBarColor={'#000'}>
+            <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon type='material-community' name={"arrow-left"} />
+            <Icon type='material-community' name={"arrow-left"} color='white' />
             </Button>
-          </Left>
-          <Body>
-            <Text style = {styles.headingText2}>User Posts</Text>
-          </Body>
-        </Header>
-                <View style={{ minHeight: 25 }}>
-                </View>
-                <View style={styles.selectorView}>
-                    <MultiSelect
+            </Left>
+            <Body>
+            <Text style = {styles.headerText}>User Posts</Text>
+            </Body>
+            </Header>
+        <View style={{ minHeight: 25 }}>
+        </View>
+        <View style={{width:WIDTH,zIndex:500}}>
+            <MultiSelect
                         items={this.state.locations}
                         uniqueKey={"location_id"}
                         ref={(component) => { this.multiSelect = component }}
                         onSelectedItemsChange={this.onSelectedItemsChange}
                         selectedItems={this.state.selectedAreas}
                         fixedHeight={true}
-                        selectText="Select Areas"
+                        //style = {{fixedHeight:20}}
+                        minHeight={10}
+                        selectText="Select Are as"
                         searchInputPlaceholderText="Search Areas..."
                         onChangeInput={(text) => console.log(text)}
-                        tagRemoveIconColor="#D82121"
-                        tagBorderColor="#000000"
-                        tagTextColor="#000000"
+                        tagRemoveIconColor="#ffff"
+                        tagBorderColor="#ffff"
+                        tagTextColor="#ffff"
                         selectedItemTextColor="#000000"
                         selectedItemIconColor="#000000"
                         itemTextColor="#000000"
@@ -162,14 +169,18 @@ export default class AreaEdit extends Component {
                         searchInputStyle={{ color: '#CCC' }}
                         submitButtonColor="#CCC"
                         submitButtonText="Done"
-
+                        hideDropdown={true}
+                        fontFamily="Roboto"
+                        altFontFamily="Roboto"
+                        selectedItemFontFamily="Roboto"
+                        
                     />
-                </View>
-                {<View style={{ marginTop: 100, flex: 0.3, bottom: 0, justifyContent: 'center', alignItems: 'center', }}>
+        </View>
+                <View style={{alignItems: "center",flexDirection:bott}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={() => this.saveAreas()}>
                         <Text style={styles.loginText}>Save Areas</Text>
                     </TouchableOpacity>
-                </View>}
+                </View>
             </View>
 
         );

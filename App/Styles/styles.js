@@ -21,6 +21,13 @@ export default StyleSheet.create({ //Styles
         alignItems: 'center',
         backgroundColor: BG_DARK,
     },
+    headerText:
+    {
+      color: 'white',
+      textAlign: 'center',
+      fontFamily: 'Roboto',
+      fontSize:30
+    },
     view_container: 
     {
       flex: 9,
@@ -130,7 +137,7 @@ export default StyleSheet.create({ //Styles
     inputLarge: 
     {
       width: WIDTH - 55,
-      height: 200,
+      //height: 200,
       fontFamily: FONT,
       //textAlign: 'center'
       textAlignVertical: 'top',
@@ -229,10 +236,13 @@ export default StyleSheet.create({ //Styles
 
     selectorView:
     {
-      flex:1, 
+      flex:9, 
       width: WIDTH-50,
       height: 5,
       marginLeft: 25,
+      zIndex:300,
+      elevation:200
+
       
       //justifyContent: "center"
     },
@@ -299,7 +309,8 @@ export default StyleSheet.create({ //Styles
       backgroundColor:BG_DARK,
       borderRadius:100,
       shadowOffset: {width: 0, height: 2}, 
-      elevation: 5, 
+      //elevation: 1000,
+      zIndex: 1000,
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
@@ -451,6 +462,7 @@ export default StyleSheet.create({ //Styles
       flex:1, 
       width: WIDTH-55,
       height: HEIGHT-20,
+
       //marginLeft: 25,
       //marginTop: 10,
       //justifyContent: "center",
@@ -533,6 +545,6 @@ export default StyleSheet.create({ //Styles
       shadowColor: '#000', 
       shadowOpacity: 0.25, 
       shadowRadius: 3.84,
-      paddingRight: 20 
+      paddingRight: 0 
     }
   });

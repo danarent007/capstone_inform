@@ -161,7 +161,7 @@ export default class NewPost extends Component {
           </Right>
         </Header>
 
-      <View style={{flex:2, backgroundColor: 'red'}}>
+      <View style={{flex:5}}>
           <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -178,6 +178,8 @@ export default class NewPost extends Component {
           <TextInput
             style={styles.inputLarge}
             placeholder={"BODY"}
+            //fixedHeight={true}
+            //height={170}
             
             multiline={true}
             numberOfLines={10}
@@ -189,7 +191,11 @@ export default class NewPost extends Component {
           </View>
       </View>
 
-      <View style={{width: WIDTH-55,flex:3,backgroundColor: 'green'}}>
+      <View style={{height: 10}}></View>
+      <View style={{flex:1, justifyContent: 'center',  borderBottomStartRadius: 0,backgroundColor: '', paddingBottom:10}}>
+        <Text style={{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:30}}>You are posting to:</Text>
+      </View>
+      <View style={{width: WIDTH-55,flex:3}}>
         <MultiSelect
           hideTags
           items={this.state.locations}
@@ -214,31 +220,22 @@ export default class NewPost extends Component {
           submitButtonText="Done"
         />
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '',flexDirection: "row"}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: ''}}>
         <View style = {{paddingRight: 0}}>
         <TouchableOpacity onPress={this.handleChoosePhoto}>
-          <Text style={{fontSize:20}}>Choose Photo</Text>
+          <Text style={styles.explainText}>Choose Photo</Text>
         </TouchableOpacity>
         </View>
-        <View>
+      </View>
+      <View style = {{flex:2, justifyContent: 'center',alignItems:'center'}}>
         {photo && (
           <Image
             source={{ uri: photo.uri }}
-            style={{ width: 80, height: 80, paddingLeft:10 }}
+            style={{ width: 80, height: 80}}
           />
         )}
         </View>
-      </View>
-  
-      <View style={{flex:3, justifyContent: 'center',  borderBottomStartRadius: 0,backgroundColor: '', paddingBottom:10}}>
-        <Text style={styles.postText}>You are posting to:</Text>
-      </View>
 
-      <View style={{flex: 1,backgroundColor:''}}>
-        <View style={{flex:0.2, justifyContent: 'center'}}>
-          {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedAreas)}
-        </View>
-      </View>
       </View>
       </View>
     );

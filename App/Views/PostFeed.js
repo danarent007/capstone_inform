@@ -55,7 +55,13 @@ class PostFeed extends React.Component {
     
     <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
         <View style={styles.listpost_row}>
-        <View style={{flex:8}}>
+        <View style={{flex:3,alignItems: 'center'}}>
+        <Image
+          style={styles.postfeed_image_style}
+          source={{uri:item.photo_uri}}
+          />
+        </View>
+        <View style={{flex:11,alignItems: "flex-start"}}>
           <Text 
           style={{ fontSize: 25, color: '#000', textAlign: 'center'}}
           numberOfLines={1}>{item.title.toUpperCase()}</Text>
@@ -65,12 +71,7 @@ class PostFeed extends React.Component {
           style={{ fontSize: 10, color: '#000', fontWeight: "bold", fontStyle: "italic",textAlign: 'center'}}
           numberOfLines={1}>{item.date_posted}</Text>
         </View>
-        <View style={{flex:3,alignItems:'flex-end'}}>
-        <Image
-          style={styles.postfeed_image_style}
-          source={{uri:item.photo_uri}}
-          />
-        </View>
+        
         </View>
       </TouchableOpacity>
   )
