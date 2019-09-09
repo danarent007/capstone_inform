@@ -94,7 +94,6 @@ export default class LoginScreen extends Component {
     {
 
       await this.props.navigation.navigate('AreaSelect')
-      console.log('GOOO BOYS')
     }
     else
     {

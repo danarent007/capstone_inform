@@ -45,12 +45,39 @@ class SignUpScreen extends Component {
     userData =
     {
       firstName : this.state.firstName,
-      lastName : this.state.lastName,
       email : this.state.email,
       password: this.state.password
     }
+    if(this.validateData(userData))
+    {
     sc = new SignupController(userData, this)
     sc.attemptRegisterUser()
+    }
+  }
+
+  validateData(userData)
+  {
+    if(userData.firstName == "")
+    {
+      alert('EMAIL field cannot be blank.')
+      return false;
+    }
+    if(userData.email == "")
+    {
+      alert('EMAIL field cannot be blank.')
+      return false;
+    }
+    if(!userData.email.includes('@') || !userData.email.includes('.'))
+    {
+      alert('EMAIL field incorrectly formatted.')
+      return false;
+    }
+    if(userData.password == "")
+    {
+      alert('PASSWORD field cannot be blank.')
+    }
+    this.setState({submitting: true})
+    return true;
   }
  
   render() { //Render view

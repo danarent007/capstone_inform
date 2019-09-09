@@ -95,13 +95,13 @@ class LoginController
              }
              else
              {
-                 alert('Sign-up currently unavailable. Please try again later.') //Error handling (no DB connection)
+                 alert('Login currently unavailable. Please try again later.') //Error handling (no DB connection)
              }
          }).catch((error) => 
          {
            
           this.loginObj.setState({loading: false})
-             console.error(error);
+          alert('Unable to reach server. Please try again later.')
          });
     }
     

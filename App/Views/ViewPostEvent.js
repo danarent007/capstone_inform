@@ -267,6 +267,7 @@ export default class ViewPostEvent extends Component {
           <Text style={styles.descText_dark}>Date: {this.formatDate(this.state.eventStartDate)}</Text>
           <Text style={styles.descText_dark}>{this.state.eventLocation}</Text>
           <Text style={styles.bodyText}>{this.state.body}</Text>
+          <Text style={styles.bodyText}>Attending: {this.state.body}</Text>
           </ScrollView>
               
           

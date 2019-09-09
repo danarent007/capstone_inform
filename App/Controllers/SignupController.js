@@ -60,6 +60,7 @@ class SignupController
             }
         }).catch((error) => 
         {
+            alert('Sign-up currently unavailable. Please try again later.') //Error handling (no DB connection)
         });
          }
 
