@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
+import { Icon } from 'react-native-elements'
+
 const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
 const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
 export default class AreaSelect extends Component {
@@ -35,7 +37,8 @@ export default class AreaSelect extends Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                alert(JSON.stringify(responseJson))
+                //alert(JSON.stringify(responseJson))
+                
 
             }).catch((error) => {
 
@@ -109,29 +112,38 @@ export default class AreaSelect extends Component {
         return (
 
             
-            <View style={{ flex: 1, backgroundColor: '#4682b4',alignContent: "center" }}>
-                <Header style={{ backgroundColor: '#4682b4' }}
-                    androidStatusBarColor={'#4682b4'}>
-                    <Body>
-                        <Title>AreaSelect</Title>
-                    </Body>  
+            <View style={{ flex: 1, backgroundColor: '#000', alignContent: "center" }}>
+            <Header style={{ backgroundColor: '#000' }}
+            androidStatusBarColor={'#000'}>
+            <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon type='material-community' name={"arrow-left"} color='white' />
+            </Button>
+            </Left>
+            <Body>
+            <Text style = {styles.headingText2}>SELECT AREAS</Text>
+            </Body>
             </Header>
                 <View style = {{minHeight: 25}}>
                 </View>
-                <View style={styles.selectorView}>
+                <View style={{flex:1}}>
+                <Text style = {styles.explainText}>you can view and post in these areas</Text>
+                </View>
+                <View style={{flex:5}}>
+                    <ScrollView>
                 <MultiSelect
                     items={this.locations}
                     uniqueKey={"location_id"}
                     ref={(component) => { this.multiSelect = component }}
                     onSelectedItemsChange={this.onSelectedItemsChange}
                     selectedItems={selectedAreas}
-                    fixedHeight={true}
+                    fixedHeight={false}
                     selectText="Select Areas"
                     searchInputPlaceholderText="Search Areas..."
                     onChangeInput={(text) => console.log(text)}
-                    tagRemoveIconColor="#D82121"
-                    tagBorderColor="#000000"
-                    tagTextColor="#000000"
+                    tagRemoveIconColor="#ffff"
+                    tagBorderColor="#ffff"
+                    tagTextColor="#ffff"
                     selectedItemTextColor="#000000"
                     selectedItemIconColor="#000000"
                     itemTextColor="#000000"
@@ -139,10 +151,15 @@ export default class AreaSelect extends Component {
                     searchInputStyle={{ color: '#CCC' }}
                     submitButtonColor="#CCC"
                     submitButtonText="Done"
+                    hideDropdown={true}
+                    fontFamily="Roboto"
+                    altFontFamily="Roboto"
+                    selectedItemFontFamily="Roboto"
                     
                 />
+                </ScrollView>
                 </View>
-                { <View style={{ marginTop: 100, flex: 0.3,bottom: 0,justifyContent: 'center', alignItems: 'center',}}>
+                { <View style={{flex: 1,bottom: 0,justifyContent: 'center', alignItems: 'center',}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={ ()=>this.saveAreas()}>
                     <Text style={styles.loginText}>Save Areas</Text>
                 </TouchableOpacity>

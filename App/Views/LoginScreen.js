@@ -53,8 +53,8 @@ export default class LoginScreen extends Component {
       email : this.state.email,
       password: this.state.password
     }
-    if(this.validateData(userData))
-    //if(true)
+    //if(this.validateData(userData)) TODO
+    if(true)
     {
     lc = new LoginController(userData, this) //Create new login controller to handle login
     lc.tryLogIn2() //Call method to attempt login

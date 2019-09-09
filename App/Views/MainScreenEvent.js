@@ -173,7 +173,7 @@ GetSelectedPickerItem=()=>{
 //Filter data to match "search" query (filters using location ID)
   filterData = (unfiltered) =>
   {
-    console.log("FilterData")
+    console.log('FILTER')
     output = [];
     if(this.state.PickerValueHolder == '-1' || this.state.PickerValueHolder == '')
     {

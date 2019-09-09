@@ -41,20 +41,25 @@ export default class NewPost extends Component {
     super(props);
     this.state =
       {
-        title: 'TITLE',
-        body: 'BODY',
+        title: '',
+        body: '',
         controller: this.props.navigation.getParam('controller', 'Not Found'),
         locations: this.props.navigation.getParam('locs', 'Not Found'),
         user_id: this.props.navigation.getParam('user_id','Not Found'),
         selectedAreas: [],
         loading: 'initial',
-        photo: null,
         event: false,
         previousMode: 'news',
         mode: this.props.navigation.getParam('mode','news'),
         start_date: '',
         end_date: '',
-        event_location: ''
+        event_location: '',
+        photo: 
+        {
+          height: 500,
+          width: 500
+
+        }
 
 
       };
@@ -76,16 +81,18 @@ export default class NewPost extends Component {
   }
 
 
-
   createFormData = (photo, body) => {
     const data = new FormData();
 
+    if(this.state.photo != null)
+    {
       data.append("image", {
         name: photo.fileName,
         type: photo.type,
         uri:
           Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
       });
+    }
     
     // Object.keys(body).forEach(key => {
     //   data.append(key, body[key]);
@@ -99,10 +106,69 @@ export default class NewPost extends Component {
       noData: true,
     }
     ImagePicker.launchImageLibrary(options, response => {
+      console.log("PHOTO: " + JSON.stringify(response))
       if (response.uri) {
         this.setState({ photo: response })
       }
     })
+  }
+
+
+  validateNewsPost()
+  {
+    if(this.state.title==undefined)
+    {
+      alert('TITLE field cannot be blank.')
+      return false
+    }
+    if(this.state.body=="")
+    {
+      alert('BODY field cannot be blank.')
+      return false
+    }
+    if(this.state.selectedAreas[0]==undefined)
+    {
+      alert('Please select a location.')
+      return false;
+    }
+    return true;
+  }
+
+
+  validateEventPost()
+  {
+    console.log('Validate')
+    if(this.state.selectedAreas[0]==undefined)
+    {
+      alert('Please select a location.')
+      return false
+    }
+    if(this.state.title==undefined)
+    {
+      alert('Title field cannot be blank.')
+      return false
+    }
+    if(this.state.body=="")
+    {
+      alert('Description field cannot be blank.')
+      return false
+    }
+    if(this.state.start_date=="")
+    {
+      alert('Please select a start date.')
+      return false
+    }
+    if(this.state.end_date=="")
+    {
+      alert('Please select an end date.')
+      return false
+    }
+    if(this.state.event_location=="")
+    {
+      alert('Please enter an event location.')
+      return false
+    }
+    return true;
   }
 
     createPost = () => //Create a new post
@@ -118,17 +184,22 @@ export default class NewPost extends Component {
     postData.append("description",this.state.body);
     postData.append("location",this.state.selectedAreas[0]);
     postData.append("user_id",this.state.user_id);
+    //console.log('Location: ' + this.state.selectedAreas[0])
     
-    
-      //alert("PD: "+JSON.stringify(postData))
+    if(this.validateNewsPost(postData))
+    {
     pc = new PostController(postData) //Start a new post
-   //pc.publishPost() //Publish post
-     pc.publishPost();
+    pc.publishPost();
     this.props.navigation.goBack() //Return to main screen
+    }
   }
 
   createEventPost = () => //Create a new post
   {
+
+    if(this.validateEventPost)
+    {
+
     postData = this.createFormData(this.state.photo, { userId: this.state.user_id })
 
     postData.append("event_name",this.state.title);
@@ -138,9 +209,12 @@ export default class NewPost extends Component {
     postData.append("event_start",this.state.start_date+'Z');
     postData.append("event_end",this.state.end_date+'Z');
     postData.append("event_address",this.state.event_location);
+
+    
     pc = new PostController(postData) //Start a new post controller
     pc.publishEventPost();
     this.props.navigation.goBack() //Return to main screen
+    }
   }
 
   onSelectedItemsChange = selectedAreas => {
@@ -193,11 +267,10 @@ export default class NewPost extends Component {
           <TextInput
             style={styles.input}
             multiline={true}
-            numberOfLines={2}
+            numberOfLines={1}
             placeholder={"TITLE"}
             placeholderTextColor={'#fff'}
             underLineColorAndroid='transparent'
-            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
           ></TextInput>
           </View>
@@ -208,9 +281,8 @@ export default class NewPost extends Component {
             placeholder={"BODY"}
             //fixedHeight={true}
             //height={170}
-            defaultValue={this.state.body}
             multiline={true}
-            numberOfLines={10}
+            numberOfLines={14}
             //height={120}
             placeholderTextColor={'#ffffff'}
             underLineColorAndroid='transparent'
@@ -291,9 +363,6 @@ export default class NewPost extends Component {
           <Text style = {styles.headingText2}>EVENT POST</Text>
           </Body>
           <Right>
-          <Button transparent onPress={() => alert(this.state.start_date)}>
-          <Icon type='material-community' name={"back"} color={'white'} />
-          </Button>
           </Right>
         </Header>
 

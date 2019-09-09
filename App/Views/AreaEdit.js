@@ -140,7 +140,7 @@ export default class AreaEdit extends Component {
             </Button>
             </Left>
             <Body>
-            <Text style = {styles.headerText}>Edit Areas</Text>
+            <Text style = {styles.headingText2}>EDIT AREAS</Text>
             </Body>
             </Header>
         <View style={{ minHeight: 25 }}>

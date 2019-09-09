@@ -79,9 +79,10 @@ class SignUpScreen extends Component {
     this.setState({submitting: true})
     return true;
   }
-
   
- 
+
+
+
   render() { //Render view
     return (
       
