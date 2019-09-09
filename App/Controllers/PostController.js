@@ -10,7 +10,8 @@
 
 const POST_URL = 'http://dulwich.dlinkddns.com/api/posts' //API post get url
 const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add' //API post add url
-const UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/upload'
+const UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/upload' //
+const EVENT_UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/events/add'
 class PostController
 {
   constructor()
@@ -20,7 +21,7 @@ class PostController
 
 
 
-  uploadPhoto = () => //Publish post to DB
+  publishPost = () => //Publish post to DB
   {
     alert("UPLOAD DATA: " + JSON.stringify(postData))
     fetch(UPLOAD_URL, { //JSon message
@@ -36,31 +37,49 @@ class PostController
           }).catch((error) => {
             console.error(error);
          });
-}
+  }
 
-
-  publishPost = () => //Publish post to DB
+  publishEventPost = () => //Publish post to DB
   {
-    console.log("POST DATA: " + JSON.stringify(postData))
-    fetch(ADD_URL, { //JSon message
+    console.log("UPLOAD DATA: " + JSON.stringify(postData))
+    fetch(EVENT_UPLOAD_URL, { //JSon message
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-       'Content-Type': 'application/json',
+       'Content-Type': 'multipart/form-data',
      },
-     body: JSON.stringify({
-      title: postData.title,
-      description: postData.body,
-      locationid: postData.location,
-      // photo: postData.photo
-     })
+      body: postData
    }).then((response) => response.text())
          .then((responseJson) => {
-           alert(responseJson )
+           alert(JSON.stringify(responseJson))
           }).catch((error) => {
             console.error(error);
          });
-}
+  }
+
+
+//   publishPost = () => //Publish post to DB
+//   {
+//     console.log("POST DATA: " + JSON.stringify(postData))
+//     fetch(ADD_URL, { //JSon message
+//       method: 'POST',
+//       headers: {
+//         'Accept': 'application/json',
+//        'Content-Type': 'application/json',
+//      },
+//      body: JSON.stringify({
+//       title: postData.title,
+//       description: postData.body,
+//       locationid: postData.location,
+//       // photo: postData.photo
+//      })
+//    }).then((response) => response.text())
+//          .then((responseJson) => {
+//            alert(responseJson )
+//           }).catch((error) => {
+//             console.error(error);
+//          });
+// }
 
 
 

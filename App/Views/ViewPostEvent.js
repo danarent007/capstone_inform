@@ -28,7 +28,7 @@ import {
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 const {width: WIDTH} = Dimensions.get('window') //Window width for formatting
 const REPORT_URL = 'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
-const DELETE_URL = 'http://dulwich.dlinkddns.com/api/posts/delete' //API delete post url
+const DELETE_URL = 'http://dulwich.dlinkddns.com/api/events/delete' //API delete post url
 
 
 
@@ -47,8 +47,8 @@ export default class ViewPostEvent extends Component {
       area: this.props.navigation.getParam('area', 'No User'),
       name: this.props.navigation.getParam('name','Not Found'),
       photo_uri: this.props.navigation.getParam('photo_uri','Not Found'),
-      eventStartDate: this.props.navigation.getParam('event_start_date','2019-09-19T19:00:00.000Z'),
-      eventEndDate: this.props.navigation.getParam('event_End_date','2019-09-20T19:00:00.000Z'),
+      eventStartDate: this.props.navigation.getParam('start','2019-09-19T19:00:00.000Z'),
+      eventEndDate: this.props.navigation.getParam('end','2019-09-20T19:00:00.000Z'),
       eventLocation: this.props.navigation.getParam('event_location','2 Roeland Street, Cape Town'),
       dialogVisible: false,
       delDialogVisible: false
@@ -61,7 +61,8 @@ export default class ViewPostEvent extends Component {
     this.setState({dialogVisible: true})
   }
 
-  tryDeletePost = () =>
+
+  tryDeleteEvent = () =>
   {
     console.log('TRY DEL')
     this.setState({delDialogVisible: true})
@@ -79,6 +80,7 @@ export default class ViewPostEvent extends Component {
      body: JSON.stringify({
       user_id: this.state.current_user_id,
       post_id: this.state.id
+
      })
    }).then((response) => response.text())
          .then((responseJson) => {
@@ -91,8 +93,9 @@ export default class ViewPostEvent extends Component {
 
   }
 
-  deletePost = async () =>
+  deleteEvent = async () =>
   {
+    console.log('DEL: ' + this.state.id +" " + this.state.current_user_id)
     await fetch(DELETE_URL, { //JSon message
       method: 'POST',
       headers: {
@@ -101,21 +104,21 @@ export default class ViewPostEvent extends Component {
      },
      body: JSON.stringify({
       user_id: this.state.current_user_id,
-      post_id: this.state.id
+      event_id: this.state.id
      })
    }).then((response) => response.text())
          .then((responseJson) => {
-           //alert(JSON.stringify(responseJson))
+           console.log(JSON.stringify(responseJson))
           }).catch((error) => {
             console.error(error);
          });
          
-         alert('Post Deleted.')
+         alert('Event Deleted.')
          this.props.navigation.goBack()
 
   }
 
-  addReminder = () =>
+  addReminder = async () =>
   {
     this.requestCalPermission()
     // RNCalendarEvents.saveEvent(this.state.title, {
@@ -125,15 +128,15 @@ export default class ViewPostEvent extends Component {
     //   notes: 'Host: '+this.state.name
     // }) 
     console.log(this.state.title)
-    console.log(this.state.startDate)
-    console.log(this.state.endDate)
-    RNCalendarEvents.saveEvent(this.state.title, {
-      
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      //location: this.state.eventLocation,
-      //notes: 'Host: '+this.state.name
+    console.log(this.state.eventStartDate)
+    console.log(this.state.eventEndDate)
+    await RNCalendarEvents.saveEvent(this.state.title, {
+      startDate: this.state.eventStartDate,
+      endDate: this.state.eventEndDate,
+      location: this.state.eventLocation,
+      notes: 'Host: '
     }) 
+    alert("Event saved in calendar.")
   }
 
   async requestCalPermission() 
@@ -184,6 +187,15 @@ export default class ViewPostEvent extends Component {
     }
   }
 
+  formatDate(date)
+  {
+    var year = (date).substring(0,4)
+    var month = (date).substring(5,7)
+    var day = (date).substring(8,10)
+    var ho = (date).substring(11,13)
+    var mi = (date).substring(14,16)
+    return (day+'/'+month+'/'+year+' '+ho+':'+mi)
+  }
 
   
 
@@ -236,7 +248,7 @@ export default class ViewPostEvent extends Component {
           onTouchOutside={() => this.setState({delDialogVisible: false})}
           positiveButton={{
           title: "YES",
-          onPress: () => this.deletePost()
+          onPress: () => this.deleteEvent()
           }}
           negativeButton={{
           title: "NO",
@@ -252,7 +264,7 @@ export default class ViewPostEvent extends Component {
           source={{uri: this.state.photo_uri}}
           />
           <Text style={styles.headingText2_dark}>{this.state.title}</Text>
-          <Text style={styles.descText_dark}>{this.state.name} - {this.state.eventDate}</Text>
+          <Text style={styles.descText_dark}>Date: {this.formatDate(this.state.eventStartDate)}</Text>
           <Text style={styles.descText_dark}>{this.state.eventLocation}</Text>
           <Text style={styles.bodyText}>{this.state.body}</Text>
           </ScrollView>
@@ -260,7 +272,7 @@ export default class ViewPostEvent extends Component {
           
           </View>
           </ScrollView>
-          <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeletePost()}>
+          <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeleteEvent()}>
             <Icon type='material' name='delete' size={35} color="white"/>
           </TouchableOpacity>
           </View>

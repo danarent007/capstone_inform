@@ -192,9 +192,13 @@ export default StyleSheet.create({ //Styles
     {
         marginTop: 0,
     },
+    inputContainer2: 
+    {
+        marginTop: 10,
+    },
     inputContainerLarge: 
     {
-        marginTop: 20,
+        marginTop: 10,
     },
     btnLogin: 
     {

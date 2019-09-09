@@ -20,7 +20,8 @@ import {
     TextInput,
     TouchableOpacity,
     Animated,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    ActivityIndicator
   } from 'react-native';
   
 import AsyncStorage from '@react-native-community/async-storage';
@@ -39,7 +40,8 @@ export default class LoginScreen extends Component {
       loading: false,
       userId: '',
       locations: [],
-      animation: new Animated.Value(0)
+      animation: new Animated.Value(0),
+      submitting: false
 
     };
   }
@@ -48,15 +50,36 @@ export default class LoginScreen extends Component {
   {
     userData =
     {
-      firstName : this.state.firstName,
-      lastName : this.state.lastName,
       email : this.state.email,
-      password: this.state.password,
+      password: this.state.password
     }
-    //AsyncStorage.setItem('userData', userData)
-
+    if(this.validateData(userData))
+    //if(true)
+    {
     lc = new LoginController(userData, this) //Create new login controller to handle login
     lc.tryLogIn2() //Call method to attempt login
+    }
+  }
+
+
+  validateData(userData)
+  {
+    if(userData.email == "")
+    {
+      alert('EMAIL field cannot be blank.')
+      return false;
+    }
+    if(!userData.email.includes('@') || !userData.email.includes('.'))
+    {
+      alert('EMAIL field incorrectly formatted.')
+      return false;
+    }
+    if(userData.password == "")
+    {
+      alert('PASSWORD field cannot be blank.')
+    }
+    this.setState({submitting: true})
+    return true;
   }
 
   doLogin = async () => //User exists
@@ -66,6 +89,7 @@ export default class LoginScreen extends Component {
     //If, then login
     //Else, open location pick screen
     await this.getLocations()
+    this.setState({submitting: false})
     if(this.state.locations == 0)
     {
 
@@ -116,9 +140,25 @@ export default class LoginScreen extends Component {
       }).start();
   }
 
+  LoginButton(props)
+  {
+    if(props.submitting)
+    {
+      return(
+      <ActivityIndicator size="large" color="#fff" />
+      )
+    }
+    else{
+      return(
+        <TouchableOpacity style={styles.btnLogin} onPress={this.tryLogin}>
+        <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+      )
+    }
+
+  }
 
   render() { //Render view
-
     if(this.state.loading)
     {
       return(
@@ -155,9 +195,7 @@ export default class LoginScreen extends Component {
       </View>
 
       <View style={{flex:25,justifyContent: 'space-evenly'}}>
-        <TouchableOpacity style={styles.btnLogin} onPress={this.tryLogin}>
-        <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+        <this.LoginButton submitting ={this.state.submitting}/>
       </View>
 
       <View style={{flex:12, backgroundColor:'white',width: WIDTH,alignItems: "center",justifyContent:'space-evenly'}}>

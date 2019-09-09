@@ -54,7 +54,7 @@ class PostFeedEvent extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPostEvent', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPostEvent', {start: item.event_start, end: item.event_end,current_user_id: this.props.current_user_id ,id: item.event_id, title: item.event_name, description: item.event_description, controller: this, user_id: item.user_id, area: item.location_name, name:item.author_name,photo_uri:item.photo_uri})}> 
         <View style={styles.listpost_row}>
 
         
@@ -67,12 +67,19 @@ class PostFeedEvent extends React.Component {
         <View style={{flex:11,alignItems: "flex-start"}}>
           <Text 
           style={{ fontSize: 25, color: '#000', textAlign: 'center'}}
-          numberOfLines={1}>{item.title.toUpperCase()}</Text>
+          numberOfLines={1}>{item.event_name.toUpperCase()}</Text>
           <Text 
           style={{ fontSize: 15, color: '#000', fontWeight: "bold",textAlign: 'center', fontStyle: "italic"}}>{item.location_name}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <View>
           <Text 
           style={{ fontSize: 10, color: '#000', fontWeight: "bold", fontStyle: "italic",textAlign: 'center'}}
-          numberOfLines={1}>{item.date_posted}</Text>
+          numberOfLines={1}>{item.event_start}</Text>
+          </View>
+          <View style={{alignItems: "flex-end"}}>
+            <Text>Going: 67</Text>
+          </View>
+          </View>
         </View>
         </View>
       </TouchableOpacity>

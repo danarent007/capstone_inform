@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import styles from '../Styles/styles'
@@ -44,8 +44,7 @@ export default class AreaEdit extends Component {
                 })
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    alert(JSON.stringify(responseJson))
-
+                    alert("Areas Saved")
                 }).catch((error) => {
 
                 console.error(error);
@@ -147,13 +146,14 @@ export default class AreaEdit extends Component {
         <View style={{ minHeight: 25 }}>
         </View>
         <View style={{width:WIDTH,zIndex:500,flex:4}}>
+        <ScrollView style = {{height:100,maxHeight:HEIGHT-30}}>
             <MultiSelect
                         items={this.state.locations}
                         uniqueKey={"location_id"}
                         ref={(component) => { this.multiSelect = component }}
                         onSelectedItemsChange={this.onSelectedItemsChange}
                         selectedItems={this.state.selectedAreas}
-                        fixedHeight={true}
+                        fixedHeight={false}
                         //style = {{fixedHeight:20}}
                         minHeight={10}
                         selectText="Select Are as"
@@ -175,6 +175,7 @@ export default class AreaEdit extends Component {
                         selectedItemFontFamily="Roboto"
                         
                     />
+        </ScrollView>
         </View>
                 <View style={{alignItems: "center",justifyContent: 'flex-end',flex:1}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={() => this.saveAreas()}>

@@ -16,7 +16,7 @@ import {Dimensions} from 'react-native';
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
-const EVENT_FETCH_URL = 'http://dulwich.dlinkddns.com/api/events' //URL for fetching events.
+const EVENT_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userEvents' //URL for fetching events.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 const HEIGHT = Dimensions.get('window').height
@@ -126,11 +126,11 @@ GetSelectedPickerItem=()=>{
 //Fetch posts for only selected locations
   makeRequest =  async() =>
   {
-
+    
     console.log('Fetch Posts 1')
     this.setState({refreshing: true})
     console.log('Start refresh')
-    await fetch(POST_FETCH_URL, {
+    await fetch(EVENT_FETCH_URL, {
       method: 'POST',
       headers: 
           {
@@ -146,7 +146,7 @@ GetSelectedPickerItem=()=>{
     })
     .then(async response => await response.json())
     .then((responseJson) => {
-      //console.log(JSON.stringify(responseJson))
+      console.log(JSON.stringify(responseJson))
       console.log('End refresh')
       this.setState({
         data: this.filterData(responseJson),
@@ -170,7 +170,7 @@ GetSelectedPickerItem=()=>{
     console.log("Picker state updated")
   }
 
-//Filter data to match "search" query
+//Filter data to match "search" query (filters using location ID)
   filterData = (unfiltered) =>
   {
     console.log("FilterData")
@@ -185,7 +185,7 @@ GetSelectedPickerItem=()=>{
       output = []
       for(i = 0; i < unfiltered.length;i++)
       {
-        if(unfiltered[i].location_id == this.state.PickerValueHolder)
+        if(unfiltered[i].event_location == this.state.PickerValueHolder)
         {
           output.push(unfiltered[i])
           console.log('HIT')

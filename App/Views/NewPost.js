@@ -15,7 +15,8 @@ import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import ImagePicker from 'react-native-image-picker'
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
-//import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker'
+
 
 
 
@@ -51,8 +52,11 @@ export default class NewPost extends Component {
         event: false,
         previousMode: 'news',
         mode: this.props.navigation.getParam('mode','news'),
-        date: '',
-        time: ''
+        start_date: '',
+        end_date: '',
+        event_location: ''
+
+
       };
   }
 
@@ -117,11 +121,25 @@ export default class NewPost extends Component {
     
     
       //alert("PD: "+JSON.stringify(postData))
-    pc = new PostController(postData) //Start a new post controller
+    pc = new PostController(postData) //Start a new post
    //pc.publishPost() //Publish post
-     pc.uploadPhoto();
-    
+     pc.publishPost();
+    this.props.navigation.goBack() //Return to main screen
+  }
 
+  createEventPost = () => //Create a new post
+  {
+    postData = this.createFormData(this.state.photo, { userId: this.state.user_id })
+
+    postData.append("event_name",this.state.title);
+    postData.append("event_description",this.state.body);
+    postData.append("event_location",this.state.selectedAreas[0]);
+    postData.append("user_id",this.state.user_id);
+    postData.append("event_start",this.state.start_date+'Z');
+    postData.append("event_end",this.state.end_date+'Z');
+    postData.append("event_address",this.state.event_location);
+    pc = new PostController(postData) //Start a new post controller
+    pc.publishEventPost();
     this.props.navigation.goBack() //Return to main screen
   }
 
@@ -256,12 +274,10 @@ export default class NewPost extends Component {
     return (
       
       <View style={styles.container}>
-        <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.createPost()}>
+        <TouchableOpacity style={styles.creatPostFloatButton} onPress={() => this.createEventPost()}>
         <Icon type='material' name='done' size={35} color="white" />
         </TouchableOpacity>
       
-
-
         <Header style={{ backgroundColor: '#000' , width: WIDTH}}
           androidStatusBarColor={'#000'}>
           <Left>
@@ -271,16 +287,18 @@ export default class NewPost extends Component {
           </Left>
           <Body>
           
+
           <Text style = {styles.headingText2}>EVENT POST</Text>
           </Body>
           <Right>
-          <Button transparent onPress={() => alert('TODO')}>
+          <Button transparent onPress={() => alert(this.state.start_date)}>
           <Icon type='material-community' name={"back"} color={'white'} />
           </Button>
           </Right>
         </Header>
 
-      <ScrollView style={{width: WIDTH-55,zIndex:5,marginTop:10,zIndex:50, minHeight: 0, maxHeight:400}}>
+
+      <ScrollView style={{width: WIDTH-55,zIndex:5,marginTop:0,zIndex:50,  minHeight: 10, maxHeight:400}}>
         <MultiSelect
           hideTags
           items={this.state.locations}
@@ -304,20 +322,18 @@ export default class NewPost extends Component {
           submitButtonColor="#CCC"
           submitButtonText="Done"
         />
-
         </ScrollView>
 
 
-
-      <View style={{flex:9,backgroundColor:''}}>
+      <View style={{flex:7}}>
           <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
             multiline={true}
             numberOfLines={2}
-            placeholder={"TITLE"}
+            placeholder={"title"}
             placeholderTextColor={'#fff'}
-            defaultValue={this.state.title}
+            //defaultValue={this.state.title}
             underLineColorAndroid='transparent'
             onChangeText={(text) => this.setState({title:text})}
           ></TextInput>
@@ -326,30 +342,47 @@ export default class NewPost extends Component {
           <View style={styles.inputContainerLarge}>
           <TextInput
             style={styles.inputLarge}
-            placeholder={"BODY"}
+            placeholder={"description"}
             //fixedHeight={true}
             //height={170}
-            defaultValue={this.state.body}
+            //defaultValue={this.state.body}
             multiline={true}
-            numberOfLines={10}
+            numberOfLines={9}
             //height={120}
             placeholderTextColor={'#ffffff'}
             underLineColorAndroid='transparent'
             onChangeText={(text) => this.setState({ body: text })}
           ></TextInput>
           </View>
+
+          <View style={styles.inputContainer2}>
+          <TextInput
+            style={styles.input}
+            multiline={true}
+            numberOfLines={2}
+            placeholder={"location"}
+            placeholderTextColor={'#fff'}
+            underLineColorAndroid='transparent'
+            onChangeText={(text) => this.setState({event_location:text})}
+          ></TextInput>
+          </View>
       </View>
 
       <View style={{height: 10}}></View>
-<View style={{flex:2}}>
-        {/* <DatePicker
+
+      <View style={{flex:1,flexDirection: 'row',width:WIDTH-55}}>
+      <View style={{flex:1, alignItems: 'flex-start'}}>
+        <Text style={styles.explainText}>Event Start</Text>
+      </View>
+      <View style={{flex:2,alignItems: 'flex-end',paddingLeft: 20}}>
+      <DatePicker
         style={{width: 200}}
-        date={this.state.date}
-        mode="date"
-        placeholder="event date"
-        format="YYYY-MM-DD"
+        date={this.state.start_date}
+        mode="datetime"
+        placeholder="select date"
+        format="YYYY-MM-DDTHH:mm:ss.000"
         minDate="2019-05-01"
-        maxDate="2022-12-01"
+        maxDate="2025-06-01"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -364,20 +397,26 @@ export default class NewPost extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
-      /> */}
-        </View>
+        onDateChange={(date) => {this.setState({start_date: date})}}
+      />
+      </View>
+      </View>
 
-        <View style={{flex:2}}>
-        {/* <DatePicker
+      <View style={{flex:1,flexDirection: 'row',width:WIDTH-55}}>
+      <View style={{flex:1, alignItems: 'flex-start'}}>
+        <Text style={styles.explainText}>Event End</Text>
+      </View>
+      <View style={{flex:2,alignItems: 'flex-end',paddingLeft: 20}}>
+      <DatePicker
         style={{width: 200}}
-        date={this.state.time}
-          mode="time"
-          format="HH:mm"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          minuteInterval={10}
-          onDateChange={(time) => {this.setState({time: time});}}
+        date={this.state.end_date}
+        mode="datetime"
+        placeholder="select date"
+        format="YYYY-MM-DDTHH:mm:ss.000"
+        minDate="2019-05-01"
+        maxDate="2025-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
         customStyles={{
           dateIcon: {
             position: 'absolute',
@@ -386,17 +425,19 @@ export default class NewPost extends Component {
             marginLeft: 0
           },
           dateInput: {
-            marginLeft: 36,
-            backgroundColor: 'white'
+            marginLeft: 36
           }
           // ... You can check the source to find the other keys.
         }}
-      /> */}
-        </View>
+        onDateChange={(date) => {this.setState({end_date: date})}}
+      />
+      </View>
+      </View>
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: ''}}>
         <View style = {{paddingRight: 0}}>
         <TouchableOpacity onPress={this.handleChoosePhoto}>
+          {console.log('End date: '+this.state.end_date)}
           <Text style={styles.explainText}>Choose Photo</Text>
         </TouchableOpacity>
         </View>
