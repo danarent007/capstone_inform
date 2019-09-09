@@ -16,6 +16,7 @@ import {Dimensions} from 'react-native';
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+const EVENT_FETCH_URL = 'http://dulwich.dlinkddns.com/api/events' //URL for fetching events.
 const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 const HEIGHT = Dimensions.get('window').height

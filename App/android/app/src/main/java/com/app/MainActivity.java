@@ -1,5 +1,5 @@
 package com.app;
-
+import com.calendarevents.CalendarEventsPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -15,6 +15,9 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "App";
     }
+
+
+
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegate(this, getMainComponentName()) {
@@ -23,5 +26,11 @@ public class MainActivity extends ReactActivity {
        return new RNGestureHandlerEnabledRootView(MainActivity.this);
       }
     };
+  }
+	
+	  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+      CalendarEventsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults);
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 }

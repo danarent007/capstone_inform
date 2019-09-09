@@ -337,6 +337,26 @@ export default StyleSheet.create({ //Styles
       shadowOpacity: 0.25, 
       shadowRadius: 3.84
     },
+    creatPostFloatButton2:
+    {
+      borderWidth:1,
+      borderColor:'#fff',
+      alignItems:'center',
+      justifyContent:'center',
+      width:70,
+      position: 'absolute',                                          
+      bottom: 10,                                                    
+      right: 10,
+      height:70,
+      backgroundColor:BG_DARK,
+      borderRadius:100,
+      shadowOffset: {width: 0, height: 2}, 
+      //elevation: 1000,
+      zIndex: 1000,
+      shadowColor: '#000', 
+      shadowOpacity: 0.25, 
+      shadowRadius: 3.84
+    },
     creatPostFloatButtonLight:
     {
       borderWidth:1,

@@ -11,15 +11,16 @@
 import React, { Component, PureComponent } from 'react'
 import { FlatList, Text, TouchableHighlight } from 'react-native'
 import styles from '../Styles/styles'
+import { Icon } from 'react-native-elements'
 import { withNavigation } from 'react-navigation';
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
+
 import {
   View,
   Image
-  
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Left } from 'native-base';
 import { underline } from 'ansi-colors';
 import MainScreen from './MainScreen';
 
@@ -53,8 +54,10 @@ class PostFeedEvent extends React.Component {
 // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
   _renderItem = ({item}) => (
     
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPost', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
+    <TouchableOpacity onPress = {() => this.props.navigation.navigate('VPostEvent', {current_user_id: this.props.current_user_id ,id: item.post_id, title: item.title, description: item.description, controller: this, user_id: item.user_id, area: item.location_name, name:item.name,photo_uri:item.photo_uri})}> 
         <View style={styles.listpost_row}>
+
+        
         <View style={{flex:3,alignItems: 'center'}}>
         <Image
           style={styles.postfeed_image_style}
@@ -71,7 +74,6 @@ class PostFeedEvent extends React.Component {
           style={{ fontSize: 10, color: '#000', fontWeight: "bold", fontStyle: "italic",textAlign: 'center'}}
           numberOfLines={1}>{item.date_posted}</Text>
         </View>
-        
         </View>
       </TouchableOpacity>
   )

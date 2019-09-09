@@ -15,7 +15,7 @@ import { Icon } from 'react-native-elements'
 import MultiSelect from 'react-native-multiple-select';
 import ImagePicker from 'react-native-image-picker'
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
-import DatePicker from 'react-native-datepicker'
+//import DatePicker from 'react-native-datepicker'
 
 
 
@@ -342,7 +342,7 @@ export default class NewPost extends Component {
 
       <View style={{height: 10}}></View>
 <View style={{flex:2}}>
-        <DatePicker
+        {/* <DatePicker
         style={{width: 200}}
         date={this.state.date}
         mode="date"
@@ -365,11 +365,11 @@ export default class NewPost extends Component {
           // ... You can check the source to find the other keys.
         }}
         onDateChange={(date) => {this.setState({date: date})}}
-      />
+      /> */}
         </View>
 
         <View style={{flex:2}}>
-        <DatePicker
+        {/* <DatePicker
         style={{width: 200}}
         date={this.state.time}
           mode="time"
@@ -391,7 +391,7 @@ export default class NewPost extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-      />
+      /> */}
         </View>
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: ''}}>
