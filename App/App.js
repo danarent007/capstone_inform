@@ -31,7 +31,7 @@ const drawerComponent = (props) => (
         <TouchableOpacity onPress={()=>props.navigation.navigate('MainEvents')}>
           <Text style={{margin: 16,fontWeight: 'bold',color: 'black'}}>Events</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{backgroundColor: 'blue'}} onPress={()=>
+        <TouchableOpacity style={{backgroundColor: 'grey'}} onPress={()=>
           Alert.alert(
             'Log out',
             'Do you want to logout?',

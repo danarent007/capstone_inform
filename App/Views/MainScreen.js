@@ -35,7 +35,7 @@ export default class MainScreen extends Component
 {
   static navigationOptions = {
     drawerIcon : ({tintColor}) => (
-      <Icon name="home" style={{fontSize: 24}} color={tintColor}/>
+      <Icon name="home" style={{fontSize: 24}} color={'black'}/>
     )
   }
   constructor(props) 

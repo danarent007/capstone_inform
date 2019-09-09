@@ -36,7 +36,6 @@ class SignupController
          body: JSON.stringify(
              {
           firstName: userData.firstName,
-          lastName: userData.lastName,
           email: userData.email,
           password: userData.password,
          })
@@ -60,6 +59,7 @@ class SignupController
             }
         }).catch((error) => 
         {
+            console.error(error)
             alert('Sign-up currently unavailable. Please try again later.') //Error handling (no DB connection)
         });
          }

@@ -213,7 +213,6 @@ export default class ViewPostEvent extends Component {
 
   render() { //Render view
     console.log('Current user ID: ' + this.state.current_user_id)
-    const edit= (this.state.current_user_id == this.state.author_id)
     console.log('Current: ' + this.state.current_user_id + ' Post: ' + this.state.author_id)
 
 

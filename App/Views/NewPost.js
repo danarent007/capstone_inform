@@ -46,6 +46,7 @@ export default class NewPost extends Component {
         controller: this.props.navigation.getParam('controller', 'Not Found'),
         locations: this.props.navigation.getParam('locs', 'Not Found'),
         user_id: this.props.navigation.getParam('user_id','Not Found'),
+        user_perm: this.props.navigation.getParam('user_permission','Not Found'),
         selectedAreas: [],
         loading: 'initial',
         event: false,

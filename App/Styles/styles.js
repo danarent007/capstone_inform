@@ -458,6 +458,8 @@ export default StyleSheet.create({ //Styles
         fontSize: 20,
         minWidth: this.WIDTH,
         marginTop: 10,
+        paddingBottom: 20,
+        marginBottom: 40,
         opacity: 1,
         textAlign: "left",
         position : "relative",

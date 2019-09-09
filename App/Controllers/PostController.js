@@ -33,7 +33,7 @@ class PostController
       body: postData
    }).then((response) => response.text())
          .then((responseJson) => {
-           alert(responseJson)
+          alert('Post awaiting moderation. It will display shortly.')
           }).catch((error) => {
             console.error(error);
          });
@@ -51,7 +51,8 @@ class PostController
       body: postData
    }).then((response) => response.text())
          .then((responseJson) => {
-           alert(JSON.stringify(responseJson))
+           //alert(JSON.stringify(responseJson))
+           alert('Event awaiting moderation. It will display shortly.')
           }).catch((error) => {
             console.error(error);
          });
