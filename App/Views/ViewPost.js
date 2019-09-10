@@ -128,11 +128,11 @@ export default class ViewPost extends Component {
 
     return (
       <View style={{ flex: 1, width: '100%' }}>
-        <Header style={{ backgroundColor: '#000', borderBottomWidth: 1, borderBottomColor: 'white' }}
-          androidStatusBarColor={'#4682b4'}>
+        <Header style={{ backgroundColor: '#3f51b5', borderBottomWidth: 0, borderBottomColor: 'white' }}
+          androidStatusBarColor={'#3f51b5'}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon type='material' name={"home"} color='white' />
+            <Icon type='material-community' name={"arrow-left"} color='white' />
             </Button>
           </Left>
           <Body>

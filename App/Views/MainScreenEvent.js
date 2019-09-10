@@ -221,8 +221,8 @@ export default class MainScreenEvent extends Component {
     if (!this.state.loading) {
       return (
         <View style={{ flex: 1, width: '100%' }}>
-          <Header style={{ backgroundColor: '#000' }}
-            androidStatusBarColor={'#000'}>
+          <Header style={{ backgroundColor: '#3f51b5' }}
+            androidStatusBarColor={'#3f51b5'}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
                 <Icon type='material-community' name={"menu"} color={'white'} />

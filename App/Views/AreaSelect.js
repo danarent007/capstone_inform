@@ -122,9 +122,9 @@ export default class AreaSelect extends Component {
         return (
 
 
-            <View style={{ flex: 1, backgroundColor: '#000', alignContent: "center" }}>
-                <Header style={{ backgroundColor: '#000' }}
-                    androidStatusBarColor={'#000'}>
+            <View style={{ flex: 1, backgroundColor: '#3f51b5', alignContent: "center" }}>
+                <Header style={{ backgroundColor: '#3f51b5' }}
+                    androidStatusBarColor={'#3f51b5'}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon type='material-community' name={"arrow-left"} color='white' />
@@ -134,8 +134,6 @@ export default class AreaSelect extends Component {
                         <Text style={styles.headingText2}>SELECT AREAS</Text>
                     </Body>
                 </Header>
-                <View style={{ minHeight: 25 }}>
-                </View>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.explainText}>you can view and post in these areas</Text>
                 </View>
@@ -148,7 +146,7 @@ export default class AreaSelect extends Component {
                             onSelectedItemsChange={this.onSelectedItemsChange}
                             selectedItems={selectedAreas}
                             fixedHeight={false}
-                            selectText="Select Areas"
+                            selectText="    Select Areas"
                             searchInputPlaceholderText="Search Areas..."
                             onChangeInput={(text) => console.log(text)}
                             tagRemoveIconColor="#ffff"
@@ -169,7 +167,7 @@ export default class AreaSelect extends Component {
                         />
                     </ScrollView>
                 </View>
-                {<View style={{ flex: 1, bottom: 0, justifyContent: 'center', alignItems: 'center', }}>
+                {<View style={{ flex: 1, bottom: 0, justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
                     <TouchableOpacity style={styles.btnLogin} onPress={() => this.saveAreas()}>
                         <Text style={styles.loginText}>Save Areas</Text>
                     </TouchableOpacity>

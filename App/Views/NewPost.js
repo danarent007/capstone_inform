@@ -22,7 +22,6 @@ import DatePicker from 'react-native-datepicker'
 import { ScrollView } from 'react-native-gesture-handler';
 
 import {
-  StyleSheet,
   View,
   Text,
   Dimensions,
@@ -222,12 +221,12 @@ export default class NewPost extends Component {
             <Icon type='material' name='done' size={35} color="white" />
           </TouchableOpacity>
 
-          <Header style={{ backgroundColor: '#000', width: WIDTH }}
-            androidStatusBarColor={'#000'}>
+          <Header style={{ backgroundColor: '#3f51b5', width: WIDTH }}
+            androidStatusBarColor={'#3f51b5'}>
             <Left>
-              <Button transparent onPress={() => alert('TODO')}>
-                <Icon type='material-community' name={"home"} color={'white'} />
-              </Button>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon type='material-community' name={"arrow-left"} color='white' />
+            </Button>
             </Left>
             <Body>
 
@@ -327,12 +326,12 @@ export default class NewPost extends Component {
             <Icon type='material' name='done' size={35} color="white" />
           </TouchableOpacity>
 
-          <Header style={{ backgroundColor: '#000', width: WIDTH }}
-            androidStatusBarColor={'#000'}>
+          <Header style={{ backgroundColor: '#3f51b5', width: WIDTH }}
+            androidStatusBarColor={'#3f51b5'}>
             <Left>
-              <Button transparent onPress={() => alert('TODO')}>
-                <Icon type='material-community' name={"home"} color={'white'} />
-              </Button>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon type='material-community' name={"arrow-left"} color='white' />
+                        </Button>
             </Left>
             <Body>
 

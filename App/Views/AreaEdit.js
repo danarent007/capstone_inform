@@ -145,9 +145,9 @@ export default class AreaEdit extends Component {
             );
         }
         return (
-            <View style={{ flex: 1, backgroundColor: '#000', alignContent: "center" }}>
-                <Header style={{ backgroundColor: '#000' }}
-                    androidStatusBarColor={'#000'}>
+            <View style={{ flex: 1, backgroundColor: '#3f51b5', alignContent: "center" }}>
+                <Header style={{ backgroundColor: '#3f51b5' }}
+                    androidStatusBarColor={'#3f51b5'}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon type='material-community' name={"arrow-left"} color='white' />
@@ -157,8 +157,6 @@ export default class AreaEdit extends Component {
                         <Text style={styles.headingText2}>EDIT AREAS</Text>
                     </Body>
                 </Header>
-                <View style={{ minHeight: 25 }}>
-                </View>
                 <View style={{ width: WIDTH, zIndex: 500, flex: 4 }}>
                     <ScrollView style={{ height: 100, maxHeight: HEIGHT - 30 }}>
                         <MultiSelect
@@ -191,7 +189,7 @@ export default class AreaEdit extends Component {
                         />
                     </ScrollView>
                 </View>
-                <View style={{ alignItems: "center", justifyContent: 'flex-end', flex: 1 }}>
+                <View style={{ alignItems: "center", justifyContent: 'flex-end', flex: 1,marginBottom:10 }}>
                     <TouchableOpacity style={styles.btnLogin} onPress={() => this.saveAreas()}>
                         <Text style={styles.loginText}>Save Areas</Text>
                     </TouchableOpacity>

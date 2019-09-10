@@ -7,8 +7,9 @@ import { Row } from "native-base";
 
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
-const BG_DARK = '#000'
-const BG_LIGHT = '#fff'
+const BG_DARK = '#3f51b5'
+const BG_LIGHTER = '#fff'
+const BG_LIGHT = '#eee'
 const TEXT_LIGHT = '#ffffff'
 const TEXT_DARK = '#000'
 const FONT = 'Roboto'
@@ -384,14 +385,14 @@ export default StyleSheet.create({ //Styles
     {
       width: WIDTH,
       alignItems:'center', 
-      backgroundColor: BG_DARK,
+      backgroundColor: BG_LIGHTER,
       minHeight: HEIGHT - 80,
       maxHeight: HEIGHT - 80
     },
     flatListContentStyle:
     {
       alignContent: 'center', 
-      backgroundColor: BG_DARK,
+      backgroundColor: BG_LIGHTER,
       //maxHeight: HEIGHT-100
     },
     listpost:
@@ -427,7 +428,7 @@ export default StyleSheet.create({ //Styles
       marginRight: 10, 
       backgroundColor: BG_LIGHT, 
       borderColor: 'grey', 
-      borderWidth: 0, 
+      borderWidth: 0.2, 
       alignItems: 'center', 
       borderRadius: 0, 
       shadowOffset: {width: 0, height: 2}, 
