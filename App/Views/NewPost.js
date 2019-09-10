@@ -233,9 +233,6 @@ export default class NewPost extends Component {
               <Text style={styles.headingText2}>NEWS POST</Text>
             </Body>
             <Right>
-              <Button transparent onPress={() => alert('TODO')}>
-                <Icon type='material-community' name={"back"} color={'white'} />
-              </Button>
             </Right>
           </Header>
 
