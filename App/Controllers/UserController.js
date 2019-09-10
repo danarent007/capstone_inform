@@ -24,7 +24,6 @@ class UserController
         }
         //alert(JSON.stringify(userData, null, 4));
     }
-
     async storeToken(token)
     {
       AsyncStorage.setItem('token', token)
@@ -51,7 +50,6 @@ class UserController
            'Content-Type': 'application/json',
          },
          body: JSON.stringify({
-          
           firstName: userData.firstName,
           lastName: userData.lastName,
           email: userData.email,

@@ -24,7 +24,8 @@ class SignupController
         }
     }
 
-    attemptRegisterUser = () => { //Attempt to register user
+    //Attempt to register a user. Throws errors/exceptions if user exists, or it cannot reach the server.
+    attemptRegisterUser = () => {
        fetch(REGISTER_URL,  //JSon message
         {
          method: 'POST',
@@ -43,7 +44,6 @@ class SignupController
         .then((response) => response.json())
         .then((responseJson) => 
         {
-
             if(responseJson.registered == false) //Handle JSon response
             {
                 alert('User already exists. Please sign in, or change email address.') //User exists
@@ -63,16 +63,5 @@ class SignupController
             alert('Sign-up currently unavailable. Please try again later.') //Error handling (no DB connection)
         });
          }
-
-
-
-
-
-
-
-
-
-
-
 }
 export default SignupController

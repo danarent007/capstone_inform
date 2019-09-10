@@ -27,18 +27,16 @@ class LoginController
         };
     }
 
+    //Store JWT token in local storage
     storeToken(token)
     {
       AsyncStorage.setItem('token', token)
     }
 
-
-
-
-    tryLogIn2 = async () => //Attempt a login
+    //Attempt a login. Fails if username and pass is incorrect
+    tryLogIn2 = async () =>
     {
       this.loginObj.setState({loading: true})
-
         await fetch(LOGIN_URL, //JSon Request
          {
           method: 'POST',
@@ -76,9 +74,8 @@ class LoginController
              }
          }).catch((error) => 
          {
-           
           this.loginObj.setState({loading: false})
-          alert('Unable to reach server. Please try again later.')
+          alert('Unable to reach server. Please try again later.') 
          });
     }
     
