@@ -50,7 +50,8 @@ export default class MainScreen extends Component
       text: '',
       PickerValueHolder : '',
       user_id: '',
-      refreshing: false
+      refreshing: false,
+      user_permission:'1'
     };
     
   }
@@ -61,12 +62,24 @@ export default class MainScreen extends Component
    {
     try {
       let userData =  await AsyncStorage.getItem('userID')
+      
       return userData
     } catch (error) {
       alert(error)
     }
   }
 
+  async getPerm() 
+  {
+   try {
+     let user_permission =  await AsyncStorage.getItem('user_permission')
+     return user_permission
+   } catch (error) {
+     alert(error)
+   }
+ }
+
+ 
 
 GetSelectedPickerItem=()=>{
   alert('ALERTTTT' + this.state.PickerValueHolder);
@@ -118,8 +131,9 @@ GetSelectedPickerItem=()=>{
     
     let id = await this.getData()
     this.state.user_id = id
+    let pm = await this.getPerm()
+    this.state.user_permission = pm
      let c = await this.getLocations()
-     //this.makeRequest()
    }
   
 //Fetch posts for only selected locations
@@ -273,6 +287,7 @@ GetSelectedPickerItem=()=>{
           columnWrapperStyle = {{color: 'red'}}
           controller = {this}
           refreshing = {this.state.refreshing}
+        
           />
           </ScrollView>
         </View>

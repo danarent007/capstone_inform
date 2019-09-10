@@ -22,6 +22,7 @@ class LoginController
           lastName : userData.lastName,
           email : userData.email,
           password: userData.password, 
+          user_permission: userData.user_permission,
           id: ""
         };
     }
@@ -30,38 +31,13 @@ class LoginController
     {
       AsyncStorage.setItem('token', token)
     }
-    storeData(data)
-    {
-      AsyncStorage.setItem('userID', data)
-      
-    }
+
 
 
 
     tryLogIn2 = async () => //Attempt a login
     {
       this.loginObj.setState({loading: true})
-
-        /*
-        alert(this.email)
-
-        if(userData.password === undefined && userData.email === undefined)
-        {
-          alert('Please enter login details.')
-          return
-        }
-        else if(userData.password === undefined)
-        {
-          alert('Please enter password.')
-          return
-        }
-        else if(userData.email === undefined)
-        {
-          alert('Please enter email.')
-          return
-        }
-        */
-
 
         await fetch(LOGIN_URL, //JSon Request
          {
@@ -90,6 +66,7 @@ class LoginController
              else if (responseJson.loggedIn == true) //Logged In
              {
                 AsyncStorage.setItem('userID', JSON.stringify(loggedInData.userID))
+                AsyncStorage.setItem('user_permission', JSON.stringify(loggedInData.user_permission))
                 this.loginObj.setState({userId: JSON.stringify(loggedInData.userID)})
                 this.loginObj.doLogin() //Call login method in View
              }

@@ -33,7 +33,7 @@ class PostController
       body: postData
    }).then((response) => response.text())
          .then((responseJson) => {
-          alert('Post awaiting moderation. It will display shortly.')
+          alert('Post added.')
           }).catch((error) => {
             console.error(error);
          });
