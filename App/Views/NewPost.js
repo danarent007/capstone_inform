@@ -90,6 +90,15 @@ export default class NewPost extends Component {
     return data;
   };
 
+  formatDate(date) {
+    var year = (date).substring(0, 4)
+    var month = (date).substring(5, 7)
+    var day = (date).substring(8, 10)
+    var ho = (date).substring(11, 13)
+    var mi = (date).substring(14, 16)
+    return (day + '/' + month + '/' + year + ' ' + ho + ':' + mi)
+  }
+
   //Photo choser handler. Allows the user to select a photo, and handles response
   handleChoosePhoto = () => {
     const options = {

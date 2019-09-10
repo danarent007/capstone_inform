@@ -15,9 +15,7 @@ Data is fed in from MainScreenEvent.js
 import React, { Component, PureComponent } from 'react'
 import { FlatList, Text, TouchableHighlight } from 'react-native'
 import styles from '../Styles/styles'
-import { Icon } from 'react-native-elements'
 import { withNavigation } from 'react-navigation';
-import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 import {
   View,
@@ -25,7 +23,6 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
-import { underline } from 'ansi-colors';
 import MainScreen from './MainScreen';
 
 
@@ -41,6 +38,7 @@ class PostFeedEvent extends React.Component {
       }
   }
 
+  //Format the date and time, making it displayable
   formatDate(date) {
     var year = (date).substring(0, 4)
     var month = (date).substring(5, 7)
@@ -50,20 +48,18 @@ class PostFeedEvent extends React.Component {
     return (day + '/' + month + '/' + year + ' ' + ho + ':' + mi)
   }
 
+  //Get the JWT token
   async getToken() {
-
     try {
       let token = await AsyncStorage.getItem('token')
       //alert(token)
       return token
     } catch (error) {
       alert(error)
-
     }
-
   }
 
-  // TO OPEN NEW SCREEN USE TOUCHABLE OPACITY ONPRESS={FUNCTION}
+  //Render an object for the supplied item.
   _renderItem = ({ item }) => (
 
     <TouchableOpacity onPress={() => this.props.navigation.navigate('VPostEvent', { start: item.event_start, end: item.event_end, current_user_id: this.props.current_user_id, id: item.event_id, title: item.event_name, description: item.event_description, controller: this, user_id: item.user_id, area: item.location_name, name: item.author_name, photo_uri: item.photo_uri, author_id: item.author_id })}>
@@ -92,8 +88,8 @@ class PostFeedEvent extends React.Component {
     </TouchableOpacity>
   )
 
-
-  render() { //Render view
+  //Render a flatlist of items from a datalist
+  render() {
     return (
       <FlatList
         contentContainerStyle={styles.flatListContentStyle}

@@ -35,12 +35,14 @@ class SignUpScreen extends Component {
     };
   }
 
-  doSignup() //Method run from controller. Signs user up, initiates next screen
+  //Method run from controller. Signs user up, initiates next screen
+  doSignup() 
   {
     this.props.navigation.replace('Login')
   }
 
-  trySignup = () => //Launch controller and attempt to sign up.
+  //Launch controller and attempt to sign up.
+  trySignup = () => 
   {
     userData =
     {
@@ -55,6 +57,7 @@ class SignUpScreen extends Component {
     }
   }
 
+  //Perform data validation on sign-up
   validateData(userData)
   {
     if(userData.firstName == "")
@@ -80,10 +83,7 @@ class SignUpScreen extends Component {
     return true;
   }
   
-
-
-
-  render() { //Render view
+  render() {
     return (
       
       <View style={styles.container}>
