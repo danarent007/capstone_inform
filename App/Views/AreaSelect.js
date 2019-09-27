@@ -124,10 +124,11 @@ export default class AreaSelect extends Component {
 
 
             <View style={{ flex: 1, backgroundColor: '#3f51b5', alignContent: "center" }}>
-                <Header style={{ backgroundColor: '#3f51b5' }}
+                <Header style={{ backgroundColor: '#3f51b5',elevation: 0 }}
                     androidStatusBarColor={'#3f51b5'}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Text style={{minHeight:20}}></Text>
                             <Icon type='material-community' name={"arrow-left"} color='white' />
                         </Button>
                     </Left>

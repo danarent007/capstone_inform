@@ -11,6 +11,7 @@
 import React, { Component } from 'react';
 import SignupController from '../Controllers/SignupController'
 import styles from '../Styles/styles'
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 import {
     StyleSheet,
@@ -82,13 +83,16 @@ class SignUpScreen extends Component {
     this.setState({submitting: true})
     return true;
   }
-  
+
   render() {
     return (
       
       <View style={styles.container}>
         
-            <View style={{height:50}}></View>
+        <Header style={{ backgroundColor: '#3f51b5',width: 600,shadowRadius: 0, elevation: 0}}
+            androidStatusBarColor={'#3f51b5'}>
+        </Header>
+
             <View style={{flex:17}}>
                 <Text style = {{color: 'white',textAlign: 'center',fontFamily: 'Roboto',fontSize:40}}>SIGN UP</Text>
             </View>

@@ -24,6 +24,7 @@ import {
   Animated,
   ActivityIndicator
 } from 'react-native';
+import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 const LOCATION_FETCH_URL = route.LOCATION_FETCH_URL //'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
@@ -146,7 +147,11 @@ export default class LoginScreen extends Component {
   render() { //Render view
     if (this.state.loading) {
       return (
+        
         <View style={styles.container}>
+          <Header style={{ backgroundColor: '#3f51b5',width: 600,shadowRadius: 0, elevation: 0}}
+            androidStatusBarColor={'#3f51b5'}>
+        </Header>
           <View style={{ height: 50 }}></View>
           <View style={{ flex: 17 }}>
             <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Roboto', fontSize: 40 }}>LOGIN</Text>
@@ -195,7 +200,10 @@ export default class LoginScreen extends Component {
     else {
       return (
         <View style={styles.container}>
-          <View style={{ height: 50 }}></View>
+                    <Header style={{ backgroundColor: '#3f51b5',width: 600,shadowRadius: 0, elevation: 0}}
+            androidStatusBarColor={'#3f51b5'}>
+        </Header>
+
           <View style={{ flex: 17 }}>
             <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Roboto', fontSize: 40 }}>LOGIN</Text>
           </View>

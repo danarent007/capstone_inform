@@ -36,6 +36,7 @@ const DELETE_URL = route.DELETE_URL //'http://dulwich.dlinkddns.com/api/posts/de
 export default class ViewPost extends Component {
   constructor(props) {
     super(props);
+    this.tryDeletePost = this.tryDeletePost.bind(this)
     this.state =
       {
         id: this.props.navigation.getParam('id', 'Not Found'),
@@ -49,6 +50,8 @@ export default class ViewPost extends Component {
         dialogVisible: false,
         delDialogVisible: false
       };
+
+      
   }
 
   //Attempt a post report. Prompt the user
@@ -56,11 +59,7 @@ export default class ViewPost extends Component {
     this.setState({ dialogVisible: true })
   }
 
-  //Attempt a post delete. Prompt the user
-  tryDeletePost = () => {
-    console.log('TRY DEL')
-    this.setState({ delDialogVisible: true })
-  }
+
 
   //Report the current post. The post is flagged in the Dash
   reportPost = async () => {
@@ -110,22 +109,22 @@ export default class ViewPost extends Component {
 
   }
 
-  //Delete button object. Only visible to owner of post
-  DelButton(props) {
-    if (props.edit) {
-      return (
-        <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeletePost()}>
-          <Icon type='material' name='delete' size={35} color="white" />
-        </TouchableOpacity>
-      )
-    }
-    return (null)
+    tryDeletePost = () =>{
+    this.setState({ delDialogVisible: true })
   }
+
+
+
+  //Delete button object. Only visible to owner of post
+
+
 
   render() { //Render view
     console.log('Current: ' + this.state.current_user_id + ' Post: ' + this.state.user_id)
 
 
+    if(this.state.current_user_id == this.state.user_id)
+    {
 
     return (
       <View style={{ flex: 1, width: '100%' }}>
@@ -192,12 +191,87 @@ export default class ViewPost extends Component {
 
           </View>
         </ScrollView>
-        <this.DelButton edit={(this.state.current_user_id == this.state.user_id)} />
+        {/* <this.delButton edit={(this.state.current_user_id == this.state.user_id)} /> */}
+        <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeletePost()}>
+          <Icon type='material' name='delete' size={35} color="white" />
+        </TouchableOpacity>
       </View>
     );
+        }
+
+        return (
+          <View style={{ flex: 1, width: '100%' }}>
+            <Header style={{ backgroundColor: '#3f51b5', borderBottomWidth: 0, borderBottomColor: 'white' }}
+              androidStatusBarColor={'#3f51b5'}>
+              <Left>
+                <Button transparent onPress={() => this.props.navigation.goBack()}>
+                <Icon type='material-community' name={"arrow-left"} color='white' />
+                </Button>
+              </Left>
+              <Body>
+                <Text style={styles.headingText2}>{this.state.area}</Text>
+              </Body>
+              <Right>
+                <Button transparent onPress={() => this.tryReportPost()}>
+                  <Icon type='material' name={"report"} color='red' />
+                </Button>
+              </Right>
+            </Header>
+    
+            <ConfirmDialog
+              title="Report Post"
+              message="Are you sure?"
+              visible={this.state.dialogVisible}
+              onTouchOutside={() => this.setState({ dialogVisible: false })}
+              positiveButton={{
+                title: "YES",
+                onPress: () => this.reportPost()
+              }}
+              negativeButton={{
+                title: "NO",
+                onPress: () => this.setState({ dialogVisible: false })
+              }}
+            />
+            <ConfirmDialog
+              title="Delete Post"
+              message="Are you sure?"
+              visible={this.state.delDialogVisible}
+              onTouchOutside={() => this.setState({ delDialogVisible: false })}
+              positiveButton={{
+                title: "YES",
+                onPress: () => this.deletePost()
+              }}
+              negativeButton={{
+                title: "NO",
+                onPress: () => this.setState({ delDialogVisible: false })
+              }}
+            />
+    
+            <ScrollView style={styles.scroll_main}>
+              <View style={styles.view_container}>
+                <ScrollView style={styles.scroll}>
+                  <Image
+                    style={styles.image_style}
+                    source={{ uri: this.state.photo_uri }}
+                  />
+                  <Text style={styles.headingText2_dark}>{this.state.title}</Text>
+                  <Text style={styles.descText_dark}>{this.state.name}</Text>
+    
+    
+                  <Text style={styles.bodyText}>{this.state.body}</Text>
+                </ScrollView>
+    
+    
+              </View>
+            </ScrollView>
+            {/* <this.delButton edit={(this.state.current_user_id == this.state.user_id)} /> */}
+          </View>
+        );
+            }
+        
 
 
 
   }
-}
+
 

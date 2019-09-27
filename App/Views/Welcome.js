@@ -20,6 +20,7 @@ import {
     TouchableWithoutFeedback,
     TouchableOpacity
   } from 'react-native';
+  import { Header, Left, Right, Body, Picker, Button } from 'native-base'
 
 
   export default class Welcome extends Component {
@@ -65,6 +66,9 @@ import {
       return (
 
       <View style={styles.container}>
+                  <Header style={{ backgroundColor: '#3f51b5',width: 600,shadowRadius: 0, elevation: 0}}
+            androidStatusBarColor={'#3f51b5'}>
+          </Header>
         <View style={{height: 20}}></View>
         <View style = {{flex:25,justifyContent: "space-between"}}>
           <TouchableWithoutFeedback onPress={()=> this.startAnimation()}>

@@ -68,7 +68,6 @@ export default class ViewPostEvent extends Component {
 
   //Attempt an event delete. Prompt the user
   tryDeleteEvent = () => {
-    console.log('TRY DEL')
     this.setState({ delDialogVisible: true })
   }
 
@@ -213,6 +212,8 @@ export default class ViewPostEvent extends Component {
     console.log('Current: ' + this.state.current_user_id + ' Post: ' + this.state.author_id)
 
 
+    if(this.state.current_user_id == this.state.author_id)
+    {
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Header style={{ backgroundColor: '#3f51b5', borderBottomWidth: 0, borderBottomColor: 'white' }}
@@ -280,9 +281,83 @@ export default class ViewPostEvent extends Component {
 
           </View>
         </ScrollView>
-        <this.DelButton edit={(this.state.current_user_id == this.state.author_id)} />
+        <TouchableOpacity style={styles.creatPostFloatButtonLight} onPress={() => this.tryDeleteEvent()}>
+        <Icon type='material' name='delete' size={35} color="white" />
+      </TouchableOpacity>
+        {/* <this.DelButton edit={(this.state.current_user_id == this.state.author_id)} /> */}
       </View>
     );
+        }
+        return (
+          <View style={{ flex: 1, width: '100%' }}>
+            <Header style={{ backgroundColor: '#3f51b5', borderBottomWidth: 0, borderBottomColor: 'white' }}
+              androidStatusBarColor={'#3f51b5'}>
+              <Left>
+                <Button transparent onPress={() => this.props.navigation.goBack()}>
+                <Icon type='material-community' name={"arrow-left"} color='white' />
+                </Button>
+              </Left>
+              <Body>
+                <Text style={styles.headingText2}>{this.state.area}</Text>
+              </Body>
+              <Right>
+                <Button transparent onPress={() => this.addReminder()}>
+                  <Icon type='material' name={"alarm"} color='white' />
+                </Button>
+                <Button transparent onPress={() => this.tryReportPost()}>
+                  <Icon type='material' name={"report"} color='red' />
+                </Button>
+              </Right>
+            </Header>
+    
+            <ConfirmDialog
+              title="Report Event"
+              message="Are you sure?"
+              visible={this.state.dialogVisible}
+              onTouchOutside={() => this.setState({ dialogVisible: false })}
+              positiveButton={{
+                title: "YES",
+                onPress: () => this.reportPost()
+              }}
+              negativeButton={{
+                title: "NO",
+                onPress: () => this.setState({ dialogVisible: false })
+              }}
+            />
+            <ConfirmDialog
+              title="Delete Event"
+              message="Are you sure?"
+              visible={this.state.delDialogVisible}
+              onTouchOutside={() => this.setState({ delDialogVisible: false })}
+              positiveButton={{
+                title: "YES",
+                onPress: () => this.deleteEvent()
+              }}
+              negativeButton={{
+                title: "NO",
+                onPress: () => this.setState({ delDialogVisible: false })
+              }}
+            />
+            <ScrollView style={styles.scroll_main}>
+              <View style={styles.view_container}>
+                <ScrollView style={styles.scroll}>
+                  <Image
+                    style={styles.image_style}
+                    source={{ uri: this.state.photo_uri }}
+                  />
+                  <View style={{ height: 20 }}></View>
+                  <Text style={styles.headingText2_dark}>{this.state.title}</Text>
+                  <Text style={styles.descText_dark}>Date: {this.formatDate(this.state.eventStartDate)}</Text>
+                  <Text style={styles.descText_dark}>{this.state.eventLocation}</Text>
+                  <Text style={styles.bodyText}>{this.state.body}</Text>
+                </ScrollView>
+    
+    
+              </View>
+            </ScrollView>
+            {/* <this.DelButton edit={(this.state.current_user_id == this.state.author_id)} /> */}
+          </View>
+        );
 
   }
 }
