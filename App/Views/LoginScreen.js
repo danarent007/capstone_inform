@@ -14,6 +14,7 @@ LoginScreen.js is self-explanitory - it's the login screen.
 import React, { Component } from 'react';
 import LoginController from '../Controllers/LoginController'
 import styles from '../Styles/styles'
+import route from '../Routes/routes'
 import {
   View,
   Text,
@@ -24,7 +25,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+const LOCATION_FETCH_URL = route.LOCATION_FETCH_URL //'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
 
 export default class LoginScreen extends Component {
@@ -41,6 +42,7 @@ export default class LoginScreen extends Component {
         submitting: false
 
       };
+      
   }
 
   //Attempt a login. Fails if username and pass is incorrect. Delegates this to LoginController.js

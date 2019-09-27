@@ -9,7 +9,8 @@
 */
 import AsyncStorage from '@react-native-community/async-storage';
 import React, { Component } from 'react';
-const LOGIN_URL = 'http://dulwich.dlinkddns.com/api/users/login' //API Login Request
+import route from '../Routes/routes'
+const LOGIN_URL =  route.LOGIN_URL //'http://dulwich.dlinkddns.com/api/users/login' //API Login Request
 let token = ""
 class LoginController
 {
@@ -54,6 +55,7 @@ class LoginController
          .then(async response => await response.json())
          .then((responseJson) => 
          {  
+          
           this.loginObj.setState({loading: false})
           console.log('STATE: ' + this.loginObj.state.loading)
             let loggedInData = responseJson;

@@ -20,10 +20,11 @@ import MultiSelect from 'react-native-multiple-select';
 import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
+import route from '../Routes/routes'
 
-const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
-const USER_LOCATION_FETCH_URL = "http://dulwich.dlinkddns.com/api/userLocations"
-const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
+const LOC_FETCH_URL = route.LOC_FETCH_URL //"http://dulwich.dlinkddns.com/api/locations"
+const USER_LOCATION_FETCH_URL = route.USER_LOCATION_FETCH_URL //"http://dulwich.dlinkddns.com/api/userLocations"
+const LOC_SET_URL = route.LOC_SET_URL //"http://dulwich.dlinkddns.com/api/setlocations"
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
 

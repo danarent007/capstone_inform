@@ -26,10 +26,11 @@ import {
   Dimensions
 } from 'react-native';
 import styles from '../Styles/styles'
+import route from '../Routes/routes'
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
-const REPORT_URL = 'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
-const DELETE_URL = 'http://dulwich.dlinkddns.com/api/posts/delete' //API delete post url
+const REPORT_URL = route.REPORT_URL //'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
+const DELETE_URL = route.DELETE_URL //'http://dulwich.dlinkddns.com/api/posts/delete' //API delete post url
 
 
 export default class ViewPost extends Component {

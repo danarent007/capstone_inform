@@ -7,11 +7,12 @@
 ** Daniel Vorster (VRSDAN004)
 ** PostController.js
 */
+import route from '../Routes/routes'
 
-const POST_URL = 'http://dulwich.dlinkddns.com/api/posts' //API post get url
-const ADD_URL = 'http://dulwich.dlinkddns.com/api/posts/add' //API post add url
-const UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/upload' //Upload url
-const EVENT_UPLOAD_URL = 'http://dulwich.dlinkddns.com/api/events/add'
+const POST_URL = route.POST_URL //'http://dulwich.dlinkddns.com/api/posts' //API post get url
+const ADD_URL = route.ADD_URL //'http://dulwich.dlinkddns.com/api/posts/add' //API post add url
+const UPLOAD_URL = route.UPLOAD_URL //'http://dulwich.dlinkddns.com/api/upload' //Upload url
+const EVENT_UPLOAD_URL = route.EVENT_UPLOAD_URL //'http://dulwich.dlinkddns.com/api/events/add'
 class PostController
 {
   constructor()

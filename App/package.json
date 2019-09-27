@@ -14,6 +14,8 @@
     "react": "16.8.6",
     "react-native": "0.60.4",
     "react-native-action-button": "^2.8.5",
+    "react-native-calendar-events": "^1.7.3",
+    "react-native-datepicker": "^1.7.2",
     "react-native-dropdown-menu": "^2.0.0",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.3.0",

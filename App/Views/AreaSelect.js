@@ -20,9 +20,10 @@ import styles from '../Styles/styles'
 import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Right, Body, Title, Button } from 'native-base'
 import { Icon } from 'react-native-elements'
+import route from '../Routes/routes'
 
-const LOC_FETCH_URL = "http://dulwich.dlinkddns.com/api/locations"
-const LOC_SET_URL = "http://dulwich.dlinkddns.com/api/setlocations"
+const LOC_FETCH_URL = route.LOC_FETCH_URL //"http://dulwich.dlinkddns.com/api/locations"
+const LOC_SET_URL = route.LOC_SET_URL //"http://dulwich.dlinkddns.com/api/setlocations"
 export default class AreaSelect extends Component {
     constructor(props) {
         super(props)

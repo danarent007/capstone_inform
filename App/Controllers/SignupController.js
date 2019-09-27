@@ -7,8 +7,8 @@
 ** Daniel Vorster (VRSDAN004)
 ** SignupController.js
 */
-
-const REGISTER_URL = 'http://dulwich.dlinkddns.com/api/users/register' //API register request
+import route from '../Routes/routes'
+const REGISTER_URL = route.REGISTER_URL //'http://dulwich.dlinkddns.com/api/users/register' //API register request
 
 class SignupController
 {

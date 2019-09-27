@@ -24,13 +24,15 @@ import {
   Text,
   Image,
   Dimensions,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Platform
 } from 'react-native';
 import styles from '../Styles/styles'
+import route from '../Routes/routes'
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 const { width: WIDTH } = Dimensions.get('window') //Window width for formatting
-const REPORT_URL = 'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
-const DELETE_URL = 'http://dulwich.dlinkddns.com/api/events/delete' //API delete post url
+const REPORT_URL = route.REPORT_URL //'http://dulwich.dlinkddns.com/api/flagPost' //API flag post url
+const DELETE_URL = route.DELETE_URL //'http://dulwich.dlinkddns.com/api/events/delete' //API delete post url
 const IS_ATTENDING_URL = 'http://dulwich.dlinkddns.com/api/events/isAttending'
 //const IS_ATTENDING_URL = 'http://dulwich.dlinkddns.com/api/'
 
@@ -60,6 +62,8 @@ export default class ViewPostEvent extends Component {
   tryReportPost = () => {
     this.setState({ dialogVisible: true })
   }
+
+  
 
 
   //Attempt an event delete. Prompt the user
@@ -120,6 +124,9 @@ export default class ViewPostEvent extends Component {
 
   //Add a calendar event to user's calendar
   addReminder = async () => {
+    if(Platform.OS=='ios'){
+      RNCalendarEvents.authorizeEventStore();
+    }
     this.requestCalPermission()
     console.log(this.state.title)
     console.log(this.state.eventStartDate)

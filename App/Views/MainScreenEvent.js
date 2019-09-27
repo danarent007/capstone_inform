@@ -17,10 +17,10 @@ import { Icon } from 'react-native-elements'
 import styles from '../Styles/styles'
 import { Dimensions } from 'react-native';
 import { Header, Left, Right, Body, Picker, Button } from 'native-base'
-
-const POST_FETCH_URL = 'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
-const EVENT_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userEvents' //URL for fetching events.
-const LOCATION_FETCH_URL = 'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
+import route from '../Routes/routes'
+const POST_FETCH_URL = route.POST_FETCH_URL //'http://dulwich.dlinkddns.com/api/posts' //URL for fetching posts.
+const EVENT_FETCH_URL = route.EVENT_FETCH_URL //'http://dulwich.dlinkddns.com/api/userEvents' //URL for fetching events.
+const LOCATION_FETCH_URL = route.LOCATION_FETCH_URL //'http://dulwich.dlinkddns.com/api/userLocations' //URL for fetching locatioms.
 
 const HEIGHT = Dimensions.get('window').height
 
