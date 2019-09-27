@@ -80,6 +80,5 @@ class LoginController
           alert('Unable to reach server. Please try again later.') 
          });
     }
-    
 }
 export default LoginController;
