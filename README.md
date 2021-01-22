@@ -11,7 +11,7 @@ analytics dashboard.
 | :----------------------------: | :-------------------------------: |
 | ![](./sample-images/login.jpg) | ![](./sample-images/postfeed.jpg) |
 
-|             Event Feed             |             searchareas              |
+|             Event Feed             |             Search Areas             |
 | :--------------------------------: | :----------------------------------: |
 | ![](./sample-images/eventfeed.jpg) | ![](./sample-images/searchareas.jpg) |
 
